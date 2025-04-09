@@ -48,6 +48,7 @@ startup
             	{ "PirateShip_L3", false, "Split When Entering 8-3", "Levels" },
             	{ "PirateShip_L4", false, "Split When Entering 8-4", "Levels" },
             	{ "PirateShip_L5", false, "Split When Entering 8-5", "Levels" },
+		{ "FarmBattle", false, "Split When Starting The Farm Battle Minigame (FOR 100%)", "Levels"},
     };
 	vars.Helper.Settings.Create(_settings);
     vars.CompletedSplits = new HashSet<string>();
@@ -67,8 +68,7 @@ init
 
     vars.Helper["GWorld"] = vars.Helper.Make<ulong>(gWorld, 0x18);
 
-    // vars.Helper["Loads"] = vars.Helper.Make<bool>(gWorld) // Final Thing Needed For The Splitter To Be Finished
-
+    // vars.Helper["Loads"] = vars.Helper.Make<bool>();
 
     vars.FNameToString = (Func<ulong, string>)(fName =>
     {
@@ -96,12 +96,12 @@ start
 
 onStart
 {
- vars.CompletedSplits.Clear();
+    vars.CompletedSplits.Clear();
 }
 
 reset
 {
-     return current.Map == "MainMenu"; // This is there for the people who have the reset tab ticked
+    return current.Map == "MainMenu"; // This is there for the people who have the reset tab ticked
 }
 
 split
@@ -115,7 +115,7 @@ split
 
 isLoading
 {
-    return current.Map == "TutorialLevelSelect" || current.Map == "HeavenLevelSelect" || current.Map == "WorldBiomeSelect" || current.Map == "SpaceLevelSelect" || current.Map == "PirateShipLevelSelect" || current.Map == "HellLevelSelect" || current.Map == "IceLevelSelect" || current.Map == "JungleLevelSelect" || current.Map == "DesertLevelSelect" || current.Map == "MainMenu";
+    return current.Map == "Intro_Main" || current.Map == "Village" || current.Map == "Home" || current.Map == "Farm" || current.Map == "Bank" || current.Map == "Shop" || current.Map == "TutorialLevelSelect" || current.Map == "HeavenLevelSelect" || current.Map == "WorldBiomeSelect" || current.Map == "SpaceLevelSelect" || current.Map == "PirateShipLevelSelect" || current.Map == "HellLevelSelect" || current.Map == "IceLevelSelect" || current.Map == "JungleLevelSelect" || current.Map == "DesertLevelSelect" || current.Map == "MainMenu";
 }
 
 exit
@@ -131,5 +131,5 @@ update
     var world = vars.FNameToString(current.GWorld);
     if (!string.IsNullOrEmpty(world) && world != "None") current.Map = world;
     if (old.Map != current.Map) vars.Log("Current Map Is: " + current.Map);
-    //  if (old.Loads != current.Loads) vars.Log("Current Loads: " + current.Loads)
+    // if (old.Loads != current.Loads) vars.Log("Current Loads: " + current.Loads);
 }
