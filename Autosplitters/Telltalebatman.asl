@@ -5,7 +5,6 @@ state("Batman")
 
 startup
 {
-    startup
 {
     if (timer.CurrentTimingMethod == TimingMethod.RealTime)
     {        
