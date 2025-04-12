@@ -48,6 +48,7 @@ startup
             	{ "PirateShip_L3", false, "Split When Entering 8-3", "Levels" },
             	{ "PirateShip_L4", false, "Split When Entering 8-4", "Levels" },
             	{ "PirateShip_L5", false, "Split When Entering 8-5", "Levels" },
+	        { "Outro_Assembly", true, "Split When Starting The Final Cutscene", "Levels"}
 		{ "FarmBattle", false, "Split When Starting The Farm Battle Minigame (FOR 100%)", "Levels"},
     };
 	vars.Helper.Settings.Create(_settings);
