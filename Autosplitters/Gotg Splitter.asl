@@ -42,8 +42,7 @@ isLoading
 
 reset
 {
-    if (current.Chaptercount < old.Chaptercount)
-{
-  return true;
-}
+    if (current.Chaptercount < old.Chaptercount) {
+        return true;
+   }
 }
