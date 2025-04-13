@@ -39,3 +39,11 @@ isLoading
 {
     return current.loading == 1;
 }
+
+reset
+{
+    if (current.Chaptercount < old.Chaptercount)
+{
+  return true;
+}
+}
