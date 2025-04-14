@@ -1,4 +1,4 @@
-state("Sinister Squidward") {} // This Game Is So Stupid
+state("Sinister Squidward") {} // This Game Is The Dumbest Game I've Ever Played
 
 startup
 {
