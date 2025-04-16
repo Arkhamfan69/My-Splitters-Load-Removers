@@ -15,27 +15,25 @@ startup
 
 start
 {
-    return current.activeScene == "Level1" && old.activeScene == "Loading";
+    return current.Scene == "Level1" && old.Scene == "Loading";
 }
 
 split
 {
-    return current.activeScene != "Loading" && current.activeScene != old.activeScene;
+    return current.Scene != "Loading" && current.Scene != old.Scene;
 }
 
 isLoading
 {
-    return current.activeScene == "Loading";
+    return current.Scene == "Loading";
 }
 
 reset
 {
-    return current.activeScene == "Title";
+    return current.Scene == "Title";
 }
 
 update
 {
-    current.activeScene = vars.Helper.Scenes.Active.Name == null ? current.activeScene : vars.Helper.Scenes.Active.Name;
-
- if(current.activeScene != old.activeScene) vars.Log("active: Old: \"" + old.activeScene + "\", Current: \"" + current.activeScene + "\"");
+     current.Scene = vars.Helper.Scenes.Active.Name ?? current.Scene;
 }
