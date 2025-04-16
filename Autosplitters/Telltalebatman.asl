@@ -1,6 +1,7 @@
 state("Batman")
 {
     bool loading: 0xF4544D;
+    int episode: 0xEEC088;
 }
 
 startup
@@ -22,6 +23,11 @@ startup
         }
     }
 }
+}
+
+split
+{
+    return current.episode != old.episode && current.episode >= 1 && current.episode <= 5;
 }
 
 isLoading
