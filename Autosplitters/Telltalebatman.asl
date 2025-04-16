@@ -1,6 +1,6 @@
 state("Batman")
 {
-    bool loading: 0xEC9DA8;
+    bool loading: 0xF4544D;
 }
 
 startup
