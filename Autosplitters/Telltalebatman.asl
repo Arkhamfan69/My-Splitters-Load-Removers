@@ -4,6 +4,11 @@ state("Batman")
     int episode: 0xEEC088;
 }
 
+state("Batman2")
+{
+    bool loading: 0xF4325D;
+}
+
 startup
 {
 {
