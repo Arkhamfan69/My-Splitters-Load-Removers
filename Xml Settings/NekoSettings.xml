@@ -1,61 +1,64 @@
 <Settings>
-    <Setting Id="W1" Label="World 1 Splits" State="false">
-        <Setting Id="Tutorial_L2" Label="Split When Entering 1-2" State="false"/>
-        <Setting Id="Tutorial_L3" Label="Split When Entering 1-3" State="false"/>
-        <Setting Id="Tutorial_L4" Label="Split When Entering 1-4" State="false"/>
-        <Setting Id="Tutorial_L5" Label="Split When Entering 1-5" State="false"/>
-    </Setting>
+    <Setting Id="SplittingAreas" Label="Splitting Areas" State="true">
+        <Setting Id="W1" Label="World 1 Splits" State="false">
+            <Setting Id="Tutorial_L2" Label="Split When Entering 1-2" State="false"/>
+            <Setting Id="Tutorial_L3" Label="Split When Entering 1-3" State="false"/>
+            <Setting Id="Tutorial_L4" Label="Split When Entering 1-4" State="false"/>
+            <Setting Id="Tutorial_L5" Label="Split When Entering 1-5" State="false"/>
+        </Setting>
         <Setting Id="W2" Label="World 2 Splits" State="true">
-        <Setting Id="Desert_L1" Label="Split When Entering 2-1" State="true"/>
-        <Setting Id="Desert_L2" Label="Split When Entering 2-2" State="false"/>
-        <Setting Id="Desert_L3" Label="Split When Entering 2-3" State="false"/>
-        <Setting Id="Desert_L4" Label="Split When Entering 2-4" State="false"/>
-        <Setting Id="Desert_L5" Label="Split When Entering 2-5" State="false"/>
-    </Setting>
+            <Setting Id="Desert_L1" Label="Split When Entering 2-1" State="true"/>
+            <Setting Id="Desert_L2" Label="Split When Entering 2-2" State="false"/>
+            <Setting Id="Desert_L3" Label="Split When Entering 2-3" State="false"/>
+            <Setting Id="Desert_L4" Label="Split When Entering 2-4" State="false"/>
+            <Setting Id="Desert_L5" Label="Split When Entering 2-5" State="false"/>
+        </Setting>
         <Setting Id="W3" Label="World 3 Splits" State="true">
-        <Setting Id="Jungle_L1" Label="Split When Entering 3-1" State="true"/>
-        <Setting Id="Jungle_L2" Label="Split When Entering 3-2" State="false"/>
-        <Setting Id="Jungle_L3" Label="Split When Entering 3-3" State="false"/>
-        <Setting Id="Jungle_L4" Label="Split When Entering 3-4" State="false"/>
-        <Setting Id="Jungle_L5" Label="Split When Entering 3-5" State="false"/>
-    </Setting>
+            <Setting Id="Jungle_L1" Label="Split When Entering 3-1" State="true"/>
+            <Setting Id="Jungle_L2" Label="Split When Entering 3-2" State="false"/>
+            <Setting Id="Jungle_L3" Label="Split When Entering 3-3" State="false"/>
+            <Setting Id="Jungle_L4" Label="Split When Entering 3-4" State="false"/>
+            <Setting Id="Jungle_L5" Label="Split When Entering 3-5" State="false"/>
+        </Setting>
         <Setting Id="W4" Label="World 4 Splits" State="true">
-        <Setting Id="Ice_L1" Label="Split When Entering 4-1" State="true"/>
-        <Setting Id="Ice_L2" Label="Split When Entering 4-2" State="false"/>
-        <Setting Id="Ice_L3" Label="Split When Entering 4-3" State="false"/>
-        <Setting Id="Ice_L4" Label="Split When Entering 4-4" State="false"/>
-        <Setting Id="Ice_L5" Label="Split When Entering 4-5" State="false"/>
-    </Setting>
+            <Setting Id="Ice_L1" Label="Split When Entering 4-1" State="true"/>
+            <Setting Id="Ice_L2" Label="Split When Entering 4-2" State="false"/>
+            <Setting Id="Ice_L3" Label="Split When Entering 4-3" State="false"/>
+            <Setting Id="Ice_L4" Label="Split When Entering 4-4" State="false"/>
+            <Setting Id="Ice_L5" Label="Split When Entering 4-5" State="false"/>
+        </Setting>
         <Setting Id="W5" Label="World 5 Splits" State="true">
-        <Setting Id="Hell_L1" Label="Split When Entering 5-1" State="true"/>
-        <Setting Id="Hell_L2" Label="Split When Entering 5-2" State="false"/>
-        <Setting Id="Hell_L3" Label="Split When Entering 5-3" State="false"/>
-        <Setting Id="Hell_L4" Label="Split When Entering 5-4" State="false"/>
-        <Setting Id="Hell_L5" Label="Split When Entering 5-5" State="false"/>
-    </Setting>
+            <Setting Id="Hell_L1" Label="Split When Entering 5-1" State="true"/>
+            <Setting Id="Hell_L2" Label="Split When Entering 5-2" State="false"/>
+            <Setting Id="Hell_L3" Label="Split When Entering 5-3" State="false"/>
+            <Setting Id="Hell_L4" Label="Split When Entering 5-4" State="false"/>
+            <Setting Id="Hell_L5" Label="Split When Entering 5-5" State="false"/>
+        </Setting>
         <Setting Id="W6" Label="World 6 Splits" State="true">
-        <Setting Id="Heaven_L1" Label="Split When Entering 6-1" State="true"/>
-        <Setting Id="Heaven_L2" Label="Split When Entering 6-2" State="false"/>
-        <Setting Id="Heaven_L3" Label="Split When Entering 6-3" State="false"/>
-        <Setting Id="Heaven_L4" Label="Split When Entering 6-4" State="false"/>
-        <Setting Id="Heaven_L5" Label="Split When Entering 6-5" State="false"/>
-    </Setting>
+            <Setting Id="Heaven_L1" Label="Split When Entering 6-1" State="true"/>
+            <Setting Id="Heaven_L2" Label="Split When Entering 6-2" State="false"/>
+            <Setting Id="Heaven_L3" Label="Split When Entering 6-3" State="false"/>
+            <Setting Id="Heaven_L4" Label="Split When Entering 6-4" State="false"/>
+            <Setting Id="Heaven_L5" Label="Split When Entering 6-5" State="false"/>
+        </Setting>
         <Setting Id="W7" Label="World 7 Splits" State="true">
-        <Setting Id="Space_L1" Label="Split When Entering 7-1" State="true"/>
-        <Setting Id="Space_L2" Label="Split When Entering 7-2" State="false"/>
-        <Setting Id="Space_L3" Label="Split When Entering 7-3" State="false"/>
-        <Setting Id="Space_L4" Label="Split When Entering 7-4" State="false"/>
-        <Setting Id="Space_L5" Label="Split When Entering 7-5" State="false"/>
-    </Setting>
+            <Setting Id="Space_L1" Label="Split When Entering 7-1" State="true"/>
+            <Setting Id="Space_L2" Label="Split When Entering 7-2" State="false"/>
+            <Setting Id="Space_L3" Label="Split When Entering 7-3" State="false"/>
+            <Setting Id="Space_L4" Label="Split When Entering 7-4" State="false"/>
+            <Setting Id="Space_L5" Label="Split When Entering 7-5" State="false"/>
+        </Setting>
         <Setting Id="W8" Label="World 8 Splits" State="true">
-        <Setting Id="PirateShip_L1" Label="Split When Entering 8-1" State="true"/>
-        <Setting Id="PirateShip_L2" Label="Split When Entering 8-2" State="false"/>
-        <Setting Id="PirateShip_L3" Label="Split When Entering 8-3" State="false"/>
-        <Setting Id="PirateShip_L4" Label="Split When Entering 8-4" State="false"/>
-        <Setting Id="PirateShip_L5" Label="Split When Entering 8-5" State="false"/>
-        <Setting Id="Outro_Assembly" Label="Split When The Final Cutscene Starts" State="true"/>
+            <Setting Id="PirateShip_L1" Label="Split When Entering 8-1" State="true"/>
+            <Setting Id="PirateShip_L2" Label="Split When Entering 8-2" State="false"/>
+            <Setting Id="PirateShip_L3" Label="Split When Entering 8-3" State="false"/>
+            <Setting Id="PirateShip_L4" Label="Split When Entering 8-4" State="false"/>
+            <Setting Id="PirateShip_L5" Label="Split When Entering 8-5" State="false"/>
+            <Setting Id="Outro_Assembly" Label="Split When The Final Cutscene Starts" State="true"/>
+        </Setting>
     </Setting>
-        <Setting Id="100" Label="Extra 100% Settings" State="false">
+
+    <Setting Id="100" Label="Extra 100% Settings" State="false">
         <Setting Id="FarmBattle" Label="Split When You Start The Farmbattle" State="false"/>
     </Setting>
 </Settings>
