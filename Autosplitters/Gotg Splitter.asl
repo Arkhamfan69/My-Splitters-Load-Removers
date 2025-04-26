@@ -9,9 +9,11 @@ state("gotg", "Epic")
     int loading: 0x3DEDDDC; // 0 When Not Loading, 1 When Loading
 }
 
-state("gotg", "Steam") // Steam Version Done By tpredninja
+state("gotg", "Steam")
 {
     int Chaptercount: 0x3DD9374; // -1 when in main menu 0 when in prologue 1 and so on for all the other chapters
+    int Interactable: 0x3DD2788; // 4 for everything 7 when putting down the interactable may need to test further
+    int Credits: 0x3DE5DB4; // 0 when not in credits, 1 when in credits
     int loading: 0x3DD9004; // 0 When Not Loading, 1 When Loading
     /* extra loading addresses for steam version
     0x3D5CE48
@@ -22,6 +24,7 @@ state("gotg", "Steam") // Steam Version Done By tpredninja
     0x3DD909C
     0x3DD90AC
     */
+    //int testaddress: 0x3DE5DB4; //its a different number at different places could be useful to split on stuff other than just chapter changes
 }
 
 init
@@ -50,7 +53,6 @@ init
 
 startup
 {
-    if (timer.CurrentTimingMethod == TimingMethod.RealTime)
     {        
         var timingMessage = MessageBox.Show (
             "This game uses Time without Loads (Loadless) as the main timing method.\n"+
@@ -65,11 +67,35 @@ startup
             timer.CurrentTimingMethod = TimingMethod.GameTime;
         }
     }
+
+    settings.Add("Promise", true, "Promise%");
+    settings.SetToolTip("Promise", "Enable to autoend the timer in promise%");
+}
+
+start
+{
+    if (current.Interactable == 7 && old.Interactable == 4)
+    {
+        timer.Run.Offset = TimeSpan.FromSeconds(2.32);
+        return true;
+    }
 }
 
 split
 {
+    //normal chapter splits
     if (current.Chaptercount > old.Chaptercount) {
+        return true;
+    }
+
+    //promise % split
+    if(current.Chaptercount == 8 && current.Interactable == 4 && current.Credits == 0 && old.Credits == 1 && settings["Promise"] )
+    {
+        print("Promise % Split Triggered");
+        return true;
+    } else if (current.Chaptercount == 16 && current.Credits == 0 && old.Credits == 1 && !settings["Promise"])
+    {
+        print("full game split triggered");
         return true;
     }
 }
