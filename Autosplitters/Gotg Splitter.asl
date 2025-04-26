@@ -9,7 +9,7 @@ state("gotg", "Epic")
     int loading: 0x3DEDDDC; // 0 When Not Loading, 1 When Loading
 }
 
-state("gotg", "Steam")
+state("gotg", "Steam") // Steam Version And Extra Logic Done By Tpredninja
 {
     int Chaptercount: 0x3DD9374; // -1 when in main menu 0 when in prologue 1 and so on for all the other chapters
     int Interactable: 0x3DD2788; // 4 for everything 7 when putting down the interactable may need to test further
