@@ -6,10 +6,15 @@
 state("gotg", "Epic")
 {
     int Chaptercount: 0x3DEE0B4; 
+    int Interactable: 0x3DE74C8; // 4 for everything 7 when putting down the interactable may need to test further
+    int Credits: 0x3DFAAF4; // 0 when not in credits, 1 when in credits
     int loading: 0x3DEDDDC; // 0 When Not Loading, 1 When Loading
+    /*
+    int testaddress: 3E044F8 //same as steam but its like minus 10 or something idk why its weird probably wont use
+    */
 }
 
-state("gotg", "Steam") // Steam Version And Extra Logic Done By Tpredninja
+state("gotg", "Steam")
 {
     int Chaptercount: 0x3DD9374; // -1 when in main menu 0 when in prologue 1 and so on for all the other chapters
     int Interactable: 0x3DD2788; // 4 for everything 7 when putting down the interactable may need to test further
