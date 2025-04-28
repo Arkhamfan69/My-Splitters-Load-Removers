@@ -4,7 +4,7 @@ state("BiodacityMansion")
 startup
 {
     Assembly.Load(File.ReadAllBytes("Components/asl-help")).CreateInstance("Unity");
-    vars.Helper.GameName = "Biodacity Mansion";
+    vars.Helper.GameName = "Biodacity: The Mansion";
     vars.Helper.AlertGameTime();
     
     dynamic[,] _settings =
