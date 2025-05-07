@@ -16,5 +16,5 @@ start
 
 update
 {
-    if (old.Circle != old.Circle) print("Current Loading Is: " + current.Circle);
+    if (current.Circle != old.Circle) print("Current Loading Is: " + current.Circle);
 }
