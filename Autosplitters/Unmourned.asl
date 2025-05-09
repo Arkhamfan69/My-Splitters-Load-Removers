@@ -12,14 +12,9 @@ startup
 	{
 		{ "Area", true, "Splitting Areas", null },
 			{ "1.2 RoadToLibrary_Library_Demo", true, "Split When You Go To The Library", "Area" },
-			{ "4. EchoesOfParanoia", true, "Split When Entering The Bizare Area", "Area" },
+			{ "4. EchoesOfParanoia", true, "Split When Entering The Wanna Be Among The Sleep Ass Area", "Area" },
     };
 	vars.Helper.Settings.Create(_settings);
-}
-
-init
-{
-    vars.CompletedSplits = new HashSet<string>();
 }
 
 start
@@ -29,11 +24,7 @@ start
 
 split
 {
-    if (current.Area != old.Area && settings[current.Area] && !vars.CompletedSplits.Contains(current.Area))
-    {
-        vars.CompletedSplits.Add(current.Area);
-        return true;
-    }
+   return current.Area != old.Area && settings[current.Area];
 }
 
 reset
