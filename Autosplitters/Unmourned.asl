@@ -24,7 +24,7 @@ start
 
 split
 {
-   return current.Area != old.Area && settings[current.Area];
+   return current.Scene != old.Scene && settings[current.Scene];
 }
 
 reset
