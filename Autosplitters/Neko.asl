@@ -12,8 +12,9 @@ startup
 init
 {
     IntPtr gWorld = vars.Helper.ScanRel(3, "48 8B 05 ???????? 48 3B C? 48 0F 44 C? 48 89 05 ???????? E8");
-	IntPtr gEngine = vars.Helper.ScanRel(3, "48 39 35 ?? ?? ?? ?? 0F 85 ?? ?? ?? ?? 48 8B 0D");
-	IntPtr fNames = vars.Helper.ScanRel(13, "89 5C 24 ?? 89 44 24 ?? 74 ?? 48 8D 15");
+    IntPtr gEngine = vars.Helper.ScanRel(3, "48 39 35 ?? ?? ?? ?? 0F 85 ?? ?? ?? ?? 48 8B 0D");
+    IntPtr fNames = vars.Helper.ScanRel(13, "89 5C 24 ?? 89 44 24 ?? 74 ?? 48 8D 15");
+    IntPtr gSyncLoadCount = vars.Helper.ScanRel(5, "89 43 60 8B 05 ?? ?? ?? ??");
 
     if (gWorld == IntPtr.Zero || gEngine == IntPtr.Zero || fNames == IntPtr.Zero)
     {
@@ -21,9 +22,15 @@ init
         throw new Exception(Msg);
     }
 
+    if (gSyncLoadCount == IntPtr.Zero)
+    {
+        const string msg = "GSLC not found";
+        throw new Exception (msg);
+    }
+
     vars.Helper["GWorld"] = vars.Helper.Make<ulong>(gWorld, 0x18);
 
-    // vars.Helper["Loads"] = vars.Helper.Make<bool>();
+    vars.Helper["Loads"] = vars.Helper.Make<bool>(gSyncLoadCount);
 
     vars.FNameToString = (Func<ulong, string>)(fName =>
     {
@@ -70,7 +77,7 @@ split
 
 isLoading
 {
-    return current.Map == "Intro_Main" || current.Map == "Village" || current.Map == "Home" || current.Map == "Farm" || current.Map == "Bank" || current.Map == "Shop" || current.Map == "TutorialLevelSelect" || current.Map == "HeavenLevelSelect" || current.Map == "WorldBiomeSelect" || current.Map == "SpaceLevelSelect" || current.Map == "PirateShipLevelSelect" || current.Map == "HellLevelSelect" || current.Map == "IceLevelSelect" || current.Map == "JungleLevelSelect" || current.Map == "DesertLevelSelect" || current.Map == "MainMenu";
+    return current.Loads == true || current.Map == "Intro_Main" || current.Map == "Village" || current.Map == "Home" || current.Map == "Farm" || current.Map == "Bank" || current.Map == "Shop" || current.Map == "TutorialLevelSelect" || current.Map == "HeavenLevelSelect" || current.Map == "WorldBiomeSelect" || current.Map == "SpaceLevelSelect" || current.Map == "PirateShipLevelSelect" || current.Map == "HellLevelSelect" || current.Map == "IceLevelSelect" || current.Map == "JungleLevelSelect" || current.Map == "DesertLevelSelect" || current.Map == "MainMenu";
 }
 
 exit
@@ -86,5 +93,5 @@ update
     var world = vars.FNameToString(current.GWorld);
     if (!string.IsNullOrEmpty(world) && world != "None") current.Map = world;
     if (old.Map != current.Map) vars.Log("Current Map Is: " + current.Map);
-    // if (old.Loads != current.Loads) vars.Log("Current Loads: " + current.Loads);
+    if (old.Loads != current.Loads) vars.Log("Current Loads: " + current.Loads);
 }
