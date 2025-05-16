@@ -66,12 +66,6 @@ start
 
 split
 {
-    if (current.Area != old.Area && settings[current.Area] && !vars.CompletedSplits.Contains(current.Area))
-    {
-        vars.CompletedSplits.Add(current.Area);
-        return true;
-    }
-
     if (current.Area == "1-Hub" && old.Area != "1-Hub")
     {
         return settings["After"];
