@@ -20,6 +20,8 @@ init
     IntPtr gWorld = vars.Helper.ScanRel(10, "80 7C 24 ?? 00 ?? ?? 48 8B 3D ???????? 48");
     IntPtr gEngine = vars.Helper.ScanRel(3, "48 89 05 ???????? 48 85 c9 74 ?? e8 ???????? 48 8d 4d");
     IntPtr fNames = vars.Helper.ScanRel(7, "8B D9 74 ?? 48 8D 15 ?? ?? ?? ?? EB");
+    IntPtr gSyncLoadCount = vars.Helper.ScanRel(5, "89 43 60 8B 05 ?? ?? ?? ??");
+
 
     if (gWorld == IntPtr.Zero || gEngine == IntPtr.Zero || fNames == IntPtr.Zero)
     {
@@ -28,6 +30,7 @@ init
     }
 
     vars.Helper["GWorldName"] = vars.Helper.Make<ulong>(gWorld, 0x18);
+    vars.Helper["Loading"] = vars.Helper.Make<bool>(gSyncLoadCount);
 
     vars.FNameToString = (Func<ulong, string>)(fName =>
     {
@@ -95,6 +98,13 @@ split
 isLoading
 {
     return current.Paused;
+
+    return current.Loading;
+
+    if (current.Area == "HubWorld")
+    {
+        return false;
+    }
 }
 
 reset
