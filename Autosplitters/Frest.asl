@@ -7,28 +7,12 @@ startup
 {
     Assembly.Load(File.ReadAllBytes("Components/asl-help")).CreateInstance("Basic");
     vars.Helper.GameName = "Frest";
-    settings.Add("End", false, "Trigger This Setting If You Only Are Splitting On Final Cutscene");
-    settings.Add("100%", true, "Split After Returning To Hub After Every Challenge");
-
-   dynamic[,] _settings =
-	{
-	    { "Area", true, "Splitting Areas", null },
-		{ "HubWorld", false, "Split When Entering The Hub World", "Area" },
-		{ "1-Hub", false, "Split When Entering The Forest Area Select", "Area" },
-                { "Forest2", true, "Split When Entering Tree Top Trips", "Area" },
-            { "Forest3", true, "Split When Entering The Cowardice King", "Area" },
-            { "2-Hub", false, "Split When Entering The Second Hub", "Area" },
-            { "CaveLevel1Persistent", true, "Split When Entering Teleports Behind You", "Area" },
-		{ "CaveLevel2Persistent", true, "Split When Entering Hole in the Laser Wall", "Area" },
-		{ "BossLevelPersistent2", false, "Split When Entering The Scholar Boss Fight", "Area" },
-                { "3-Hub", false, "Split When Entering The World 3 Hub", "Area" },
-                { "FrozenBeachLevel1", true, "Split When Entering Frozen World", "Area" },
-                { "FrozenBeachLevel2", true, "Split When Entering Chunky Ice Falls", "Area" },
-                { "4-FrozenBeachBossLevel", true, "Split When Entering The Knight Boss Fight", "Area" },
-		{ "4-Ben", true, "Split When Entering Benjamin" ,"Area" },
-               { "Finale", true, "End The Timer When The Credits Start" ,"Area" },
-    };
-	vars.Helper.Settings.Create(_settings);
+    settings.Add("Frest", true, "Frest Auto Splitter Settings");
+        settings.Add("End", false, "Trigger This Setting If You Only Are Splitting On Final Cutscene", "Frest");
+        settings.Add("100%", false, "Split After Returning To Hub After Every Challenge", "Frest");
+        settings.Add("After", true, "Split After Finishing A Level In World 1", "Frest");
+        settings.Add("After2", true, "Split After Finishing A Level In World 2", "Frest");
+        settings.Add("After3", true, "Split After Finishing A Level In World 3", "Frest");
 }
 
 init
@@ -86,6 +70,21 @@ split
     {
         vars.CompletedSplits.Add(current.Area);
         return true;
+    }
+
+    if (current.Area == "1-Hub" && old.Area != "1-Hub")
+    {
+        return settings["After"];
+    }
+
+    if (current.Area == "2-Hub" && old.Area != "2-Hub")
+    {
+        return settings["After2"];
+    }
+
+    if (current.Area == "3-Hub" && old.Area == "3-Hub")
+    {
+        return settings["After3"];
     }
 
     if (current.Area == "Finale")
