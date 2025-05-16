@@ -1,6 +1,5 @@
 state("Frest-Win64-Shipping")
 {
-    bool MapLoading: 0x80342A1;
     bool Paused: "gameoverlayrenderer64.dll", 0x152862;
 }
 
@@ -13,21 +12,21 @@ startup
 
    dynamic[,] _settings =
 	{
-		{ "Area", true, "Splitting Areas", null },
-			{ "HubWorld", false, "Split When Entering The Hub World", "Area" },
-			{ "1-Hub", false, "Split When Entering The Forest Area Select", "Area" },
-            { "Forest2", true, "Split When Entering Tree Top Trips", "Area" },
+	    { "Area", true, "Splitting Areas", null },
+		{ "HubWorld", false, "Split When Entering The Hub World", "Area" },
+		{ "1-Hub", false, "Split When Entering The Forest Area Select", "Area" },
+                { "Forest2", true, "Split When Entering Tree Top Trips", "Area" },
             { "Forest3", true, "Split When Entering The Cowardice King", "Area" },
             { "2-Hub", false, "Split When Entering The Second Hub", "Area" },
             { "CaveLevel1Persistent", true, "Split When Entering Teleports Behind You", "Area" },
-			{ "CaveLevel2Persistent", true, "Split When Entering Hole in the Laser Wall", "Area" },
-			{ "BossLevelPersistent2", false, "Split When Entering The Scholar Boss Fight", "Area" },
-            { "3-Hub", false, "Split When Entering The World 3 Hub", "Area" },
-            { "FrozenBeachLevel1", true, "Split When Entering Frozen World", "Area" },
-            { "FrozenBeachLevel2", true, "Split When Entering Chunky Ice Falls", "Area" },
-            { "4-FrozenBeachBossLevel", true, "Split When Entering The Knight Boss Fight", "Area" },
-			{ "4-Ben", true, "Split When Entering Benjamin" ,"Area" },
-            { "Finale", true, "End The Timer When The Credits Start" ,"Area" },
+		{ "CaveLevel2Persistent", true, "Split When Entering Hole in the Laser Wall", "Area" },
+		{ "BossLevelPersistent2", false, "Split When Entering The Scholar Boss Fight", "Area" },
+                { "3-Hub", false, "Split When Entering The World 3 Hub", "Area" },
+                { "FrozenBeachLevel1", true, "Split When Entering Frozen World", "Area" },
+                { "FrozenBeachLevel2", true, "Split When Entering Chunky Ice Falls", "Area" },
+                { "4-FrozenBeachBossLevel", true, "Split When Entering The Knight Boss Fight", "Area" },
+		{ "4-Ben", true, "Split When Entering Benjamin" ,"Area" },
+               { "Finale", true, "End The Timer When The Credits Start" ,"Area" },
     };
 	vars.Helper.Settings.Create(_settings);
 }
