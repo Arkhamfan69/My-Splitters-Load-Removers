@@ -95,16 +95,22 @@ split
 
 isLoading
 {
-    return current.Paused || current.Area == "OpeningCutscene";
-
-    if (current.Area == "HubWorld" && current.Loading2 == true)
-    {
-        return false;
-    }
-    else if (current.Area != "HubWorld" && current.Loading2 == true)
+    if (current.Paused || current.Area == "OpeningCutscene")
     {
         return true;
     }
+
+    if (current.Area == "HubWorld" && current.Loading2)
+    {
+        return false;
+    }
+
+    if (current.Area != "HubWorld" && current.Loading2)
+    {
+        return true;
+    }
+
+    return false;
 }
 
 reset
