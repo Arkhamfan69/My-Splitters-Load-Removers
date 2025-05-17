@@ -9,7 +9,7 @@ startup
     vars.Helper.GameName = "Frest";
 
     settings.Add("Frest", true, "Frest Auto Splitter Settings");
-        settings.Add("1-1", true, "Disable For 100% Speedruns");
+        settings.Add("1-1", true, "Split When Entering The Hub After 1-1");
         settings.Add("End", true, "Split On Final Cutscene Starting", "Frest");
         settings.SetToolTip("End", "Disable All Other Settings If You Only Have A Split For The Ending");
         settings.Add("100%", false, "Split After Returning To Hub After Every Challenge", "Frest");
