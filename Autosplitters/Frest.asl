@@ -79,7 +79,7 @@ split
         return settings["After2"];
     }
 
-    if (current.Area == "3-Hub" && old.Area == "3-Hub")
+    if (current.Area == "3-Hub" && old.Area != "3-Hub")
     {
         return settings["After3"];
     }
