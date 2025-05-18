@@ -7,9 +7,10 @@ startup
 {
     Assembly.Load(File.ReadAllBytes("Components/asl-help")).CreateInstance("Basic");
     vars.Helper.GameName = "Frest";
+    vars.Helper.AlertLoadless();
 
     settings.Add("Frest", true, "Frest Auto Splitter Settings");
-        settings.Add("1-1", true, "Split When Entering The Hub After 1-1");
+        settings.Add("1-1", true, "Disable For 100% Speedruns");
         settings.Add("End", true, "Split On Final Cutscene Starting", "Frest");
         settings.SetToolTip("End", "Disable All Other Settings If You Only Have A Split For The Ending");
         settings.Add("100%", false, "Split After Returning To Hub After Every Challenge", "Frest");
@@ -100,18 +101,30 @@ isLoading
         return true;
     }
 
+    // Only "HubWorld" ignores loading flag
     if (current.Area == "HubWorld" && current.Loading2)
     {
         return false;
     }
 
-    if (current.Area != "HubWorld" && current.Loading2)
+    // Exclude World 2 levels from being treated as loading areas
+    if (current.Area == "CaveLevel1Persistent" || current.Area == "CaveLevel2Persistent")
+    {
+        if (current.Loading2)
+        {
+            return false;
+        }
+    }
+
+    // All other areas, including 1-Hub/2-Hub/3-Hub, obey loading flag
+    if (current.Loading2)
     {
         return true;
     }
 
     return false;
 }
+
 
 reset
 {
