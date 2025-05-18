@@ -101,30 +101,29 @@ isLoading
         return true;
     }
 
-    // Only "HubWorld" ignores loading flag
-    if (current.Area == "HubWorld" && current.Loading2)
+    if (current.Area == "HubWorld" || current.Area == "CaveLevel1Persistent" || current.Area == "CaveLevel2Persistent")
     {
         return false;
     }
 
-    // Exclude World 2 levels from being treated as loading areas
-    if (current.Area == "CaveLevel1Persistent" || current.Area == "CaveLevel2Persistent")
-    {
-        if (current.Loading2)
-        {
-            return false;
-        }
-    }
-
-    // All other areas, including 1-Hub/2-Hub/3-Hub, obey loading flag
-    if (current.Loading2)
+    if (
+        (
+            current.Area == "CaveLevel1Persistent" ||
+            current.Area == "CaveLevel2Persistent" ||
+            current.Area == "BossLevelPersistent2" ||
+            current.Area == "JungleLevel1Persistent" ||
+            current.Area == "JungleLevel2Persistent" ||
+            current.Area == "BossLevelPersistent3" ||
+            current.Area == "FrozenBeachLevel1"
+        )
+        && current.Loading2 == true
+    )
     {
         return true;
     }
-
-    return false;
+    
+    return current.Loading2;
 }
-
 
 reset
 {
