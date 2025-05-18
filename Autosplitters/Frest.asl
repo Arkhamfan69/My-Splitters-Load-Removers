@@ -13,6 +13,7 @@ startup
         settings.Add("1-1", true, "Disable For 100% Speedruns");
         settings.Add("End", true, "Split On Final Cutscene Starting", "Frest");
         settings.SetToolTip("End", "Disable All Other Settings If You Only Have A Split For The Ending");
+        settings.Add("Ben", true, "Split When Entering The Benjamin Boss Fight", "Frest");
         settings.Add("100%", false, "Split After Returning To Hub After Every Challenge", "Frest");
         settings.Add("After", true, "Split After Finishing A Level In World 1", "Frest");
         settings.Add("After2", true, "Split After Finishing A Level In World 2", "Frest");
@@ -68,6 +69,12 @@ split
         return settings["1-1"]; // Done To Split When Entering The Hub World After 1-1
     }
 
+    if (current.Area == "4-Ben" && old.Area != "4-Ben" && !vars.CompletedSplits.Contains(current.Area))
+    {
+        vars.CompletedSplits.Add(current.Area);
+        return settings["Ben"];
+    }
+
     if (current.Area == "1-Hub" && old.Area != "1-Hub")
     {
         return settings["After"];
@@ -101,7 +108,14 @@ isLoading
         return true;
     }
 
-    if (current.Area == "HubWorld" || current.Area == "CaveLevel1Persistent" || current.Area == "CaveLevel2Persistent")
+    if (
+        current.Area == "HubWorld" ||
+        current.Area == "CaveLevel1Persistent" ||
+        current.Area == "CaveLevel2Persistent" ||
+        current.Area == "FrozenBeachLevel1" ||
+        current.Area == "FrozenBeachLevel2" || 
+        current.Area == "4-Ben"
+    )
     {
         return false;
     }
@@ -113,8 +127,7 @@ isLoading
             current.Area == "BossLevelPersistent2" ||
             current.Area == "JungleLevel1Persistent" ||
             current.Area == "JungleLevel2Persistent" ||
-            current.Area == "BossLevelPersistent3" ||
-            current.Area == "FrozenBeachLevel1"
+            current.Area == "BossLevelPersistent3"
         )
         && current.Loading2 == true
     )
