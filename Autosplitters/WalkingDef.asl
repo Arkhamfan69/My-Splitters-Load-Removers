@@ -1,6 +1,6 @@
 state("WDC")
 {
-    bool Circle: 0xFDA138;
+    bool Circle: 0xFD9F15;
     byte Menu: 0xF3386F;
 }
 
@@ -16,5 +16,5 @@ start
 
 update
 {
-    if (current.Circle != old.Circle) print("Current Loading Is: " + current.Circle);
+    if (old.Circle != current.Circle) print("Current Loading Is: " + current.Circle);
 }
