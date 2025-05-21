@@ -8,8 +8,8 @@ init
 {
     vars.ModsDetected = false;
 	vars.gameModule = modules.First();
-	vars.MickeyLocation = Path.GetFullPath(Path.Combine(vars.gameModule.FileName, @"../../../"));
-	vars.paksFolder = Path.GetFullPath(Path.Combine(vars.MickeyLocation, @"Content\Paks\"));
+	vars.Em2Location = Path.GetFullPath(Path.Combine(vars.gameModule.FileName, @"../../../"));
+	vars.paksFolder = Path.GetFullPath(Path.Combine(vars.Em2Location, @"Content\Paks\"));
 	if (Directory.Exists(vars.paksFolder + @"~mods"))
 	{
 		var modsMessage = MessageBox.Show (
