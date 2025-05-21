@@ -20,7 +20,7 @@ startup
     }
 }
 
-init // Code Tweaked Some From Clair Obscure: Expedition 33 Autosplitter By Nikoheart
+init // Code Tweaked Some From Clair Obscur: Expedition 33 Autosplitter By Nikoheart
 {
     vars.ModsDetected = false;
 	vars.gameModule = modules.First();
