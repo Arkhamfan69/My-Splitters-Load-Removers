@@ -85,8 +85,3 @@ isLoading
 {
     return current.loading == 1 || current.loading == null;
 }
-
-start
-{
-    return current.loading == 1;
-}
