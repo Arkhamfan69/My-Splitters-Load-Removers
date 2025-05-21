@@ -76,5 +76,5 @@ reset
 
 isLoading
 {
-    return current.Paused == true;
+    return current.Paused;
 }
