@@ -24,7 +24,8 @@ init
     current.Scene = "";
     current.Starshard = 0;
     current.Starsliver = 0;
-    current.World = "";
+    current.World = 2;
+    vars.Island = new HashSet<int>();
 }
 
 update
@@ -59,7 +60,8 @@ split
         return settings["Starsliver"];
     }
 
-    if (current.World == 1 && old.World != 1) {
+    if (current.World == 1 && old.World != 1 && !vars.Island.Contains(current.World)) {
+        vars.Island.Add(current.World);
         return settings["island"];
     }
 }
