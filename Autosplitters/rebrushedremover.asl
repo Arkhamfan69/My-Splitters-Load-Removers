@@ -215,6 +215,7 @@ onStart
 
     vars.CutscenesWatched.Clear();
 	vars.DoneAreas.Clear();
+	vars.NewGamePlus = false;
 
 	vars.Log("NG+ State at start: " + current.NewGamePlus);
 }
