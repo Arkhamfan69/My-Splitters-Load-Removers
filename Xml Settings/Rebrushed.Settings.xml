@@ -104,13 +104,6 @@
                 <Setting Id="LS_EBR_PeteMiniboss_2" Label="Entered Colosseum" State="false"/>
                 <Setting Id="LS_EBR_PeteDefeated_1_LOOP" Label="Finished Colosseum Mini Boss" State="false"/>
             </Setting>
-            <Setting Id="Clocktower" Label="Clocktower Settings" State="true">
-                <Setting Id="GV_CT_P" Label="Entered Clocktower Area" State="true"/>
-                <Setting Id="LS_ClockTower_Intro" Label="Entered Clocktower Boss Fight" State="false"/>
-                <Setting Id="LS_ClockTower_PaintDefeat" Label="Paint Path Fight" State="false"/>
-                <Setting Id="LS_ClockTower_ThinnerDefeat" Label="Thinner Path Fight" State="false"/>
-                <Setting Id="LS_MickeyProjectorLeave_Clocktower" Label="Entering Projector After Boss" State="false"/>
-            </Setting>
         </Setting>
         <Setting Id="MJM" Label="Mickey Junk Mountain Settings" State="true">
             <Setting Id="Heaps" Label="Heaps Settings" State="true">
@@ -246,7 +239,7 @@
             </Setting>
         </Setting>
         <Setting Id="Blot" Label="Bloticles Settings" State="true">
-            <Setting Id="Blot" Label="Blot Settings" State="true">
+            <Setting Id="Blost" Label="Blot Settings" State="true">
                 <Setting Id="Ostownblot" Label="Ostown Blot Settings" State="true">
                     <Setting Id="BTB2_BOT_REC_P" Label="Entered Ostown Blot" State="true"/>
                 </Setting>
