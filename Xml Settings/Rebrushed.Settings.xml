@@ -1,6 +1,5 @@
 <Settings>
     <Setting Id="General" Label="General Options" State="true">
-        <Setting Id="Reset" Label="Reset When The Game Crashes" State="false"/>
         <Setting Id="ng+" Label="Split When Starting New Game Plus" State="false"/>
         <Setting Id="Ng+f" Label="100% Final Split (Don't Deactivate)" State="true"/>
         <Setting Id="ChestOpening" Label="Chest Opening Settings (DO NOT DISABLE ANY IF THIS SETTING IS CHECKED)" State="false">
