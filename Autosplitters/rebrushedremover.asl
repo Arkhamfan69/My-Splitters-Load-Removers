@@ -259,10 +259,10 @@ split
 		return true;
 	}
 
-	if (settings["Ng+f"] && current.World == "BTB1_TSB_P" && old.World == "BTB_YOD_P" && vars.NewGamePlus = true && current.Cutscene == "LS_TSB_ShadowBlotDefeatedThinner_2_2")
-	{
-		return true;
-	}
+	if (settings["Ng+f"] && current.World == "BTB1_TSB_P" && old.World == "BTB_YOD_P" && vars.NewGamePlus == true && current.Cutscene == "LS_TSB_ShadowBlotDefeatedThinner_2_2")
+{
+    return true;
+}
 }
 
 exit
