@@ -23,6 +23,9 @@ startup
         MessageBoxButtons.YesNo, MessageBoxIcon.Information);
     }
 
+    settings.Add("skip", false, "Split On Final Cutscene (With Rubble Skip)");
+    settings.Add("skip2", true, "Split On Final Cutscene (No Rubble Skip)");
+
    	dynamic[,] _settings =
 	{
 		{ "Area", true, "Splitting Areas", null },
@@ -55,12 +58,10 @@ init
     // GWorld.OwningGameInstance.LocalPlayers[0].Character.CharacterMovement.Velocity.X/Y/Z
     vars.Helper["CharacterMovementX"] = vars.Helper.Make<float>(gEngine, 0xD98, 0x38, 0x0, 0x30, 0x2C8, 0x300, 0xC8);
     vars.Helper["CharacterMovementY"] = vars.Helper.Make<float>(gEngine, 0xD98, 0x38, 0x0, 0x30, 0x2C8, 0x300, 0xD0);
-    // vars.Helper["Flashlight"] =  vars.Helper.Make<bool>(gEngine, 0x6BB, )  // This is a potential option to autoend the timer
+    // GWorld.OwningGameInstance.LocalPlayers[0].AcknowledgedPawn.IsCinematic
+    vars.Helper["Cinematic"] = vars.Helper.Make<bool>(gEngine, 0xD98, 0x38, 0x0, 0x30, 0x318, 0x761);
     // GEngine.GameInstance.collectableList??
     // vars.Helper["Collectables"] = vars.Helper.Make<int>(gEngine, 0xD98, 0x278);
-
-    // GWorld.OwningGameInstance.LocalPlayers[0].AcknowledgedPawn.IsCinematic
-    // vars.Helper["Cinematic"] = vars.Helper.Make<bool>(gEngine, 0xD98, 0x38, 0x0, 0x30, 0x318, 0x761);
 
     // vars.CollctablesDP = new DeepPointer(gEngine, 0xD98, 0x278);
 
@@ -80,6 +81,7 @@ init
     });
 
     current.Area = "";
+    current.CutsceneCount = 0;
     vars.CompletedSplits = new HashSet<string>();
 }
 
@@ -93,9 +95,22 @@ update
     if (old.Area != current.Area) vars.Log("Area: " + current.Area);
     if (old.Paused != current.Paused) vars.Log("Current Paused Is " + current.Paused);
     if (old.HiddenLoads != current.HiddenLoads) vars.Log("Hidden Loading = " + current.HiddenLoads);
-    // if (old.Cinematic != current.Cinematic) vars.Log("Cinematic: " + current.Cinematic);
-    // if (old.Collectables != current.Collectables) vars.Log("Collectables: " + current.Collectables);
-    // if (current.Area == "1_finalChase" && old.Cinematic != current.Cinematic && current.Cinematic == true) vars.FinalLevelCutscene++;
+    if (old.Cinematic != current.Cinematic) vars.Log("Cinematic: " + current.Cinematic);
+
+    if (current.Area == "1_finalChase") {
+        if (current.Cinematic && !old.Cinematic) {
+            current.CutsceneCount = old.CutsceneCount + 1;
+            vars.Log("Final map cutscene started! Total: " + current.CutsceneCount);
+        } else {
+            current.CutsceneCount = old.CutsceneCount;
+        }
+    } else {
+        current.CutsceneCount = old.CutsceneCount;
+    }
+
+    if (current.Area != "1_finalChase") {
+        current.CutsceneCount = 0;
+    }
 }
 
 start
@@ -105,7 +120,7 @@ start
 
 onStart
 {
-	vars.CompletedSplits.Clear();
+    vars.CompletedSplits.Clear();
 }
 
 isLoading
@@ -125,5 +140,14 @@ split
         vars.CompletedSplits.Add(current.Area);
         return true;
     }
-}
 
+    if (settings["skip"] && current.Area == "1_finalChase" && current.CutsceneCount == 5)
+    {
+        return true;
+    }
+
+    if (settings["skip2"] && current.Area == "1_finalChase" && current.CutsceneCount == 6)
+    {
+        return true;
+    }
+}
