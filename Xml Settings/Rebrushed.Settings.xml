@@ -1,14 +1,15 @@
 <Settings>
-    <Setting Id="General" Label="General Options" State="true">
-        <Setting Id="ng+" Label="Split When Starting New Game Plus" State="false"/>
-        <Setting Id="Ng+f" Label="100% Final Split (Don't Deactivate)" State="true"/>
-        <Setting Id="ChestOpening" Label="Chest Opening Settings (DO NOT DISABLE ANY IF THIS SETTING IS CHECKED)" State="false">
-            <Setting Id="LS_TreasureChest_Open_Static" Label="Chest Opening Cutscene" State="true"/>
-            <Setting Id="LS_TreasureChest_Open" Label="Courtyard Chest Open" State="true"/>
-            <Setting Id="LS_TreasureChest_Open_Near" Label="Mean Street Chest Open" State="true"/>
-        </Setting>
-    </Setting>
     <Setting Id="EMR" Label="Epic Mickey Rebrushed Settings" State="true">
+        <Setting Id="General" Label="General Options" State="true">
+            <Setting Id="Reset" Label="Reset When The Game Crashes" State="false"/>
+            <Setting Id="ng+" Label="Split When Starting New Game Plus" State="false"/>
+            <Setting Id="Ng+f" Label="100% Final Split (Don't Deactivate)" State="true"/>
+            <Setting Id="ChestOpening" Label="Chest Opening Settings (DO NOT DISABLE ANY IF THIS SETTING IS CHECKED)" State="false">
+                <Setting Id="LS_TreasureChest_Open_Static" Label="Chest Opening Cutscene" State="true"/>
+                <Setting Id="LS_TreasureChest_Open" Label="Courtyard Chest Open" State="true"/>
+                <Setting Id="LS_TreasureChest_Open_Near" Label="Mean Street Chest Open" State="true"/>
+            </Setting>
+        </Setting>
         <Setting Id="hub" Label="Hub Settings" State="true">
             <Setting Id="ms" Label="Mean Street Settings" State="true">
                 <Setting Id="MS_MS_P" Label="Entered Mean Street" State="true"/>
@@ -52,279 +53,286 @@
                 <Setting Id="LM_BE2b_REC_P" Label="Entered Bog Easy 2" State="true"/>
             </Setting>
         </Setting>
-    </Setting>
-    <Setting Id="Area" Label="Area Settings" State="true">
-        <Setting Id="DBC1" Label="Dark Beauty Castle 1 Settings" State="true">
-            <Setting Id="LS_MDL_ArmHurt_03_2" Label="First Gen Destroyed" State="false"/>
-            <Setting Id="LS_MDL_ArmDestroyed_04_2" Label="Second Gen Destroyed" State="false"/>
-            <Setting Id="LS_CE_CastleIntro_01_2" Label="Split When Starting The Courtyard Cutscene" State="true"/>
-            <Setting Id="LS_CE_Gear1_06_2" Label="Split When Spinning First Gear" State="false"/>
-            <Setting Id="LS_CE_Gear2_07_2" Label="Split When Spinning Second Gear" State="false"/>
-            <Setting Id="DBC_BS_P" Label="Split After Skipping Courtyard Cutscene" State="false"/>
-        </Setting>
-        <Setting Id="Gremlin" Label="Gremlin Village Settings" State="true">
-            <Setting Id="Slalom" Label="Slalom Settings" State="true">
-                <Setting Id="GremlinVillage_P" Label="Slalom Entrance" State="true"/>
-                <Setting Id="LS_SLM_GearsBroken_2b_2" Label="Broke Slalom Gear" State="false"/>
-                <Setting Id="LS_SLM_SpatterPipes_3_2" Label="Pipes Cutscene" State="false"/>
-                <Setting Id="LS_SL_DoubleJump" Label="Double Jump Tutorial" State="false"/>
-                <Setting Id="LS_TB_EnemiesThreateningTim" Label="Slalom Enemies" State="false"/>
+        <Setting Id="Area" Label="Area Settings" State="true">
+            <Setting Id="DBC1" Label="Dark Beauty Castle 1 Settings" State="true">
+                <Setting Id="LS_MDL_ArmHurt_03_2" Label="First Gen Destroyed" State="false"/>
+                <Setting Id="LS_MDL_ArmDestroyed_04_2" Label="Second Gen Destroyed" State="false"/>
+                <Setting Id="LS_CE_CastleIntro_01_2" Label="Split When Starting The Courtyard Cutscene" State="true"/>
+                <Setting Id="LS_CE_Gear1_06_2" Label="Split When Spinning First Gear" State="false"/>
+                <Setting Id="LS_CE_Gear2_07_2" Label="Split When Spinning Second Gear" State="false"/>
+                <Setting Id="DBC_BS_P" Label="Split After Skipping Courtyard Cutscene" State="false"/>
             </Setting>
-            <Setting Id="TicketBooth" Label="Ticket Booth Settings" State="true">
-                <Setting Id="LS_TB_Intro_GuardianDrawn_Paint_4" Label="Guardian Tutorial / Enter Ticket Booth" State="true"/>
-                <Setting Id="LS_TB_LvlIntro_1_ShortEdit" Label="Save Gremlin Tim Dialogue" State="false"/>
-                <Setting Id="LS_TB_startBoatsPaint_2b_2" Label="Saved Gremlin Tim" State="false"/>
-                <Setting Id="LS_TB_ptPump_PaintGus_" Label="Thinner Pump Gus Dialogue" State="false"/>
-                <Setting Id="LS_TB_TimGetsWrench_4c_2" Label="Tim Getting Wrench" State="false"/>
-                <Setting Id="LS_TB_FixedPipes_7a_2" Label="Tim Quest Done" State="false"/>
-            </Setting>
-            <Setting Id="JBR" Label="Jungle Boat Ride Settings" State="true">
-                <Setting Id="LS_JBR_LevelIntro_2" Label="Enter Hippo Room" State="false"/>
-                <Setting Id="LS_JBR_HippoMouth" Label="Hippo Room Done" State="false"/>
-                <Setting Id="LS_JBR_Whirlpool_2" Label="Whirlpool Cutscene / 100% Cutscene JBR skip" State="false"/>
-                <Setting Id="LS_JBR_RedChest_2" Label="Cutscene After Chest Opening" State="false"/>
-                <Setting Id="LS_JBR_ThinnerPit_2" Label="Valves Area" State="false"/>
-                <Setting Id="LS_JBR_PitDoorOpens_2" Label="Valves Area Done" State="false"/>
-            </Setting>
-            <Setting Id="Asia" Label="Asia Settings" State="true">
-                <Setting Id="LS_ABR_IntroPuzzle_CS_10_1_NEW" Label="Entered Asia Area" State="true"/>
-                <Setting Id="LS_ABR_Pete_11_1_NEW" Label="Steam Time Challenge Done" State="false"/>
-                <Setting Id="LS_ABR_LevelIntroduction_01_1and2" Label="Actually Entered Asia" State="false"/>
-                <Setting Id="LS_ABR_GremlinSam_07b_3" Label="Saved Gremlin Sam (Useful for non Asia Skip Runners)" State="false"/>
-                <Setting Id="LS_ABR_TempleDoor_Hint" Label="Reached The Exit Dialogue" State="false"/>
-                <Setting Id="LS_ABR_TempleDoor_09" Label="Temple Door Open" State="false"/>
-                <Setting Id="LS_ABR_RaiseTheFireBridge_07" Label="Raised The Fire Bridge" State="false"/>
-            </Setting>
-            <Setting Id="Europe" Label="Europe Settings" State="true">
-                <Setting Id="GV_EBR_P" Label="Entered Europe" State="false"/>
-                <Setting Id="LS_EBR_LeaningTowerFalling_New_Destruction" Label="Pillar Down" State="false"/>
-                <Setting Id="LS_HotAirBallonSandBags" Label="In Hot Air Baloon" State="false"/>
-                <Setting Id="LS_ChestPillarUp" Label="Raised Chest Pillar" State="false"/>
-                <Setting Id="LS_EBR_PeteMiniboss_2" Label="Entered Colosseum" State="false"/>
-                <Setting Id="LS_EBR_PeteDefeated_1_LOOP" Label="Finished Colosseum Mini Boss" State="false"/>
-            </Setting>
-        </Setting>
-        <Setting Id="MJM" Label="Mickey Junk Mountain Settings" State="true">
-            <Setting Id="Heaps" Label="Heaps Settings" State="true">
-                <Setting Id="MJM_HP_P" Label="Entered MJM" State="true"/>
-                <Setting Id="LS_MJM_HP_Intro_1_3" Label="First MJM Cutscene Started" State="false"/>
-                <Setting Id="LS_MJM_HP_FreeGremlinKip_4_3" Label="Saved Gremlin Kip" State="false"/>
-                <Setting Id="LS_MJM_HP_CraneFixed_4" Label="Crane Fixed" State="false"/>
-                <Setting Id="LS_MickeyProjectorLeave_MJM_Alpine" Label="Entering Alpine Climber: Part 1" State="false"/>
-            </Setting>
-            <Setting Id="Piles" Label="Piles Settings" State="true">
-                <Setting Id="MJM_TP_P" Label="Entered Piles" State="true"/>
-                <Setting Id="LS_GremlinRonald_Phone" Label="Gremlin Ronald On Phone (Saved Gremlin Ronald)" State="false"/>
-            </Setting>
-            <Setting Id="Slopes" Label="Slopes Settings" State="true">
-                <Setting Id="MickeyJunkMountain_P" Label="Entered Slopes" State="true"/>
-                <Setting Id="LS_OpenDoorsCameraFighting" Label="Finished Slopes Fight" State="false"/>
-                <Setting Id="LS_SecondAnvil" Label="Painted Anvil For Gildas Axe" State="false"/>
-            </Setting>
-            <Setting Id="Caverns" Label="Caverns Settings" State="true">
-                <Setting Id="LS_LevelIntroduction" Label="Entered Caverns" State="true"/>
-                <Setting Id="LS_CavernGridPlatformMovingUp" Label="Thinned Mickey Statue" State="false"/>
-                <Setting Id="LS_FirstProjector" Label="Unlocked First Projector" State="false"/>
-                <Setting Id="LS_MickeyProjectorLeave_MJM_First" Label="Entering First Projector" State="false"/>
-                <Setting Id="LS_SecondProjector" Label="Unlocked Second Projector" State="false"/>
-                <Setting Id="LS_MickeyProjectorLeave_MJM_Second" Label="Entering Second Projector" State="false"/>
-                <Setting Id="LS_ThirdProjector" Label="Unlocked Third Projector" State="false"/>
-                <Setting Id="LS_MickeyProjectorLeave_MJM_Third" Label="Entering Third Projector" State="false"/>
-                <Setting Id="LS_SeekOutOswald" Label="Oswald Cutscene" State="false"/>
-                <Setting Id="MJM_MOC_P_3" Label="Caverns Visit 2" State="false"/>
-                <Setting Id="BTB_YOD_P" Label="Entered Ye Olden Days" State="false"/>
-            </Setting>
-        </Setting>
-        <Setting Id="TommorowCity" Label="Tommorow City Settings" State="true">
-            <Setting Id="Notilus" Label="Notilus Settings" State="true">
-                <Setting Id="TL_NOT_P" Label="Entered Notilus" State="true"/>
-                <Setting Id="LS_NOT_GearEntrance_3" Label="Painted First Gear" State="false"/>
-                <Setting Id="LS_NOT_ExtendPlatforms_6" Label="Painted Second Gear" State="false"/>
-                <Setting Id="LS_NOT_RaisePillars_7" Label="Painted Third Gear" State="false"/>
-                <Setting Id="LS_SecretDoor_5" Label="Opened Secret Door" State="false"/>
-                <Setting Id="LS_NOT_RepairingStarr_4" Label="Saved Gremlin Starr / Raised Notilus" State="false"/>
-                <Setting Id="TL_MM1_P" Label="Entered Mechanical Man: Part 1" State="false"/>
-            </Setting>
-            <Setting Id="TCL" Label="Tommorow City Lagoon Settings" State="true">
-                <Setting Id="TomorrowCity_TCL-GBT_P" Label="Entered Lagoon" State="true"/>
-                <Setting Id="LS_TCL_IntroSpinners_3" Label="Spinner Cutscene" State="false"/>
-                <Setting Id="LS_TCL_FirstValve" Label="Spun First Valve" State="false"/>
-                <Setting Id="LS_TCL_SecondValve" Label="Spun Second Valve" State="false"/>
-                <Setting Id="LS_TCL_FreeWilco_9_2" Label="Saved Gremlin Wilco" State="false"/>
-                <Setting Id="LS_TCL_CompleteUFO_11_2" Label="Completed UFO" State="false"/>
-            </Setting>
-            <Setting Id="GBT" Label="Great Big Tomorrow Settings" State="true">
-                <Setting Id="LS_GBT_IntroSlobber_1_2" Label="Entered GBT" State="true"/>
-                <Setting Id="LS_GBT_DefeatedSlobber_2a_2" Label="Defeated Slobber" State="false"/>
-                <Setting Id="LS_MickeyReceiveAbility_TVSketch" Label="Received TV Sketch Ability" State="false"/>
-                <Setting Id="TL_PLU2_P" Label="Entered Plutopia: Part 2" State="true"/>
-            </Setting>
-            <Setting Id="TCS" Label="Tommorow City Square Settings" State="true">
-                <Setting Id="LS_TS_Intro_1_2" Label="Tommorow Square Entrance" State="true"/>
-                <Setting Id="LS_TS_FreeApollo_2_2" Label="Free Apollo" State="false"/>
-                <Setting Id="LS_TS_FreeNova_8_2" Label="Free Nova" State="false"/>
-            </Setting>
-            <Setting Id="Voyage" Label="Space Voyage Settings" State="true">
-                <Setting Id="TL_SV_P" Label="Entered Voyage" State="true"/>
-            </Setting>
-        </Setting>
-        <Setting Id="POTW" Label="Pirate Of The Wasteland Settings" State="true">
-            <Setting Id="Ventureland" Label="Ventureland Settings" State="true">
-                <Setting Id="POTW_VL1_P" Label="Entered Ventureland " State="true"/>
-                <Setting Id="LS_VL_SmeeIntro_02_4" Label="Talked To Smee" State="false"/>
-                <Setting Id="LS_VL_SmeeGotAllItems_15_2" Label="Got All Items For Smee" State="false"/>
-                <Setting Id="POTW_CA1_P" Label="Entered Castaway: Part 1" State="true"/>
-                <Setting Id="LS_Castaway_P1_BigWave" Label="Got On Raft In Castaway: Part 1" State="false"/>
-                <Setting Id="POTW_VL2_P" Label="Entered Ventureland 2" State="true"/>
-            </Setting>
-            <Setting Id="Tortooga" Label="Tortooga Settings" State="true">
-                <Setting Id="POTW_TOR_P" Label="Entered Tortooga" State="true"/>
-                <Setting Id="LS_TOR_JailDoor" Label="Knocked Down Jail Door" State="false"/>
-                <Setting Id="LS_TOR_Pirate_2_01" Label="Let Middle Pirate Out Of Jail" State="false"/>
-                <Setting Id="LS_VL_LanternsCompeted_01" Label="Lanterns Quest Completed" State="false"/>
-                <Setting Id="LS_TOR_IntoTheWell_01" Label="Entered The Well" State="false"/>
-                <Setting Id="LS_VL_BillysBagFound" Label="Found Beluga Billys Bag" State="false"/>
-                <Setting Id="POTW_JR2_P" Label="Entered Jungle Rhythm: Part 2" State="true"/>
-                <Setting Id="POTW_TOR2_P" Label="Entered Tortooga 2" State="true"/>
-                <Setting Id="POTW_CA2_P" Label="Entered Castaway: Part 2" State="true"/>
-            </Setting>
-            <Setting Id="Jungle" Label="Jungle Settings" State="true">
-                <Setting Id="POTW_JUN_P" Label="Entered Jungle" State="true"/>
-                <Setting Id="LS_JUN_AllLanternsPainted_01" Label="Painted All Lanterns" State="false"/>
-                <Setting Id="LS_JUN_FixTheGate_01" Label="Saved Gremlin Buzz" State="false"/>
-                <Setting Id="POTW_TW_P" Label="Entered The Whalers" State="true"/>
-            </Setting>
-            <Setting Id="pvoyage" Label="Pirate Voyage Settings" State="true">
-                <Setting Id="POTW_PV_P" Label="Entered Pirate Voyage" State="true"/>
-                <Setting Id="LS_FireExtinguish_3" Label="Extenguised Fire On Concept Art" State="false"/>
-                <Setting Id="LS_FireExtinguish" Label="Extenguised Fire On Chest" State="false"/>
-                <Setting Id="LS_PV_PumpAllPaint_01" Label="All Pumps Painted" State="false"/>
-                <Setting Id="LS_PV_FreeGErik_02" Label="Freed Gremlin Erik" State="false"/>
-                <Setting Id="POTW_SH_P" Label="Entered Shanghaied" State="false"/>
-            </Setting>
-            <Setting Id="SIsland" Label="Skull Island Settings" State="true">
-                <Setting Id="POTW_SI_P" Label="Entered Skull Island" State="true"/>
-                <Setting Id="LS_SI_ThinThirdAnchor_07_2" Label="All Anchors Thinned" State="false"/>
-                <Setting Id="LS_SI_CameraLess_AllPumpPainted_CloseDoors" Label="All Pumps Painted" State="false"/>
-            </Setting>
-        </Setting>
-        <Setting Id="Lonesome" Label="Lonesome Manor Settings" State="true">
-            <Setting Id="Manor" Label="Manor House Settings" State="true">
-                <Setting Id="LM_MH_P" Label="Entered Manor House" State="true"/>
-                <Setting Id="LM_MD1_P" Label="Entered The Mad Doctor: Part 1" State="true"/>
-            </Setting>
-            <Setting Id="Foyer" Label="Foyer Settings" State="true">
-                <Setting Id="LM_FY_P" Label="Entered Foyer" State="true"/>
-                <Setting Id="LS_FY_Skull2_2" Label="Painted First Skull" State="false"/>
-                <Setting Id="LS_FY_Skull1_2" Label="Painted Second Skull" State="false"/>
-                <Setting Id="LM_HH1_P" Label="Entered Haunted House: Part 1" State="true"/>
-            </Setting>
-            <Setting Id="sr" Label="Stretching Room Settings" State="true">
-                <Setting Id="LM_SR_P" Label="Entered Stretching Room" State="true"/>
-                <Setting Id="LS_SR_RestorePainting_TalkingToSidney" Label="Saved Gremlin Sydney" State="false"/>
-                <Setting Id="LM_MD2_P" Label="Entered The Mad Doctor: Part 2" State="true"/>
-                <Setting Id="LS_SawbladeChamber" Label="Entered Sawblade Chamber" State="false"/>
-            </Setting>
-            <Setting Id="lib" Label="Library Settings" State="true">
-                <Setting Id="LM_L_P" Label="Entered Library" State="true"/>
-                <Setting Id="LS_L_LeonaTalk_Blend" Label="Talked To Leona For The First Time" State="false"/>
-                <Setting Id="LM_HH2_P" Label="Entered Haunted House: Part 2" State="true"/>
-            </Setting>
-            <Setting Id="br" Label="Ballroom Settings" State="true">
-                <Setting Id="LM_BR_P" Label="Entered Ballroom" State="true"/>
-                <Setting Id="LS_BR_FreeFerdinand_01_2" Label="Free Ferdinand" State="false"/>
-                <Setting Id="LS_BR_PlayMusicDone_01" Label="Helped The Pipe Organ" State="false"/>
-                <Setting Id="LM_HH3_P" Label="Entered Haunted House: Part 3" State="true"/>
-            </Setting>
-        </Setting>
-        <Setting Id="Blot" Label="Bloticles Settings" State="true">
-            <Setting Id="Blost" Label="Blot Settings" State="true">
-                <Setting Id="Ostownblot" Label="Ostown Blot Settings" State="true">
-                    <Setting Id="BTB2_BOT_REC_P" Label="Entered Ostown Blot" State="true"/>
+            <Setting Id="Gremlin" Label="Gremlin Village Settings" State="true">
+                <Setting Id="Slalom" Label="Slalom Settings" State="true">
+                    <Setting Id="GremlinVillage_P" Label="Slalom Entrance" State="true"/>
+                    <Setting Id="LS_SLM_GearsBroken_2b_2" Label="Broke Slalom Gear" State="false"/>
+                    <Setting Id="LS_SLM_SpatterPipes_3_2" Label="Pipes Cutscene" State="false"/>
+                    <Setting Id="LS_SL_DoubleJump" Label="Double Jump Tutorial" State="false"/>
+                    <Setting Id="LS_TB_EnemiesThreateningTim" Label="Slalom Enemies" State="false"/>
                 </Setting>
-                <Setting Id="MeanStreetBlot" Label="Mean Street Blot Settings" State="true">
-                    <Setting Id="BTB2_BMS_Original_P" Label="Entered Mean Street Blot" State="true"/>
+                <Setting Id="TicketBooth" Label="Ticket Booth Settings" State="true">
+                    <Setting Id="LS_TB_Intro_GuardianDrawn_Paint_4" Label="Guardian Tutorial / Enter Ticket Booth" State="true"/>
+                    <Setting Id="LS_TB_LvlIntro_1_ShortEdit" Label="Save Gremlin Tim Dialogue" State="false"/>
+                    <Setting Id="LS_TB_startBoatsPaint_2b_2" Label="Saved Gremlin Tim" State="false"/>
+                    <Setting Id="LS_TB_ptPump_PaintGus_" Label="Thinner Pump Gus Dialogue" State="false"/>
+                    <Setting Id="LS_TB_TimGetsWrench_4c_2" Label="Tim Getting Wrench" State="false"/>
+                    <Setting Id="LS_TB_FixedPipes_7a_2" Label="Tim Quest Done" State="false"/>
                 </Setting>
-                <Setting Id="VenturelandBlot" Label="Ventureland Blot Settings" State="true">
-                    <Setting Id="BTB2_BVLa_P" Label="Entered Ventureland Blot" State="true"/>
-                    <Setting Id="LS_BVL_BloticlesDefeated_01_2" Label="Bloticles Defeated (Ventureland Blot)" State="false"/>
+                <Setting Id="JBR" Label="Jungle Boat Ride Settings" State="true">
+                    <Setting Id="LS_JBR_LevelIntro_2" Label="Enter Hippo Room" State="false"/>
+                    <Setting Id="LS_JBR_HippoMouth" Label="Hippo Room Done" State="false"/>
+                    <Setting Id="LS_JBR_Whirlpool_2" Label="Whirlpool Cutscene / 100% Cutscene JBR skip" State="false"/>
+                    <Setting Id="LS_JBR_RedChest_2" Label="Cutscene After Chest Opening" State="false"/>
+                    <Setting Id="LS_JBR_ThinnerPit_2" Label="Valves Area" State="false"/>
+                    <Setting Id="LS_JBR_PitDoorOpens_2" Label="Valves Area Done" State="false"/>
                 </Setting>
-                <Setting Id="BogEasyBlot" Label="Bog Easy Blot Settings" State="true">
-                    <Setting Id="BTB2_BBEb_P" Label="Entered Bog Easy Blot" State="true"/>
-                    <Setting Id="LS_BBE_Bloticle_03_2" Label="Bloticle Defeated (Bog Easy Blot)" State="false"/>
+                <Setting Id="Asia" Label="Asia Settings" State="true">
+                    <Setting Id="LS_ABR_IntroPuzzle_CS_10_1_NEW" Label="Entered Asia Area" State="true"/>
+                    <Setting Id="LS_ABR_Pete_11_1_NEW" Label="Steam Time Challenge Done" State="false"/>
+                    <Setting Id="LS_ABR_LevelIntroduction_01_1and2" Label="Actually Entered Asia" State="false"/>
+                    <Setting Id="LS_ABR_GremlinSam_07b_3" Label="Saved Gremlin Sam (Useful for non Asia Skip Runners)" State="false"/>
+                    <Setting Id="LS_ABR_TempleDoor_Hint" Label="Reached The Exit Dialogue" State="false"/>
+                    <Setting Id="LS_ABR_TempleDoor_09" Label="Temple Door Open" State="false"/>
+                    <Setting Id="LS_ABR_RaiseTheFireBridge_07" Label="Raised The Fire Bridge" State="false"/>
                 </Setting>
-                <Setting Id="TommorrowBlot" Label="Tommorow Square Blot Settings" State="true">
-                    <Setting Id="BTB2_BTS_P" Label="Entered Tommorow Square Blot" State="true"/>
-                    <Setting Id="BTB2_BSV_P" Label="Entered Space Voyage Blot" State="true"/>
+                <Setting Id="GremlinVillage" Label="Gremlin Village Settings" State="true">
+                    <Setting Id="GV_WOG_P" Label="Entered Gremlin Village" State="true"/>
+                    <Setting Id="LS_WoG_LevelIntro_2" Label="Gremlin Village Intro Cutscene" State="false"/>
+                    <Setting Id="LS_WoG_SmallPeteShip_2" Label="Opened Ship Log Door" State="false"/>
+                    <Setting Id="LS_WoG_PipesPainted_2" Label="Painted The Pipes" State="false"/>
+                    <Setting Id="LS_WoG_PipesFixed_2" Label="Spun Village Pipe" State="false"/>
+                </Setting>
+                <Setting Id="Europe" Label="Europe Settings" State="true">
+                    <Setting Id="GV_EBR_P" Label="Entered Europe" State="false"/>
+                    <Setting Id="LS_EBR_LeaningTowerFalling_New_Destruction" Label="Pillar Down" State="false"/>
+                    <Setting Id="LS_HotAirBallonSandBags" Label="In Hot Air Baloon" State="false"/>
+                    <Setting Id="LS_ChestPillarUp" Label="Raised Chest Pillar" State="false"/>
+                    <Setting Id="LS_EBR_PeteMiniboss_2" Label="Entered Colosseum" State="false"/>
+                    <Setting Id="LS_EBR_PeteDefeated_1_LOOP" Label="Finished Colosseum Mini Boss" State="false"/>
                 </Setting>
             </Setting>
-        </Setting>
-        <Setting Id="DBC2" Label="Dark Beauty Castle 2 Settings" State="true">
-            <Setting Id="Thinner" Label="Mad Doctors Lab 2 Settings" State="true">
-                <Setting Id="DBC_MDL2_P" Label="Entered Dark Beauty Castle 2" State="true"/>
-                <Setting Id="BTB_SB1_P" Label="Entered Sleeping Beauty" State="true"/>
+            <Setting Id="MJM" Label="Mickey Junk Mountain Settings" State="true">
+                <Setting Id="Heaps" Label="Heaps Settings" State="true">
+                    <Setting Id="MJM_HP_P" Label="Entered MJM" State="true"/>
+                    <Setting Id="LS_MJM_HP_Intro_1_3" Label="First MJM Cutscene Started" State="false"/>
+                    <Setting Id="LS_MJM_HP_FreeGremlinKip_4_3" Label="Saved Gremlin Kip" State="false"/>
+                    <Setting Id="LS_MJM_HP_CraneFixed_4" Label="Crane Fixed" State="false"/>
+                    <Setting Id="LS_MickeyProjectorLeave_MJM_Alpine" Label="Entering Alpine Climber: Part 1" State="false"/>
+                </Setting>
+                <Setting Id="Piles" Label="Piles Settings" State="true">
+                    <Setting Id="MJM_TP_P" Label="Entered Piles" State="true"/>
+                    <Setting Id="LS_GremlinRonald_Phone" Label="Gremlin Ronald On Phone (Saved Gremlin Ronald)" State="false"/>
+                </Setting>
+                <Setting Id="Slopes" Label="Slopes Settings" State="true">
+                    <Setting Id="MickeyJunkMountain_P" Label="Entered Slopes" State="true"/>
+                    <Setting Id="LS_OpenDoorsCameraFighting" Label="Finished Slopes Fight" State="false"/>
+                    <Setting Id="LS_SecondAnvil" Label="Painted Anvil For Gildas Axe" State="false"/>
+                </Setting>
+                <Setting Id="Caverns" Label="Caverns Settings" State="true">
+                    <Setting Id="LS_LevelIntroduction" Label="Entered Caverns" State="true"/>
+                    <Setting Id="LS_CavernGridPlatformMovingUp" Label="Thinned Mickey Statue" State="false"/>
+                    <Setting Id="LS_FirstProjector" Label="Unlocked First Projector" State="false"/>
+                    <Setting Id="LS_MickeyProjectorLeave_MJM_First" Label="Entering First Projector" State="false"/>
+                    <Setting Id="LS_SecondProjector" Label="Unlocked Second Projector" State="false"/>
+                    <Setting Id="LS_MickeyProjectorLeave_MJM_Second" Label="Entering Second Projector" State="false"/>
+                    <Setting Id="LS_ThirdProjector" Label="Unlocked Third Projector" State="false"/>
+                    <Setting Id="LS_MickeyProjectorLeave_MJM_Third" Label="Entering Third Projector" State="false"/>
+                    <Setting Id="LS_SeekOutOswald" Label="Oswald Cutscene" State="false"/>
+                    <Setting Id="MJM_MOC_P_3" Label="Caverns Visit 2" State="false"/>
+                    <Setting Id="BTB_YOD_P" Label="Entered Ye Olden Days" State="false"/>
+                </Setting>
             </Setting>
-            <Setting Id="ThroneRoom" Label="Throne Room Settings" State="true">
-                <Setting Id="BTB_TR_P" Label="Entered Throne Room" State="false"/>
-                <Setting Id="LS_ThR_SpawnGoldPin_01" Label="Spawned Gold Pin" State="false"/>
-                <Setting Id="BTB_FA1_Cinema_P" Label="Entered Fantasia: Part 1" State="true"/>
-                <Setting Id="BTB_FA2_P" Label="Entered Fantasia: Part 2" State="true"/>
+            <Setting Id="TommorowCity" Label="Tommorow City Settings" State="true">
+                <Setting Id="Notilus" Label="Notilus Settings" State="true">
+                    <Setting Id="TL_NOT_P" Label="Entered Notilus" State="true"/>
+                    <Setting Id="LS_NOT_GearEntrance_3" Label="Painted First Gear" State="false"/>
+                    <Setting Id="LS_NOT_ExtendPlatforms_6" Label="Painted Second Gear" State="false"/>
+                    <Setting Id="LS_NOT_RaisePillars_7" Label="Painted Third Gear" State="false"/>
+                    <Setting Id="LS_SecretDoor_5" Label="Opened Secret Door" State="false"/>
+                    <Setting Id="LS_NOT_RepairingStarr_4" Label="Saved Gremlin Starr / Raised Notilus" State="false"/>
+                    <Setting Id="TL_MM1_P" Label="Entered Mechanical Man: Part 1" State="false"/>
+                </Setting>
+                <Setting Id="TCL" Label="Tommorow City Lagoon Settings" State="true">
+                    <Setting Id="TomorrowCity_TCL-GBT_P" Label="Entered Lagoon" State="true"/>
+                    <Setting Id="LS_TCL_IntroSpinners_3" Label="Spinner Cutscene" State="false"/>
+                    <Setting Id="LS_TCL_FirstValve" Label="Spun First Valve" State="false"/>
+                    <Setting Id="LS_TCL_SecondValve" Label="Spun Second Valve" State="false"/>
+                    <Setting Id="LS_TCL_FreeWilco_9_2" Label="Saved Gremlin Wilco" State="false"/>
+                    <Setting Id="LS_TCL_CompleteUFO_11_2" Label="Completed UFO" State="false"/>
+                </Setting>
+                <Setting Id="GBT" Label="Great Big Tomorrow Settings" State="true">
+                    <Setting Id="LS_GBT_IntroSlobber_1_2" Label="Entered GBT" State="true"/>
+                    <Setting Id="LS_GBT_DefeatedSlobber_2a_2" Label="Defeated Slobber" State="false"/>
+                    <Setting Id="LS_MickeyReceiveAbility_TVSketch" Label="Received TV Sketch Ability" State="false"/>
+                    <Setting Id="TL_PLU2_P" Label="Entered Plutopia: Part 2" State="true"/>
+                </Setting>
+                <Setting Id="TCS" Label="Tommorow City Square Settings" State="true">
+                    <Setting Id="LS_TS_Intro_1_2" Label="Tommorow Square Entrance" State="true"/>
+                    <Setting Id="LS_TS_FreeApollo_2_2" Label="Free Apollo" State="false"/>
+                    <Setting Id="LS_TS_FreeNova_8_2" Label="Free Nova" State="false"/>
+                </Setting>
+                <Setting Id="Voyage" Label="Space Voyage Settings" State="true">
+                    <Setting Id="TL_SV_P" Label="Entered Voyage" State="true"/>
+                </Setting>
             </Setting>
-            <Setting Id="SorrowTower" Label="Sorrow Tower Settings" State="true">
-                <Setting Id="BeatingTheBlot3_P" Label="Entered Sorrow Tower" State="true"/>
-                <Setting Id="LS_UT4_IntroREC_01_2" Label="Started Hallway Cutscene" State="false"/>
-                <Setting Id="LS_ST_Intro_01_2" Label="Started Sorrow Tower Itself" State="false"/>
-                <Setting Id="LS_ST_TopTower_Intro_03_2" Label="Entered Top Of Sorrow Tower" State="false"/>
-                <Setting Id="BTB_FA3_P" Label="Entered Fantasia: Part 3" State="true"/>
+            <Setting Id="POTW" Label="Pirate Of The Wasteland Settings" State="true">
+                <Setting Id="Ventureland" Label="Ventureland Settings" State="true">
+                    <Setting Id="POTW_VL1_P" Label="Entered Ventureland " State="true"/>
+                    <Setting Id="LS_VL_SmeeIntro_02_4" Label="Talked To Smee" State="false"/>
+                    <Setting Id="LS_VL_SmeeGotAllItems_15_2" Label="Got All Items For Smee" State="false"/>
+                    <Setting Id="POTW_CA1_P" Label="Entered Castaway: Part 1" State="true"/>
+                    <Setting Id="LS_Castaway_P1_BigWave" Label="Got On Raft In Castaway: Part 1" State="false"/>
+                    <Setting Id="POTW_VL2_P" Label="Entered Ventureland 2" State="true"/>
+                </Setting>
+                <Setting Id="Tortooga" Label="Tortooga Settings" State="true">
+                    <Setting Id="POTW_TOR_P" Label="Entered Tortooga" State="true"/>
+                    <Setting Id="LS_TOR_JailDoor" Label="Knocked Down Jail Door" State="false"/>
+                    <Setting Id="LS_TOR_Pirate_2_01" Label="Let Middle Pirate Out Of Jail" State="false"/>
+                    <Setting Id="LS_VL_LanternsCompeted_01" Label="Lanterns Quest Completed" State="false"/>
+                    <Setting Id="LS_TOR_IntoTheWell_01" Label="Entered The Well" State="false"/>
+                    <Setting Id="LS_VL_BillysBagFound" Label="Found Beluga Billys Bag" State="false"/>
+                    <Setting Id="POTW_JR2_P" Label="Entered Jungle Rhythm: Part 2" State="true"/>
+                    <Setting Id="POTW_TOR2_P" Label="Entered Tortooga 2" State="true"/>
+                    <Setting Id="POTW_CA2_P" Label="Entered Castaway: Part 2" State="true"/>
+                </Setting>
+                <Setting Id="Jungle" Label="Jungle Settings" State="true">
+                    <Setting Id="POTW_JUN_P" Label="Entered Jungle" State="true"/>
+                    <Setting Id="LS_JUN_AllLanternsPainted_01" Label="Painted All Lanterns" State="false"/>
+                    <Setting Id="LS_JUN_FixTheGate_01" Label="Saved Gremlin Buzz" State="false"/>
+                    <Setting Id="POTW_TW_P" Label="Entered The Whalers" State="true"/>
+                </Setting>
+                <Setting Id="pvoyage" Label="Pirate Voyage Settings" State="true">
+                    <Setting Id="POTW_PV_P" Label="Entered Pirate Voyage" State="true"/>
+                    <Setting Id="LS_FireExtinguish_3" Label="Extenguised Fire On Concept Art" State="false"/>
+                    <Setting Id="LS_FireExtinguish" Label="Extenguised Fire On Chest" State="false"/>
+                    <Setting Id="LS_PV_PumpAllPaint_01" Label="All Pumps Painted" State="false"/>
+                    <Setting Id="LS_PV_FreeGErik_02" Label="Freed Gremlin Erik" State="false"/>
+                    <Setting Id="POTW_SH_P" Label="Entered Shanghaied" State="false"/>
+                </Setting>
+                <Setting Id="SIsland" Label="Skull Island Settings" State="true">
+                    <Setting Id="POTW_SI_P" Label="Entered Skull Island" State="true"/>
+                    <Setting Id="LS_SI_ThinThirdAnchor_07_2" Label="All Anchors Thinned" State="false"/>
+                    <Setting Id="LS_SI_CameraLess_AllPumpPainted_CloseDoors" Label="All Pumps Painted" State="false"/>
+                </Setting>
             </Setting>
-            <Setting Id="GriefTower" Label="Grief Tower Settings" State="true">
-                <Setting Id="BTB_GT_P" Label="Entered Grief Tower" State="true"/>
-                <Setting Id="LS_GT_TopTower_Intro_3_2" Label="Entered Top Of Grief Tower" State="false"/>
-                <Setting Id="BTB_FA4_P" Label="Entered Fantasia: Part 4" State="true"/>
+            <Setting Id="Lonesome" Label="Lonesome Manor Settings" State="true">
+                <Setting Id="Manor" Label="Manor House Settings" State="true">
+                    <Setting Id="LM_MH_P" Label="Entered Manor House" State="true"/>
+                    <Setting Id="LM_MD1_P" Label="Entered The Mad Doctor: Part 1" State="true"/>
+                </Setting>
+                <Setting Id="Foyer" Label="Foyer Settings" State="true">
+                    <Setting Id="LM_FY_P" Label="Entered Foyer" State="true"/>
+                    <Setting Id="LS_FY_Skull2_2" Label="Painted First Skull" State="false"/>
+                    <Setting Id="LS_FY_Skull1_2" Label="Painted Second Skull" State="false"/>
+                    <Setting Id="LM_HH1_P" Label="Entered Haunted House: Part 1" State="true"/>
+                </Setting>
+                <Setting Id="sr" Label="Stretching Room Settings" State="true">
+                    <Setting Id="LM_SR_P" Label="Entered Stretching Room" State="true"/>
+                    <Setting Id="LS_SR_RestorePainting_TalkingToSidney" Label="Saved Gremlin Sydney" State="false"/>
+                    <Setting Id="LM_MD2_P" Label="Entered The Mad Doctor: Part 2" State="true"/>
+                    <Setting Id="LS_SawbladeChamber" Label="Entered Sawblade Chamber" State="false"/>
+                </Setting>
+                <Setting Id="lib" Label="Library Settings" State="true">
+                    <Setting Id="LM_L_P" Label="Entered Library" State="true"/>
+                    <Setting Id="LS_L_LeonaTalk_Blend" Label="Talked To Leona For The First Time" State="false"/>
+                    <Setting Id="LM_HH2_P" Label="Entered Haunted House: Part 2" State="true"/>
+                </Setting>
+                <Setting Id="br" Label="Ballroom Settings" State="true">
+                    <Setting Id="LM_BR_P" Label="Entered Ballroom" State="true"/>
+                    <Setting Id="LS_BR_FreeFerdinand_01_2" Label="Free Ferdinand" State="false"/>
+                    <Setting Id="LS_BR_PlayMusicDone_01" Label="Helped The Pipe Organ" State="false"/>
+                    <Setting Id="LM_HH3_P" Label="Entered Haunted House: Part 3" State="true"/>
+                </Setting>
             </Setting>
-            <Setting Id="LossTower" Label="Loss Tower Settings" State="true">
-                <Setting Id="LS_LT_Intro_2" Label="Entered Loss Tower" State="true"/>
-                <Setting Id="LS_LT_BlotAttack_13_2" Label="Skydiving" State="false"/>
+            <Setting Id="Blot" Label="Bloticles Settings" State="true">
+                <Setting Id="Blost" Label="Blot Settings" State="true">
+                    <Setting Id="Ostownblot" Label="Ostown Blot Settings" State="true">
+                        <Setting Id="BTB2_BOT_REC_P" Label="Entered Ostown Blot" State="true"/>
+                    </Setting>
+                    <Setting Id="MeanStreetBlot" Label="Mean Street Blot Settings" State="true">
+                        <Setting Id="BTB2_BMS_Original_P" Label="Entered Mean Street Blot" State="true"/>
+                    </Setting>
+                    <Setting Id="VenturelandBlot" Label="Ventureland Blot Settings" State="true">
+                        <Setting Id="BTB2_BVLa_P" Label="Entered Ventureland Blot" State="true"/>
+                        <Setting Id="LS_BVL_BloticlesDefeated_01_2" Label="Bloticles Defeated (Ventureland Blot)" State="false"/>
+                    </Setting>
+                    <Setting Id="BogEasyBlot" Label="Bog Easy Blot Settings" State="true">
+                        <Setting Id="BTB2_BBEb_P" Label="Entered Bog Easy Blot" State="true"/>
+                        <Setting Id="LS_BBE_Bloticle_03_2" Label="Bloticle Defeated (Bog Easy Blot)" State="false"/>
+                    </Setting>
+                    <Setting Id="TommorrowBlot" Label="Tommorow Square Blot Settings" State="true">
+                        <Setting Id="BTB2_BTS_P" Label="Entered Tommorow Square Blot" State="true"/>
+                        <Setting Id="BTB2_BSV_P" Label="Entered Space Voyage Blot" State="true"/>
+                    </Setting>
+                </Setting>
             </Setting>
-            <Setting Id="ITB" Label="Inside The Blot Settings" State="true">
-                <Setting Id="BTB_ITB_P" Label="Entered Inside The Blot" State="true"/>
-                <Setting Id="LS_ITB_LostEssences_1_2" Label="Entered First Blot Room" State="false"/>
-                <Setting Id="LS_ITB_FirstBloticleArena_1_3" Label="Finished First Room" State="false"/>
-                <Setting Id="LS_ITB_Arenafight1_1_2" Label="Entered First Center Fight" State="false"/>
-                <Setting Id="LS_ITB_SecondBloticleArena_1_2" Label="Finished Second Room" State="false"/>
-                <Setting Id="LS_ITB_LostEssences3_1_2" Label="Entered Third Blot Room" State="false"/>
-                <Setting Id="LS_ITB_ThirdBloticleArena_1_2" Label="Finished Third Room" State="false"/>
-                <Setting Id="LS_ITB_Arenafight3_1_2" Label="Entered Final Bloticle Arena" State="false"/>
+            <Setting Id="DBC2" Label="Dark Beauty Castle 2 Settings" State="true">
+                <Setting Id="Thinner" Label="Mad Doctors Lab 2 Settings" State="true">
+                    <Setting Id="DBC_MDL2_P" Label="Entered Dark Beauty Castle 2" State="true"/>
+                    <Setting Id="BTB_SB1_P" Label="Entered Sleeping Beauty" State="true"/>
+                </Setting>
+                <Setting Id="ThroneRoom" Label="Throne Room Settings" State="true">
+                    <Setting Id="BTB_TR_P" Label="Entered Throne Room" State="false"/>
+                    <Setting Id="LS_ThR_SpawnGoldPin_01" Label="Spawned Gold Pin" State="false"/>
+                    <Setting Id="BTB_FA1_Cinema_P" Label="Entered Fantasia: Part 1" State="true"/>
+                    <Setting Id="BTB_FA2_P" Label="Entered Fantasia: Part 2" State="true"/>
+                </Setting>
+                <Setting Id="SorrowTower" Label="Sorrow Tower Settings" State="true">
+                    <Setting Id="BeatingTheBlot3_P" Label="Entered Sorrow Tower" State="true"/>
+                    <Setting Id="LS_UT4_IntroREC_01_2" Label="Started Hallway Cutscene" State="false"/>
+                    <Setting Id="LS_ST_Intro_01_2" Label="Started Sorrow Tower Itself" State="false"/>
+                    <Setting Id="LS_ST_TopTower_Intro_03_2" Label="Entered Top Of Sorrow Tower" State="false"/>
+                    <Setting Id="BTB_FA3_P" Label="Entered Fantasia: Part 3" State="true"/>
+                </Setting>
+                <Setting Id="GriefTower" Label="Grief Tower Settings" State="true">
+                    <Setting Id="BTB_GT_P" Label="Entered Grief Tower" State="true"/>
+                    <Setting Id="LS_GT_TopTower_Intro_3_2" Label="Entered Top Of Grief Tower" State="false"/>
+                    <Setting Id="BTB_FA4_P" Label="Entered Fantasia: Part 4" State="true"/>
+                </Setting>
+                <Setting Id="LossTower" Label="Loss Tower Settings" State="true">
+                    <Setting Id="LS_LT_Intro_2" Label="Entered Loss Tower" State="true"/>
+                    <Setting Id="LS_LT_BlotAttack_13_2" Label="Skydiving" State="false"/>
+                </Setting>
+                <Setting Id="ITB" Label="Inside The Blot Settings" State="true">
+                    <Setting Id="BTB_ITB_P" Label="Entered Inside The Blot" State="true"/>
+                    <Setting Id="LS_ITB_LostEssences_1_2" Label="Entered First Blot Room" State="false"/>
+                    <Setting Id="LS_ITB_FirstBloticleArena_1_3" Label="Finished First Room" State="false"/>
+                    <Setting Id="LS_ITB_Arenafight1_1_2" Label="Entered First Center Fight" State="false"/>
+                    <Setting Id="LS_ITB_SecondBloticleArena_1_2" Label="Finished Second Room" State="false"/>
+                    <Setting Id="LS_ITB_LostEssences3_1_2" Label="Entered Third Blot Room" State="false"/>
+                    <Setting Id="LS_ITB_ThirdBloticleArena_1_2" Label="Finished Third Room" State="false"/>
+                    <Setting Id="LS_ITB_Arenafight3_1_2" Label="Entered Final Bloticle Arena" State="false"/>
+                </Setting>
             </Setting>
         </Setting>
-    </Setting>
-    <Setting Id="Boss" Label="Boss Settings" State="true">
-        <Setting Id="Clocktower" Label="Clocktower Settings" State="true">
-            <Setting Id="GV_CT_P" Label="Entered Clocktower Area" State="true"/>
-            <Setting Id="LS_ClockTower_Intro" Label="Entered Clocktower Boss Fight" State="false"/>
-            <Setting Id="LS_ClockTower_PaintDefeat" Label="Paint Path Fight" State="false"/>
-            <Setting Id="LS_ClockTower_ThinnerDefeat" Label="Thinner Path Fight" State="false"/>
-            <Setting Id="LS_MickeyProjectorLeave_Clocktower" Label="Entering Projector After Boss" State="false"/>
-        </Setting>
-        <Setting Id="Pete" Label="Petetronic Settings" State="true">
-            <Setting Id="TL_PT_P" Label="Entered Petetronic Boss Fight" State="true"/>
-            <Setting Id="LS_PT_TalkPetetronic_2_2" Label="Started Petetronic Boss Fight" State="false"/>
-            <Setting Id="LS_PT_DefeatedPetetronic_3_2" Label="Defeated Petetronic (Paint Path Fight)" State="false"/>
-            <Setting Id="LS_PT_DefeatedPetetronic_3b_2" Label="Defeated Petetronic (Thinner Path Fight)" State="false"/>
-            <Setting Id="LS_MickeyProjectorLeave_TommorowCity_Pet" Label="Entering Projector After Petetronic" State="false"/>
-        </Setting>
-        <Setting Id="Hook" Label="Hook Boss Fight Settings" State="true">
-            <Setting Id="TJR_P" Label="Entered Hook Boss Fight Area" State="true"/>
-            <Setting Id="LS_Hook_IntroLS_TJR_HookFall_01_01_2" Label="Hook Defeated (Thinner Path)" State="false"/>
-            <Setting Id="LS_TJR_SpriteFree_00" Label="Freed The Sprite" State="false"/>
-        </Setting>
-        <Setting Id="MadDoctor" Label="Mad Doctor Boss Fight Settings" State="true">
-            <Setting Id="LM_MDA_P" Label="Entered The Mad Doctor Boss Fight Area" State="true"/>
-        </Setting>
-        <Setting Id="ShadowBlot" Label="Shadow Blot Boss Fight Settings" State="true">
-            <Setting Id="BTB1_TSB_P" Label="Entered Shadow Blot Boss Fight Area" State="false"/>
-            <Setting Id="LS_TSB_ShadowBlotDefeatedThinner_2_2" Label="Shadow Blot Defeated (Thinner Path)" State="false"/>
-            <Setting Id="LS_TSB_ShadowBlotDefeatedPaint_MASTER" Label="Shadow Blot Defeated (Paint Path)" State="false"/>
+        <Setting Id="Boss" Label="Boss Settings" State="true">
+            <Setting Id="Clocktower" Label="Clocktower Settings" State="true">
+                <Setting Id="GV_CT_P" Label="Entered Clocktower Area" State="true"/>
+                <Setting Id="LS_ClockTower_Intro" Label="Entered Clocktower Boss Fight" State="false"/>
+                <Setting Id="LS_ClockTower_PaintDefeat" Label="Paint Path Fight" State="false"/>
+                <Setting Id="LS_ClockTower_ThinnerDefeat" Label="Thinner Path Fight" State="false"/>
+                <Setting Id="LS_MickeyProjectorLeave_Clocktower" Label="Entering Projector After Boss" State="false"/>
+            </Setting>
+            <Setting Id="Pete" Label="Petetronic Settings" State="true">
+                <Setting Id="TL_PT_P" Label="Entered Petetronic Boss Fight" State="true"/>
+                <Setting Id="LS_PT_TalkPetetronic_2_2" Label="Started Petetronic Boss Fight" State="false"/>
+                <Setting Id="LS_PT_DefeatedPetetronic_3_2" Label="Defeated Petetronic (Paint Path Fight)" State="false"/>
+                <Setting Id="LS_PT_DefeatedPetetronic_3b_2" Label="Defeated Petetronic (Thinner Path Fight)" State="false"/>
+                <Setting Id="LS_MickeyProjectorLeave_TommorowCity_Pet" Label="Entering Projector After Petetronic" State="false"/>
+            </Setting>
+            <Setting Id="Hook" Label="Hook Boss Fight Settings" State="true">
+                <Setting Id="TJR_P" Label="Entered Hook Boss Fight Area" State="true"/>
+                <Setting Id="LS_Hook_IntroLS_TJR_HookFall_01_01_2" Label="Hook Defeated (Thinner Path)" State="false"/>
+                <Setting Id="LS_TJR_SpriteFree_00" Label="Freed The Sprite" State="false"/>
+            </Setting>
+            <Setting Id="MadDoctor" Label="Mad Doctor Boss Fight Settings" State="true">
+                <Setting Id="LM_MDA_P" Label="Entered The Mad Doctor Boss Fight Area" State="true"/>
+            </Setting>
+            <Setting Id="ShadowBlot" Label="Shadow Blot Boss Fight Settings" State="true">
+                <Setting Id="BTB1_TSB_P" Label="Entered Shadow Blot Boss Fight Area" State="false"/>
+                <Setting Id="LS_TSB_ShadowBlotDefeatedThinner_2_2" Label="Shadow Blot Defeated (Thinner Path)" State="false"/>
+                <Setting Id="LS_TSB_ShadowBlotDefeatedPaint_MASTER" Label="Shadow Blot Defeated (Paint Path)" State="false"/>
+            </Setting>
         </Setting>
     </Setting>
 </Settings>
