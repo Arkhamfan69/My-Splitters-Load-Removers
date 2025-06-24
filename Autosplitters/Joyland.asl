@@ -80,6 +80,17 @@ onStart
 
 isLoading
 {
+    var time = timer.CurrentTime.RealTime;
+
+    // Check if RealTime has a value first
+    if (time.HasValue && !vars.PauseTriggered && time.Value.TotalSeconds >= 76.5 && current.Area != "OutsideMap")
+    {
+        vars.PauseTriggered = true;
+    }
+
+    if (vars.PauseTriggered && current.Area != "OutsideMap")
+        return true;
+
     return current.Loading || current.Paused == 3 || current.Area == "MainMenuMapTEST" || current.Area == "GameOver";
 }
 
