@@ -10,18 +10,18 @@ startup
     vars.Helper.AlertLoadless();
 
     dynamic[,] _settings =
-	{
-		{ "Area", true, "Splitting Areas", null },
-			{ "LobbyMap", true, "Split When Entering Joyland", "Area" },
-			{ "2ndMAP", true, "Split When Entering The Tv Question Area", "Area" },
-			{ "3rdMAP", true, "Split When Entering The Elevator", "Area" },
+    {
+        { "Area", true, "Splitting Areas", null },
+            { "LobbyMap", true, "Split When Entering Joyland", "Area" },
+            { "2ndMAP", true, "Split When Entering The Tv Question Area", "Area" },
+            { "3rdMAP", true, "Split When Entering The Elevator", "Area" },
             { "4thMAP", true, "Split After Finishing The First Set Of Puzzles", "Area" },
             { "ShadowMAP", true, "Split After Grabbing The 4 Fuses", "Area" },
             { "5thMAP", true, "Split After Finishing The Shadow Section", "Area" },
             { "6thMAP", true, "Split After Finishing The Giant Puzzle", "Area" },
             { "7thMAP", true, "Split After Finishing The Chase Scene", "Area" },
     };
-	vars.Helper.Settings.Create(_settings);
+    vars.Helper.Settings.Create(_settings);
 }
 
 init
@@ -33,8 +33,7 @@ init
 
     if (gWorld == IntPtr.Zero || gEngine == IntPtr.Zero || fNames == IntPtr.Zero || gSyncLoad == IntPtr.Zero)
     {
-        const string Msg = "Not all required addresses could be found by scanning.";
-        throw new Exception(Msg);
+        throw new Exception("Not all required addresses could be found by scanning.");
     }
 
     vars.Helper["GWorldName"] = vars.Helper.Make<ulong>(gWorld, 0x18);
@@ -42,9 +41,9 @@ init
 
     vars.FNameToString = (Func<ulong, string>)(fName =>
     {
-        var nameIdx = (fName & 0x000000000000FFFF) >> 0x00;
-        var chunkIdx = (fName & 0x00000000FFFF0000) >> 0x10;
-        var number = (fName & 0xFFFFFFFF00000000) >> 0x20;
+        var nameIdx = (fName & 0x000000000000FFFF);
+        var chunkIdx = (fName & 0x00000000FFFF0000) >> 16;
+        var number = (fName & 0xFFFFFFFF00000000) >> 32;
 
         IntPtr chunk = vars.Helper.Read<IntPtr>(fNames + 0x10 + (int)chunkIdx * 0x8);
         IntPtr entry = chunk + (int)nameIdx * sizeof(short);
@@ -57,6 +56,7 @@ init
 
     current.Area = "";
     vars.CompletedSplits = new HashSet<string>();
+    vars.PauseTriggered = false;
 }
 
 split
@@ -76,6 +76,7 @@ start
 onStart
 {
     vars.CompletedSplits.Clear();
+    vars.PauseTriggered = false;
 }
 
 isLoading
@@ -106,6 +107,7 @@ update
 
     var world = vars.FNameToString(current.GWorldName);
     if (!string.IsNullOrEmpty(world) && world != "None") current.Area = world;
+
     if (old.Area != current.Area) vars.Log("Area: " + current.Area);
     if (old.Loading != current.Loading) vars.Log("Loading: " + current.Loading);
     if (old.Paused != current.Paused) vars.Log("Current Paused Is " + current.Paused);
