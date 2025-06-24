@@ -13,7 +13,7 @@ startup
     {
         { "Area", true, "Splitting Areas", null },
             { "LobbyMap", true, "Split When Entering Joyland", "Area" },
-            { "2ndMAP", true, "Split When Entering The Tv Question Area", "Area" },
+            { "2ndMAP", true, "Split When Entering The TV Question Area", "Area" },
             { "3rdMAP", true, "Split When Entering The Elevator", "Area" },
             { "4thMAP", true, "Split After Finishing The First Set Of Puzzles", "Area" },
             { "ShadowMAP", true, "Split After Grabbing The 4 Fuses", "Area" },
@@ -32,9 +32,7 @@ init
     IntPtr gSyncLoad = vars.Helper.ScanRel(21, "33 C0 0F 57 C0 F2 0F 11 05");
 
     if (gWorld == IntPtr.Zero || gEngine == IntPtr.Zero || fNames == IntPtr.Zero || gSyncLoad == IntPtr.Zero)
-    {
         throw new Exception("Not all required addresses could be found by scanning.");
-    }
 
     vars.Helper["GWorldName"] = vars.Helper.Make<ulong>(gWorld, 0x18);
     vars.Helper["Loading"] = vars.Helper.Make<bool>(gSyncLoad);
@@ -57,6 +55,35 @@ init
     current.Area = "";
     vars.CompletedSplits = new HashSet<string>();
     vars.PauseTriggered = false;
+    current.MapCount = 0;
+}
+
+update
+{
+    vars.Helper.Update();
+    vars.Helper.MapPointers();
+
+    var world = vars.FNameToString(current.GWorldName);
+    if (!string.IsNullOrEmpty(world) && world != "None")
+        current.Area = world;
+
+    if (old.Area != current.Area)
+    {
+        vars.Log("Current Area Is " + current.Area);
+        current.MapCount++;
+        vars.Log("Map Count Is " + current.MapCount);
+    }
+
+    if (old.Loading != current.Loading)
+        vars.Log("Loading: " + current.Loading);
+
+    if (old.Paused != current.Paused)
+        vars.Log("Current Paused Is " + current.Paused);
+
+    if (vars.PauseTriggered && current.Area == "OutsideMap")
+    {
+        vars.PauseTriggered = false;
+    }
 }
 
 split
@@ -77,19 +104,20 @@ onStart
 {
     vars.CompletedSplits.Clear();
     vars.PauseTriggered = false;
+    vars.MapCount = 0;
 }
 
 isLoading
 {
     var time = timer.CurrentTime.RealTime;
 
-    // Check if RealTime has a value first
-    if (time.HasValue && !vars.PauseTriggered && time.Value.TotalSeconds >= 76.5 && current.Area != "OutsideMap")
+    // Trigger special pause at exactly 1:16.50
+    if (!vars.PauseTriggered && time.HasValue && time.Value.TotalSeconds >= 76.5 && current.Area != "OutsideMap")
     {
         vars.PauseTriggered = true;
     }
 
-    if (vars.PauseTriggered && current.Area != "OutsideMap")
+    if (vars.PauseTriggered && current.MapCount < 2)
         return true;
 
     return current.Loading || current.Paused == 3 || current.Area == "MainMenuMapTEST" || current.Area == "GameOver";
@@ -98,17 +126,4 @@ isLoading
 exit
 {
     timer.IsGameTimePaused = true;
-}
-
-update
-{
-    vars.Helper.Update();
-    vars.Helper.MapPointers();
-
-    var world = vars.FNameToString(current.GWorldName);
-    if (!string.IsNullOrEmpty(world) && world != "None") current.Area = world;
-
-    if (old.Area != current.Area) vars.Log("Area: " + current.Area);
-    if (old.Loading != current.Loading) vars.Log("Loading: " + current.Loading);
-    if (old.Paused != current.Paused) vars.Log("Current Paused Is " + current.Paused);
 }
