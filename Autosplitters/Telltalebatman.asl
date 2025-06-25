@@ -85,7 +85,7 @@ split
 
 isLoading
 {
-    return current.loading;
+    return current.loading || current.Menu == 13;
 }
 
 reset
