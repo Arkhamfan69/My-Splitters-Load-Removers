@@ -9,15 +9,6 @@ startup
     vars.Helper.LoadSceneManager = true;
 }
 
-init
-{
-    vars.Helper.TryLoad = (Func<dynamic, bool>)(mono =>
-    {
-
-        return true;
-    });
-}
-
 isLoading
 {
     return current.Scene == "Loading" || current.loadingScene == 2;
