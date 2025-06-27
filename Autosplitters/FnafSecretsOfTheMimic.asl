@@ -190,26 +190,6 @@ update
     vars.Helper.Update();
     vars.Helper.MapPointers();
 
-    IntPtr gWorld = vars.Helper.Read<IntPtr>(vars.Helper.BaseAddress("GWorldName"), 0x18); // reverse lookup GWorld
-
-    // Read the number of streaming levels
-    int numLevels = vars.Helper.Read<int>(gWorld, 0x170 + 0x8); // TArray.Num
-
-    IntPtr levelArray = vars.Helper.Read<IntPtr>(gWorld, 0x170); // TArray.Data
-
-    for (int i = 0; i < numLevels; i++)
-    {
-        IntPtr levelStreaming = vars.Helper.Read<IntPtr>(levelArray, i * 8);
-        if (levelStreaming == IntPtr.Zero)
-            continue;
-
-        bool hasLoaded = vars.Helper.Read<bool>(levelStreaming, 0x70); // bHasLoadedLevel
-        bool isVisible = vars.Helper.Read<bool>(levelStreaming, 0x71); // bIsVisible
-
-        string pkg = vars.Helper.ReadFName(levelStreaming, 0x28); // PackageNameToLoad = FName
-        vars.Log("Streaming Level: " + pkg + " - Loaded: " + hasLoaded + ", Visible: " + isVisible);
-    }
-
     var world = vars.FNameToString(current.GWorldName);
     if (!string.IsNullOrEmpty(world) && world != "None")
         current.World = world;
