@@ -11,7 +11,7 @@ startup
 
 isLoading
 {
-    return current.Scene == "Loading" || current.loadingScene == 2;
+    return current.Scene == "Loading" || current.loadingScene == 2 || current.loadingScene == 22;
 }
 
 update
