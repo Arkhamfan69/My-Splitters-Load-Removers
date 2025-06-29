@@ -5,7 +5,7 @@ startup
     Assembly.Load(File.ReadAllBytes("Components/asl-help")).CreateInstance("Basic");
     vars.Helper.GameName = "Five Nights At Freddy's: Secret of The Mimic";
     vars.Helper.AlertLoadless();
-    vars.LoadDelay = new Stopwatch();
+    vars.ZoneCooldown = new Stopwatch();
 
     dynamic[,] _settings =
     {
@@ -76,8 +76,6 @@ startup
         vars.lcCache.Clear();
     });
 
-    vars.ZoneCooldown = new Stopwatch();
-
     vars.InZone = (Func<Vector3f, float, float, float, float, bool>)((pos, minX, maxX, minY, maxY) =>
     {
         return pos.X >= minX && pos.X <= maxX
@@ -112,6 +110,9 @@ init
 
     // GEngine->GameInstance->LocalPlayers[0]->PlayerController->AcknowledgedPawn->IsSeenByAi
     vars.Helper["IsSeen"] = vars.Helper.Make<bool>(gEngine, 0xD28, 0x38, 0x0, 0x30, 0x2A0, 0x60C);
+
+    // GEngine->GameInstance->LocalPlayers[0]->PlayerController->AcknowledgedPawn->Instigator
+    vars.Helper["Jumpscare"] = vars.Helper.Make<byte>(gEngine, 0xD28, 0x38, 0x0, 0x30, 0x2A0, 0x118);
 
     // NamePool stuff
     const int FNameBlockOffsetBits = 16;
@@ -204,7 +205,12 @@ update
 
     if (old.HasInterctionStarted != current.HasInterctionStarted)
     {
-        vars.Log("Interaction " + current.HasInterctionStarted);
+        vars.Log("Interaction: " + current.HasInterctionStarted);
+    }
+
+    if (old.Jumpscare != current.Jumpscare)
+    {
+        vars.Log("Jumpscare: " + current.Jumpscare);
     }
     
     vars.Watch(old, current, "IsSeen");
@@ -253,7 +259,7 @@ isLoading
         vars.InZone(current.PlayerPosition, 8239.7f, 8307.2f, -5626.2f, -5370.3f) || // R&D Floor
         vars.InZone(current.PlayerPosition, 6650.0f, 6866.0f, -6021.0f, -5915.0f)   // Welcome Show Stage
     );
-    
+
     if (inZone && !vars.ZoneCooldown.IsRunning)
     {
         vars.ZoneCooldown.Restart();
@@ -267,7 +273,7 @@ isLoading
     return current.World == "MAP_MainMenu"
         || current.LoadingState == 1
         || (settings["pause"] && current.TransitionType == 1)
-        || (vars.ZoneCooldown.IsRunning && vars.ZoneCooldown.Elapsed.TotalSeconds >= 2.75);
+        || (vars.ZoneCooldown.IsRunning && vars.ZoneCooldown.Elapsed.TotalSeconds >= 2.50);
 }
 
 // Workshop 
