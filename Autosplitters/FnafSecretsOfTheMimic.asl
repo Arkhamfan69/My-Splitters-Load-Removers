@@ -111,8 +111,8 @@ init
     // GEngine->GameInstance->LocalPlayers[0]->PlayerController->AcknowledgedPawn->IsSeenByAi
     vars.Helper["IsSeen"] = vars.Helper.Make<bool>(gEngine, 0xD28, 0x38, 0x0, 0x30, 0x2A0, 0x60C);
 
-    // GEngine->GameInstance->LocalPlayers[0]->PlayerController->AcknowledgedPawn->Instigator
-    vars.Helper["Jumpscare"] = vars.Helper.Make<byte>(gEngine, 0xD28, 0x38, 0x0, 0x30, 0x2A0, 0x118);
+    // GEngine->GameInstance->LocalPlayers[0]->PlayerController->AcknowledgedPawn
+    vars.Helper["Jumpscare"] = vars.Helper.Make<byte>(gEngine, 0xD28, 0x38, 0x0, 0x30, 0x250);
 
     // NamePool stuff
     const int FNameBlockOffsetBits = 16;
@@ -163,9 +163,6 @@ init
         throw new InvalidOperationException("Subsystem not found: " + name);
     });
 
-    vars.GameManager = IntPtr.Zero;
-
-
     vars.SetTextIfEnabled = (Action<string, object>)((text1, text2) =>
     {
         if (settings[text1])            
@@ -173,6 +170,8 @@ init
         else
             vars.RemoveText(text1);     
     });
+
+    vars.GameManager = IntPtr.Zero;
 }
 
 update
@@ -212,7 +211,17 @@ update
     {
         vars.Log("Jumpscare: " + current.Jumpscare);
     }
-    
+
+    if (old.PlayerPosition.X != current.PlayerPosition.X)
+    {
+        vars.Log("PlayerPositionX: " + old.PlayerPosition.X + " -> " + current.PlayerPosition.X);
+    }
+
+    if (old.PlayerPosition.Y != current.PlayerPosition.Y)
+    {
+        vars.Log("PlayerPositionY: " + old.PlayerPosition.Y + " -> " + current.PlayerPosition.Y);
+    }
+
     vars.Watch(old, current, "IsSeen");
 
     vars.SetTextIfEnabled("Seen", current.IsSeen);
@@ -257,7 +266,8 @@ isLoading
         vars.InZone(current.PlayerPosition, 5744.7f, 5946.8f, -6357.7f, -6210.7f) || // Showroom
         vars.InZone(current.PlayerPosition, 1239.9f, 1472.4f, -12152.9f, -12005.2f) || // Admin Wing
         vars.InZone(current.PlayerPosition, 8239.7f, 8307.2f, -5626.2f, -5370.3f) || // R&D Floor
-        vars.InZone(current.PlayerPosition, 6650.0f, 6866.0f, -6021.0f, -5915.0f)   // Welcome Show Stage
+        vars.InZone(current.PlayerPosition, 6650.0f, 6866.0f, -6021.0f, -5915.0f) || // Welcome Show Stage
+        vars.InZone(current.PlayerPosition, 6594.047f, 6672.446f, -3835.06f, -3585.102f) // Retail Showroom
     );
 
     if (inZone && !vars.ZoneCooldown.IsRunning)
@@ -270,8 +280,9 @@ isLoading
         vars.ZoneCooldown.Reset();
     }
 
-    return current.World == "MAP_MainMenu"
-        || current.LoadingState == 1
+    return current.LoadingState == 1
+        || current.Jumpscare == 1709024354624
+        || current.World == "MAP_MainMenu"
         || (settings["pause"] && current.TransitionType == 1)
         || (vars.ZoneCooldown.IsRunning && vars.ZoneCooldown.Elapsed.TotalSeconds >= 2.50);
 }
@@ -353,3 +364,9 @@ isLoading
 // PlayerPositionX: 8239.723 -5626.227 -4864.091 PlayerPositionY: 8239.723 -5626.227 -4864.091
 // PlayerPositionX: 8304.358 -5615.003 -4866.039 PlayerPositionY: 8304.358 -5615.003 -4866.039
 // PlayerPositionX: 8307.193 -5385.494 -4866.039 PlayerPositionY: 8307.193 -5385.494 -4866.039
+
+// Retail Showroom
+// PlayerPositionX: 6672.441 PlayerPositionY: -3835.06
+// PlayerPositionX: 6594.047 playerPositionY: -3834.238
+// PlayerPositionX: 6672.446 PlayerPositionY: -3585.102
+// PlayerPositionX: 6596.219 PlayerPositionY: -3597.073
