@@ -281,7 +281,6 @@ isLoading
     }
 
     return current.LoadingState == 1
-        || current.Jumpscare == 1709024354624
         || current.World == "MAP_MainMenu"
         || (settings["pause"] && current.TransitionType == 1)
         || (vars.ZoneCooldown.IsRunning && vars.ZoneCooldown.Elapsed.TotalSeconds >= 2.50);
