@@ -212,16 +212,6 @@ update
         vars.Log("Jumpscare: " + current.Jumpscare);
     }
 
-    if (old.PlayerPosition.X != current.PlayerPosition.X)
-    {
-        vars.Log("PlayerPositionX: " + old.PlayerPosition.X + " -> " + current.PlayerPosition.X);
-    }
-
-    if (old.PlayerPosition.Y != current.PlayerPosition.Y)
-    {
-        vars.Log("PlayerPositionY: " + old.PlayerPosition.Y + " -> " + current.PlayerPosition.Y);
-    }
-
     vars.Watch(old, current, "IsSeen");
 
     vars.SetTextIfEnabled("Seen", current.IsSeen);
