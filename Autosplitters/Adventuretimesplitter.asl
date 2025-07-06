@@ -9,9 +9,14 @@ startup
     vars.Helper.LoadSceneManager = true;
 }
 
+init
+{
+    vars.UpgradeState = false;
+}
+
 isLoading
 {
-    return current.Scene == "Loading" || current.loadingScene == 2 || current.loadingScene == 22;
+    return current.Scene == "Loading" || current.loadingScene == 2 || current.loadingScene == 22 || current.loadingScene == 21;
 }
 
 update
@@ -28,4 +33,9 @@ update
     {
         vars.Log("Loading Scene Changed: " + current.loadingScene);
     }
+}
+
+exit
+{
+    timer.IsGameTimePaused = true;
 }
