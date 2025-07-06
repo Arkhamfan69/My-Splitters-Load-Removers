@@ -5,7 +5,7 @@ state("Adventure Time Pirates of the Enchiridion")
 startup
 {
     Assembly.Load(File.ReadAllBytes("Components/asl-help")).CreateInstance("Unity");
-    vars.Helper.GameName = "Pirates of the Echidereion";
+    vars.Helper.GameName = "Pirates of the Enchiridion";
     vars.Helper.LoadSceneManager = true;
 }
 
