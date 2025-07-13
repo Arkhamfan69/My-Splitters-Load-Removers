@@ -111,9 +111,6 @@ init
     // GEngine->GameInstance->LocalPlayers[0]->PlayerController->AcknowledgedPawn->IsSeenByAi
     vars.Helper["IsSeen"] = vars.Helper.Make<bool>(gEngine, 0xD28, 0x38, 0x0, 0x30, 0x2A0, 0x60C);
 
-    // GEngine->GameInstance->LocalPlayers[0]->PlayerController->AcknowledgedPawn
-    vars.Helper["Jumpscare"] = vars.Helper.Make<byte>(gEngine, 0xD28, 0x38, 0x0, 0x30, 0x250);
-
     // NamePool stuff
     const int FNameBlockOffsetBits = 16;
     const uint FNameBlockOffsetMask = ushort.MaxValue; // (1 << FNameBlockOffsetBits) - 1
@@ -145,6 +142,16 @@ init
 
         return number == 0 ? name : name + "_" + (number - 1);
     });
+
+    vars.FNameToShortString = (Func<ulong, string>)(fName =>
+	{
+		string name = vars.FNameToString(fName);
+
+		int dot = name.LastIndexOf('.');
+		int slash = name.LastIndexOf('/');
+
+		return name.Substring(Math.Max(dot, slash) + 1);
+	});
 
     vars.FindSubsystem = (Func<string, IntPtr>)(name =>
     {
@@ -191,7 +198,7 @@ update
     var world = vars.FNameToString(current.GWorldName);
     if (!string.IsNullOrEmpty(world) && world != "None")
         current.World = world;
-
+    
     if (old.LoadingState != current.LoadingState)
     {
         vars.Log("LoadingState: " + old.LoadingState + " -> " + current.LoadingState);
@@ -205,11 +212,6 @@ update
     if (old.HasInterctionStarted != current.HasInterctionStarted)
     {
         vars.Log("Interaction: " + current.HasInterctionStarted);
-    }
-
-    if (old.Jumpscare != current.Jumpscare)
-    {
-        vars.Log("Jumpscare: " + current.Jumpscare);
     }
 
     vars.Watch(old, current, "IsSeen");
@@ -272,6 +274,7 @@ isLoading
 
     return current.LoadingState == 1
         || current.World == "MAP_MainMenu"
+        || current.World == "MAP_Outro_InteractiveCredits_Infinite"
         || (settings["pause"] && current.TransitionType == 1)
         || (vars.ZoneCooldown.IsRunning && vars.ZoneCooldown.Elapsed.TotalSeconds >= 2.50);
 }
