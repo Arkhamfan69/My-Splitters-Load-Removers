@@ -53,17 +53,13 @@ init
     }
 
     vars.Helper["GWorldName"] = vars.Helper.Make<ulong>(gWorld, 0x18);
-    // GWorld.OwningGameInstance.LocalPlayers[0].AcknowledgedPawn.IsPaused
-    vars.Helper["Paused"] = vars.Helper.Make<bool>(gEngine, 0xD98, 0x38, 0x0, 0x30, 0x318, 0x6E1);
+    // GEngine.TransitionType
+    vars.Helper["Paused"] = vars.Helper.Make<bool>(gEngine, 0x8E9);
     // GWorld.OwningGameInstance.LocalPlayers[0].Character.CharacterMovement.Velocity.X/Y/Z
     vars.Helper["CharacterMovementX"] = vars.Helper.Make<float>(gEngine, 0xD98, 0x38, 0x0, 0x30, 0x2C8, 0x300, 0xC8);
     vars.Helper["CharacterMovementY"] = vars.Helper.Make<float>(gEngine, 0xD98, 0x38, 0x0, 0x30, 0x2C8, 0x300, 0xD0);
     // GWorld.OwningGameInstance.LocalPlayers[0].AcknowledgedPawn.IsCinematic
     vars.Helper["Cinematic"] = vars.Helper.Make<bool>(gEngine, 0xD98, 0x38, 0x0, 0x30, 0x318, 0x761);
-    // GEngine.GameInstance.collectableList??
-    // vars.Helper["Collectables"] = vars.Helper.Make<int>(gEngine, 0xD98, 0x278);
-
-    // vars.CollctablesDP = new DeepPointer(gEngine, 0xD98, 0x278);
 
     vars.FNameToString = (Func<ulong, string>)(fName =>
     {
@@ -80,7 +76,6 @@ init
         return number == 0 ? name : name + "_" + number;
     });
 
-    current.Area = "";
     current.CutsceneCount = 0;
     vars.CompletedSplits = new HashSet<string>();
 }
@@ -89,6 +84,9 @@ update
 {
     vars.Helper.Update();
     vars.Helper.MapPointers();
+
+    // Uncomment debug information in the event of an update.
+	// print(modules.First().ModuleMemorySize.ToString());
 
     var world = vars.FNameToString(current.GWorldName);
     if (!string.IsNullOrEmpty(world) && world != "None") current.Area = world;
