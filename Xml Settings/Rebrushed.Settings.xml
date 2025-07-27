@@ -94,13 +94,15 @@
                     <Setting Id="LS_ABR_TempleDoor_Hint" Label="Reached The Exit Dialogue" State="false"/>
                     <Setting Id="LS_ABR_TempleDoor_09" Label="Temple Door Open" State="false"/>
                     <Setting Id="LS_ABR_RaiseTheFireBridge_07" Label="Raised The Fire Bridge" State="false"/>
+                    <Setting Id="GV_SW1_P" Label="Steamboat Willie: Part 1" State="true"/>
                 </Setting>
                 <Setting Id="GremlinVillage" Label="Gremlin Village Settings" State="true">
-                    <Setting Id="GV_WOG_P" Label="Entered Gremlin Village" State="true"/>
+                    <Setting Id="GV_WOG_P" Label="Entered Gremlin Village" State="false"/>
                     <Setting Id="LS_WoG_LevelIntro_2" Label="Gremlin Village Intro Cutscene" State="false"/>
                     <Setting Id="LS_WoG_SmallPeteShip_2" Label="Opened Ship Log Door" State="false"/>
                     <Setting Id="LS_WoG_PipesPainted_2" Label="Painted The Pipes" State="false"/>
                     <Setting Id="LS_WoG_PipesFixed_2" Label="Spun Village Pipe" State="false"/>
+                    <Setting Id="GV_CC2_P" Label="Entered Clock Cleaners: Part 2" State="false"/>
                 </Setting>
                 <Setting Id="Europe" Label="Europe Settings" State="true">
                     <Setting Id="GV_EBR_P" Label="Entered Europe" State="false"/>
@@ -109,6 +111,7 @@
                     <Setting Id="LS_ChestPillarUp" Label="Raised Chest Pillar" State="false"/>
                     <Setting Id="LS_EBR_PeteMiniboss_2" Label="Entered Colosseum" State="false"/>
                     <Setting Id="LS_EBR_PeteDefeated_1_LOOP" Label="Finished Colosseum Mini Boss" State="false"/>
+                    <Setting Id="GV_SW3_P" Label="Entered Steamboat Willie: Part 3" State="false"/>
                 </Setting>
             </Setting>
             <Setting Id="MJM" Label="Mickey Junk Mountain Settings" State="true">
@@ -117,11 +120,12 @@
                     <Setting Id="LS_MJM_HP_Intro_1_3" Label="First MJM Cutscene Started" State="false"/>
                     <Setting Id="LS_MJM_HP_FreeGremlinKip_4_3" Label="Saved Gremlin Kip" State="false"/>
                     <Setting Id="LS_MJM_HP_CraneFixed_4" Label="Crane Fixed" State="false"/>
-                    <Setting Id="LS_MickeyProjectorLeave_MJM_Alpine" Label="Entering Alpine Climber: Part 1" State="false"/>
+                    <Setting Id="MJM_AC1_P" Label="Entering Alpine Climber: Part 1" State="false"/>
                 </Setting>
                 <Setting Id="Piles" Label="Piles Settings" State="true">
                     <Setting Id="MJM_TP_P" Label="Entered Piles" State="true"/>
                     <Setting Id="LS_GremlinRonald_Phone" Label="Gremlin Ronald On Phone (Saved Gremlin Ronald)" State="false"/>
+                    <Setting Id="MJM_AC2_P" Label="Entered Alpine Climber: Part 2" State="false"/>
                 </Setting>
                 <Setting Id="Slopes" Label="Slopes Settings" State="true">
                     <Setting Id="MickeyJunkMountain_P" Label="Entered Slopes" State="true"/>
