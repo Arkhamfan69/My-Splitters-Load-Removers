@@ -85,11 +85,6 @@ update
 
     if (old.Paused != current.Paused)
         vars.Log("Current Paused Is " + current.Paused);
-
-    if (vars.PauseTriggered && current.Area == "OutsideMap")
-    {
-        vars.PauseTriggered = false;
-    }
 }
 
 split
