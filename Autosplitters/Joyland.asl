@@ -31,31 +31,33 @@ init
     IntPtr fNames = vars.Helper.ScanRel(13, "89 5C 24 ?? 89 44 24 ?? 74 ?? 48 8D 15");
     IntPtr gSyncLoad = vars.Helper.ScanRel(21, "33 C0 0F 57 C0 F2 0F 11 05");
 
-    if (gWorld == IntPtr.Zero || gEngine == IntPtr.Zero || fNames == IntPtr.Zero || gSyncLoad == IntPtr.Zero)
-        throw new Exception("Not all required addresses could be found by scanning.");
+	if (gWorld == IntPtr.Zero || gEngine == IntPtr.Zero || fNames == IntPtr.Zero)
+	{
+		const string Msg = "Not all required addresses could be found by scanning.";
+		throw new Exception(Msg);
+	}
 
     vars.Helper["GWorldName"] = vars.Helper.Make<ulong>(gWorld, 0x18);
+
     vars.Helper["Loading"] = vars.Helper.Make<bool>(gSyncLoad);
 
-    vars.FNameToString = (Func<ulong, string>)(fName =>
-    {
-        var nameIdx = (fName & 0x000000000000FFFF);
-        var chunkIdx = (fName & 0x00000000FFFF0000) >> 16;
-        var number = (fName & 0xFFFFFFFF00000000) >> 32;
+	vars.FNameToString = (Func<ulong, string>)(fName =>
+	{
+		var nameIdx = (fName & 0x000000000000FFFF) >> 0x00;
+		var chunkIdx = (fName & 0x00000000FFFF0000) >> 0x10;
+		var number = (fName & 0xFFFFFFFF00000000) >> 0x20;
 
-        IntPtr chunk = vars.Helper.Read<IntPtr>(fNames + 0x10 + (int)chunkIdx * 0x8);
-        IntPtr entry = chunk + (int)nameIdx * sizeof(short);
+		IntPtr chunk = vars.Helper.Read<IntPtr>(fNames + 0x10 + (int)chunkIdx * 0x8);
+		IntPtr entry = chunk + (int)nameIdx * sizeof(short);
 
-        int length = vars.Helper.Read<short>(entry) >> 6;
-        string name = vars.Helper.ReadString(length, ReadStringType.UTF8, entry + sizeof(short));
+		int length = vars.Helper.Read<short>(entry) >> 6;
+		string name = vars.Helper.ReadString(length, ReadStringType.UTF8, entry + sizeof(short));
 
-        return number == 0 ? name : name + "_" + number;
-    });
+		return number == 0 ? name : name + "_" + number;
+	});
 
-    current.Area = "";
+	current.Area = "";
     vars.CompletedSplits = new HashSet<string>();
-    vars.PauseTriggered = false;
-    current.MapCount = 0;
 }
 
 update
@@ -70,9 +72,13 @@ update
     if (old.Area != current.Area)
     {
         vars.Log("Current Area Is " + current.Area);
-        current.MapCount++;
-        vars.Log("Map Count Is " + current.MapCount);
     }
+
+    string checkName = vars.GetCutsceneName((ulong)(vars.sequencePlayer));
+	if (checkName != "") current.Cutscene = checkName;
+
+	if (old.Cutscene != current.Cutscene)
+		vars.Log("Cutscene: " + old.Cutscene + " -> " + current.Cutscene);
 
     if (old.Loading != current.Loading)
         vars.Log("Loading: " + current.Loading);
@@ -103,24 +109,11 @@ start
 onStart
 {
     vars.CompletedSplits.Clear();
-    vars.PauseTriggered = false;
-    vars.MapCount = 0;
 }
 
 isLoading
 {
-    var time = timer.CurrentTime.RealTime;
-
-    // Trigger special pause at exactly 1:16.50
-    if (!vars.PauseTriggered && time.HasValue && time.Value.TotalSeconds >= 76.5 && current.Area != "OutsideMap")
-    {
-        vars.PauseTriggered = true;
-    }
-
-    if (vars.PauseTriggered && current.MapCount < 2)
-        return true;
-
-    return current.Loading || current.Paused == 3 || current.Area == "MainMenuMapTEST" || current.Area == "GameOver";
+    return current.Loading || current.Paused == 3|| current.Area == "IntroLevel" || current.Area == "MainMenuMapTEST" || current.Area == "GameOver" ;
 }
 
 exit
