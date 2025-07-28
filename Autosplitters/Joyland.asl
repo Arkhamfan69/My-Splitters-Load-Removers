@@ -74,12 +74,6 @@ update
         vars.Log("Current Area Is " + current.Area);
     }
 
-    string checkName = vars.GetCutsceneName((ulong)(vars.sequencePlayer));
-	if (checkName != "") current.Cutscene = checkName;
-
-	if (old.Cutscene != current.Cutscene)
-		vars.Log("Cutscene: " + old.Cutscene + " -> " + current.Cutscene);
-
     if (old.Loading != current.Loading)
         vars.Log("Loading: " + current.Loading);
 
