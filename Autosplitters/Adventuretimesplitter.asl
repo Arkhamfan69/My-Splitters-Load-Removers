@@ -9,14 +9,16 @@ startup
     vars.Helper.LoadSceneManager = true;
 }
 
-init
-{
-    
-}
-
 isLoading
 {
-    return current.Scene == "Loading" || current.loadingScene == "CandyKingdom_Geo" || current.loadingScene2 == 2 || current.loadingScene2 == 22 || current.loadingScene2 == 21 || current.loadingScene2 == 26 || current.loadingScene2 == 25 || current.loadingScene2 == 38 || current.loadingScene2 == 39 || current.loadingScene2 == 37 || current.loadingScene2 == 54 || current.loadingScene2 == 53 || current.loadingScene2 == 65 || current.loadingScene2 == 64 || current.loadingScene2 == 63;
+    return current.Scene == "Loading" || current.loadingScene == "CandyKingdom_Geo" || current.loadingScene == "TreeHouse_Flooded"
+    || current.Scene == "Intro" || current.loadingScene2 == 2 || current.loadingScene2 == 22
+    || current.loadingScene2 == 21 || current.loadingScene == "FireBreakIslandShell_P" || current.loadingScene2 == 30
+    || current.loadingScene2 == 29 || current.loadingScene2 == 35 || current.loadingScene2 == 34
+    || current.loadingScene2 == 26 || current.loadingScene2 == 25 || current.loadingScene2 == 38
+    || current.loadingScene2 == 39 || current.loadingScene2 == 37 || current.loadingScene2 == 54
+    || current.loadingScene2 == 53 || current.loadingScene2 == 64 || current.loadingScene2 == 63
+    || current.loadingScene2 == 35 || current.loadingScene2 == 34;
 }
 
 update
@@ -32,7 +34,7 @@ update
 
     if (old.loadingScene != current.loadingScene)
     {
-        vars.Log("Loading Scene Changed: " + current.loadingScene);
+        vars.Log("Loading Scene Changed From: " + old.loadingScene + " To: " + current.loadingScene);
     }
 
     if (old.loadingScene2 != current.loadingScene2)
@@ -46,29 +48,12 @@ exit
     timer.IsGameTimePaused = true;
 }
 
+split
+{
+    return old.loadingScene == "WorldTerrainMidW_Geo" && current.loadingScene == "TreeHouse_Unflooded"; // This Is Just To Autoend The Timer
+}
+
 reset
 {
     return old.loadingScene == "TreeHouse_Flooded" && current.loadingScene == "TreeHouse_Unflooded_Night";
 }
-
-// All Of These Logs Use loadingScene
-
-// Fight Name Logs
-// Tutorial Fight - BattleScene7_Gameplay
-// First Candy Kingdom Fight - Candy Kingdom Fights
-// Mushroom Island Fight - BattleScene9_Mushroom_Gameplay 
-// Other Mushroom Island Fight - CandyKingdomShell_Geo
-// Evil Forest Fights - BattleScene4_Gameplay
-// Fern Boss Fight - BattleScene19_Fern_Gameplay
-// Evil Forest Ocean  - BattleScene11_Sea_EvilForest_Gameplay
-// Candy Kingdom Ocean - BattleScene7_Gameplay
-// Gelato Island - BattleScene12_GelatoIsland_Gameplay
-// 
-
-// Upgrade Logs
-// Ocean Training - TrainingScene_Ocean_Gameplay
-// Candy Kingdom - TrainingScene_CandyKingdom_Gameplay
-// Mushroom Island - TrainingScene_MushroomIsland_Gameplay
-// Evil Forest - TrainingScene_EvilForest_Gameplay
-// Ice Kingdom - TrainingScene_IceKingdom_Gameplay
-// Gelato Island - TrainingScene_GelatoIsland_Gameplay
