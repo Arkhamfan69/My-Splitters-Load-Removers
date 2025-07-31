@@ -11,7 +11,6 @@ startup
     vars.FightNames = new Dictionary<string, string>
     {
         { "BattleScene7_Gameplay", "Tutorial Fight & Candy Kingdom Fights" },
-        { "Candy Kingdom Fights", "First Candy Kingdom Fight" },
         { "BattleScene9_Mushroom_Gameplay", "Mushroom Island Fight" },
         { "CandyKingdomShell_Geo", "Other Mushroom Island Fight" },
         { "BattleScene4_Gameplay", "Evil Forest Fights" },
