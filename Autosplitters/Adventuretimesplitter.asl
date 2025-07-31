@@ -12,7 +12,6 @@ startup
     {
         { "BattleScene7_Gameplay", "Tutorial Fight & Candy Kingdom Fights" },
         { "BattleScene9_Mushroom_Gameplay", "Mushroom Island Fight" },
-        { "CandyKingdomShell_Geo", "Other Mushroom Island Fight" },
         { "BattleScene4_Gameplay", "Evil Forest Fights" },
         { "BattleScene19_Fern_Gameplay", "Fern Boss Fight" },
         { "BattleScene11_Sea_EvilForest_Gameplay", "Evil Forest Ocean" },
@@ -26,6 +25,12 @@ startup
         { "BattleScene10_Sea_FireKingdom_Gameplay", "Fire Kingdom Sea Fight" },
         { "BattleScene5_Gameplay", "Final Boss" }
     };
+
+    foreach (var fight in vars.FightNames)
+    {
+        var key = "split_" + fight.Key;
+        settings.Add(key, true, "Split: " + fight.Value);
+    }
 }
 
 init
@@ -93,8 +98,14 @@ exit
 
 split
 {
-    // Split when a fight scene ends
-    return vars.FightNames.ContainsKey(old.loadingScene) && !vars.FightNames.ContainsKey(current.loadingScene);
+    foreach (var fight in vars.FightNames)
+    {
+        var key = "split_" + fight.Key;
+        if (old.loadingScene == fight.Key && !vars.FightNames.ContainsKey(current.loadingScene) && settings[key])
+        {
+            return true;
+        }
+    }
 
     if (old.loadingScene == "WorldTerrainMidW_Geo" && current.loadingScene == "TreeHouse_Unflooded")
     {
