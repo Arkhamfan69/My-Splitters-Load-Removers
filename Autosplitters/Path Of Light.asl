@@ -25,8 +25,6 @@ init
     }
 
     vars.Helper["GWorldName"] = vars.Helper.Make<ulong>(gWorld, 0x18);
-    // GEngine.GameInstace.LocalPlayer[0].PlayerController.Character.CapsuleComponent
-    vars.Helper["PlayerPosition"] = vars.Helper.Make<Vector3f>(gEngine, 0x10A8, 0x38, 0x0, 0x30, 0x2E0, 0x328, 0x128);
     // GEngine.TransitionType
     vars.Helper["Paused"] = vars.Helper.Make<bool>(gEngine, 0xBBB);
     // GEngine.GameInstace.LocalPlayer[0].PlayerController.AcknowledgedPawn.HasStaff
@@ -35,9 +33,6 @@ init
     vars.Helper["KeysObtained"] = vars.Helper.Make<int>(gEngine, 0x10A8, 0x38, 0x0, 0x30, 0x338, 0x84C);
     // Gengine.GameInstance.LocalPlayer[0].PlayerController.AcknowledgedPawn.IsJournalOpened
     vars.Helper["IsJournalOpened"] = vars.Helper.Make<bool>(gEngine, 0x10A8, 0x38, 0x0, 0x30, 0x338, 0xAE6);
-    // GEngine.GameInstace.LocalPlayer[0].PlayerController.AcknowledgedPawn
-    vars.Helper["Loading"] = vars.Helper.Make<ulong>(gEngine, 0x10A8, 0x38, 0x0, 0x30, 0x338);
-
 
     vars.FNameToString = (Func<ulong, string>)(fName =>
     {
@@ -54,7 +49,6 @@ init
         return number == 0 ? name : name + "_" + number;
     });
 
-    current.loading = "";
     vars.CompletedSplits = new HashSet<string>();
 }
 
@@ -69,13 +63,6 @@ update
     var world = vars.FNameToString(current.GWorldName);
     if (!string.IsNullOrEmpty(world) && world != "None") current.Area = world;
     if (old.Area != current.Area) vars.Log("Area: " + current.Area);
-
-    var loading = vars.FNameToString(current.Loading);
-    if (!string.IsNullOrEmpty(loading) && loading != "None") current.LoadingName = loading;
-    if (old.Loading != current.Loading) vars.Log("Loading: " + current.Loading);
-
-    if (old.PlayerPosition.X != current.PlayerPosition.X)
-        vars.Log("Player PositionX: " + current.PlayerPosition.X);
 
     if (old.Paused != current.Paused) vars.Log("Current Paused Is " + current.Paused);
     if (old.HasStaff != current.HasStaff) vars.Log("Has Staff: " + current.HasStaff);
@@ -122,9 +109,3 @@ reset
 {
     return current.Area == "Main_Menu_PT";
 }
-
-// Area Logs
-// Starting Area: WB_Cavern
-// Level 2: CryptLevel
-// Level 3: ChapelLevel
-// Level 4: ChaseLevel
