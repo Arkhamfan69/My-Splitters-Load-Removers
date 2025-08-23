@@ -1,4 +1,4 @@
-state("Hotel188DEMO-Win64-Shipping")  // May eventutally add support for full game
+state("Hotel188DEMO-Win64-Shipping") // May eventutally add support for the full game.
 {
 
 }
@@ -10,6 +10,13 @@ startup
 
     settings.Add("Item", false, "Item Splits");
         settings.Add("Flash", false, "Obtained Flashlight", "Item");
+
+    var demoMessage = MessageBox.Show(
+        "Thank you for using the Hotel 188 Autosplitter!\n" +
+        "This autosplitter is designed for the DEMO version of the game.\n" +
+        "If you are using the full version, please note that for the time being, this autosplitter will not work for the full game.\n",
+        "LiveSplit | Hotel 188",
+        MessageBoxButtons.OK, MessageBoxIcon.Information);
 }
 
 init
@@ -81,6 +88,5 @@ exit
 {
     timer.IsGameTimePaused = true;
 }
-
 
 // Demo - 142016512
