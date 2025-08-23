@@ -1,4 +1,4 @@
-state("Hotel188DEMO-Win64-Shipping")
+state("Hotel188DEMO-Win64-Shipping")  // May eventutally add support for full game
 {
 
 }
@@ -81,5 +81,6 @@ exit
 {
     timer.IsGameTimePaused = true;
 }
+
 
 // Demo - 142016512
