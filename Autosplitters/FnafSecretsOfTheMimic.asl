@@ -111,6 +111,9 @@ init
     // GEngine->GameInstance->LocalPlayers[0]->PlayerController->AcknowledgedPawn->IsSeenByAi
     vars.Helper["IsSeen"] = vars.Helper.Make<bool>(gEngine, 0xD28, 0x38, 0x0, 0x30, 0x2A0, 0x60C);
 
+    // GEngine->GameInstance->LocalPlayers[0]->PlayerController->AcknowledgedPawn.Fname
+    vars.Helper["Pawn"] = vars.Helper.Make<ulong>(gEngine, 0xD28, 0x38, 0x0, 0x30, 0x2A0, 0x18);
+
     // NamePool stuff
     const int FNameBlockOffsetBits = 16;
     const uint FNameBlockOffsetMask = ushort.MaxValue; // (1 << FNameBlockOffsetBits) - 1
@@ -179,6 +182,7 @@ init
     });
 
     vars.GameManager = IntPtr.Zero;
+    vars.Jumpscare = "";
 }
 
 update
@@ -198,6 +202,15 @@ update
     var world = vars.FNameToString(current.GWorldName);
     if (!string.IsNullOrEmpty(world) && world != "None")
         current.World = world;
+
+    var Jumpscare = vars.FNameToString(current.Pawn);
+    if (!string.IsNullOrEmpty(Jumpscare) && Jumpscare != "None")
+        current.Jumpscare = Jumpscare;
+    
+    if (old.Jumpscare != current.Jumpscare)
+    {
+        vars.Log("Current Jumpscare Is " + current.Jumpscare);
+    }
     
     if (old.LoadingState != current.LoadingState)
     {
@@ -270,6 +283,11 @@ isLoading
     if (!inZone && vars.ZoneCooldown.IsRunning)
     {
         vars.ZoneCooldown.Reset();
+    }
+
+    if (current.Jumpscare.Contains("JumpscarePawn"))
+    {
+        return true;
     }
 
     return current.LoadingState == 1
