@@ -49,8 +49,6 @@ init
     vars.Helper["CurrentScreen"] = vars.Helper.Make<byte>(gEngine, 0xD28, 0x38, 0x0, 0x30, 0x2B0, 0x320);
     // GEngine.GameInstance.LocalPlayer[0].PlayerController.Character.CapsuleComponent.RelativeLocation
     vars.Helper["CapsulePosition"] = vars.Helper.Make<Vector3f>(gEngine, 0xD28, 0x38, 0x0, 0x30, 0x260, 0x290, 0x11C);
-    // GEngine.GameInstance.LocalPlayer[0].PlayerController.Character.CapsuleComponent.RelativeRotation
-    vars.Helper["CameraRotation"] = vars.Helper.Make<double>(gEngine, 0xD28, 0x38, 0x0, 0x30, 0x260, 0x290, 0x128, 0x4);
     // Inventory Stuff
     vars.Helper["InventoryItems"]   = vars.Helper.Make<IntPtr>(gWorld, 0x120, 0x280, 0x38);
     vars.Helper["InventoryItemsCount"] = vars.Helper.Make<int>(gWorld, 0x120, 0x280, 0x40);
@@ -105,6 +103,8 @@ init
     vars.ChapterJustChanged = false;
     vars.LastInventoryItems = new List<string>();
     vars.SplitInventoryItems = new HashSet<string>();
+    vars.SpoolsCollected = new HashSet<string>();
+    vars.SpoolsSplitDone = false;
 }
 
 update
@@ -154,11 +154,20 @@ update
         currentItems.Add(itemName);
     }
 
-    foreach (var item in currentItems)
+    // Only track inventory additions when not loading
+    if (!current.Loading)
     {
-        if (!vars.LastInventoryItems.Contains(item))
+        foreach (var item in currentItems)
         {
-            vars.Log("Inventory Item Added: " + item);
+            if (!vars.LastInventoryItems.Contains(item))
+            {
+                vars.Log("Inventory Item Added: " + item);
+                // Track spools by name (adjust if needed for your game)
+                if (item.Contains("spool of thread"))
+                {
+                    vars.SpoolsCollected.Add(item);
+                }
+            }
         }
     }
 
@@ -204,19 +213,14 @@ start
         return true;
     }
 
-    if (current.CameraRotation != old.CameraRotation && current.World == "Level1")
-    {
-        return true;
-    }
+    
 }
 
 split
 {
-    // --- Item Splitting ---
-    // Split when picking up an item for the first time and setting is enabled
     foreach (var item in vars.LastInventoryItems)
     {
-        if (settings.ContainsKey(item) && settings[item])
+        if (settings.ContainsKey(item) && settings[item] && !item.Contains("spool of thread"))
         {
             if (!vars.SplitInventoryItems.Contains(item))
             {
@@ -225,19 +229,21 @@ split
             }
         }
     }
+
+    if (settings.ContainsKey("Empty spool of thread") && settings["Empty spool of thread"])
+    {
+        if (vars.SpoolsCollected.Count >= 4 && !vars.SpoolsSplitDone)
+        {
+            vars.SpoolsSplitDone = true;
+            return true;
+        }
+    }
 }
 
-// reset
-// {
-//     if (settings["Reset"] && current.World == "MainMenu")
-//     {
-//         return true;
-//     }
-// }
-
-// P0ra = Green Spool Area
-// Level1 = Chapter 1 (Timer Starts On First Movement)
-// Level2 = Chapter 2
-// Level33 = Chapter 3
-// Level44 = Chapter 4
-// Level6
+reset
+{
+    if (settings["Reset"] && current.World == "MainMenu")
+    {
+        return true;
+    }
+}
