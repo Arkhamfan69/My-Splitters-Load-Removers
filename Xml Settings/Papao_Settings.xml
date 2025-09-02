@@ -17,71 +17,42 @@
         <Setting Id="Item" Label="Item Splits" State="true">
             <Setting Id="C1Items" Label="Chapter 1 Items" State="true">
                 <Setting Id="Room Key" Label="Room Key" State="false"/>
-                <Setting Id="Room Key Used" Label="Used Room Key" State="false"/>
                 <Setting Id="Jack-in-the-Box Key" Label="Clown Key" State="false"/>
-                <Setting Id="Jack-in-the-Box Key Used" Label="Used Clown Key" State="false"/>
                 <Setting Id="Toothbrush" Label="Toothbrush" State="false"/>
-                <Setting Id="Toothbrush Used" Label="Used Toothbrush" State="false"/>
                 <Setting Id="Toothpaste" Label="Toothpaste" State="false"/>
-                <Setting Id="Toothpaste Used" Label="Used Toothpaste" State="false"/>
                 <Setting Id="Toothbrush with toothpaste" Label="Toothbrush With Toothpaste" State="false"/>
-                <Setting Id="Toothbrush with toothpaste Used" Label="Used Toothbrush With Toothpaste" State="false"/>
                 <Setting Id="White Key" Label="White Key" State="false"/>
-                <Setting Id="White Key Used" Label="Used White Key" State="false"/>
             </Setting>
             <Setting Id="C2Items" Label="Chapter 2 Items" State="true">
                 <Setting Id="Toy Dart Launcher" Label="Gun" State="false"/>
-                <Setting Id="Toy Dart Launcher Used" Label="Used Gun" State="false"/>
                 <Setting Id="Alegria card Blue" Label="Blue Keycard" State="false"/>
-                <Setting Id="Alegria card Blue Used" Label="Used Blue Keycard" State="false"/>
                 <Setting Id="Alegria card yellow" Label="Yellow Keycard" State="false"/>
-                <Setting Id="Alegria card yellow Used" Label="Used Yellow Keycard" State="false"/>
                 <Setting Id="Alegria card Red" Label="Red Keycard" State="false"/>
-                <Setting Id="Alegria card Red Used" Label="Used Red Keycard" State="false"/>
                 <Setting Id="Pliers!" Label="Pliers" State="false"/>
-                <Setting Id="Pliers! Used" Label="Used Pliers" State="false"/>
             </Setting>
             <Setting Id="C3Items" Label="Chapter 3 Items" State="true">
                 <Setting Id="Blue Lever" Label="Blue Lever (During Boss Fight)" State="false"/>
-                <Setting Id="Blue Lever Used" Label="Used Blue Lever (During Boss Fight)" State="false"/>
                 <Setting Id="Yellow Lever" Label="Blue Lever (During Boss Fight)" State="false"/>
-                <Setting Id="Yellow Lever Used" Label="Used Yellow Lever (During Boss Fight)" State="false"/>
                 <Setting Id="Green Lever" Label="Green Lever (During Boss Fight)" State="false"/>
-                <Setting Id="Green Lever Used" Label="Used Green Lever (During Boss Fight)" State="false"/>
                 <Setting Id="Red Level" Label="Red Lever (During Boss Fight)" State="false"/>
-                <Setting Id="Red Level Used" Label="Used Red Lever (During Boss Fight)" State="false"/>
                 <Setting Id="Safety Lock" Label="Safety Lock" State="false"/>
-                <Setting Id="Safety Lock Used" Label="Used Safety Lock" State="false"/>
                 <Setting Id="Gear" Label="Gear" State="false"/>
-                <Setting Id="Gear Used" Label="Used Gear" State="false"/>
             </Setting>
             <Setting Id="C4Items" Label="Chapter 4 Items" State="true">
                 <Setting Id="Toy hammer" Label="Toy Hammer" State="false"/>
-                <Setting Id="Toy hammer Used" Label="Used Toy Hammer" State="false"/>
                 <Setting Id="A pen!" Label="Pen" State="false"/>
-                <Setting Id="A pen! Used" Label="Used Pen" State="false"/>
                 <Setting Id="A blank sheet of paper" Label="Paper" State="false"/>
-                <Setting Id="A blank sheet of paper Used" Label="Used Paper" State="false"/>
                 <Setting Id="New Story" Label="Paper Used To Defeat The Bear" State="false"/>
-                <Setting Id="New Story Used" Label="Used Paper To Defeat The Bear" State="false"/>
                 <Setting Id="Empty spool of thread" Label="Picked Up A Spool Of Thread (Works for all 4)" State="false"/>
-                <Setting Id="Empty spool of thread Used" Label="Used Spool Of Thread" State="false"/>
                 <Setting Id="Mask" Label="Gas Mask" State="false"/>
-                <Setting Id="Mask Used" Label="Used Gas Mask" State="false"/>
                 <Setting Id="A car battery" Label="Forklift Battery" State="false"/>
-                <Setting Id="A car battery" Label="Used Forklift Battery" State="false"/>
             </Setting>
             <Setting Id="C5Items" Label="Chapter 5 Items" State="true">
                 <Setting Id="Green Key" Label="Green Key" State="false"/>
-                <Setting Id="Green Key Used" Label="Used Green Key" State="false"/>
                 <Setting Id="Blue Key" Label="Blue Key" State="false"/>
-                <Setting Id="Blue Key Used" Label="Used Blue Key" State="false"/>
                 <Setting Id="Red Key" Label="Red Key" State="false"/>
-                <Setting Id="Red Key" Label="Used Red Key" State="false"/>
                 <Setting Id="Yellow Key" Label="Yellow Key" State="false"/>
-                <Setting Id="Yellow Key" Label="Used Yellow Key" State="false"/>
                 <Setting Id="Orange Key" Label="Orange Key" State="false"/>
-                <Setting Id="Orange Key" Label="Used Orange Key" State="false"/>
             </Setting>
         </Setting>
     </Setting>
