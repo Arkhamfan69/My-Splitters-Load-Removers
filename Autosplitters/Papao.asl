@@ -161,8 +161,7 @@ update
         {
             if (!vars.LastInventoryItems.Contains(item))
             {
-                vars.Log("Inventory Item Added: " + item);
-                // Track spools by name (adjust if needed for your game)
+                vars.Log("Inventory Item Added: " + item);
                 if (item.Contains("spool of thread"))
                 {
                     vars.SpoolsCollected.Add(item);
