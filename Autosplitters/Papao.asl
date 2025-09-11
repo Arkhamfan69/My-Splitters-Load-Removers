@@ -161,7 +161,8 @@ update
         {
             if (!vars.LastInventoryItems.Contains(item))
             {
-                vars.Log("Inventory Item Added: " + item);
+                vars.Log("Inventory Item Added: " + item);
+
                 if (item.Contains("spool of thread"))
                 {
                     vars.SpoolsCollected.Add(item);
@@ -245,4 +246,12 @@ reset
     {
         return true;
     }
+}
+
+onReset
+{
+    vars.CompletedSplits.Clear();
+    vars.LastInventoryItems.Clear();
+    vars.SplitInventoryItems.Clear();
+    vars.SpoolsCollected.Clear();
 }
