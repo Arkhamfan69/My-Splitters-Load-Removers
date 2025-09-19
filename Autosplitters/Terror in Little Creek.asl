@@ -81,6 +81,7 @@ init
     current.Quest = ""; 
     current.DeathLoad = false;
     vars.ItemsCollected = new HashSet<string>();
+    vars.CompletedQuests = new HashSet<string>();
 
     vars.SetTextIfEnabled = (Action<string, object>)((text1, text2) =>
     {
@@ -176,6 +177,12 @@ split
 			if (settings[id]) return true;
 		}
 	}
+
+    if (settings.ContainsKey(current.Quest) && settings[current.Quest] && current.Quest != old.Quest)
+    {
+        vars.CompletedQuests.Add(current.Quest);
+        return true;
+    }
 }
 
 start
