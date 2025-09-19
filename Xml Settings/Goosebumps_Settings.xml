@@ -1,0 +1,75 @@
+<Settings>
+    <Setting Id="Goosebumps: Terror In Little Creek Autosplitter Settings" Label="Goosebumps: Terror In Little Creek Autosplitter Settings" State="true">
+        <Setting Id="General Settings" Label="General Settings" State="true">
+            <Setting Id="Reset" Label="Reset on The Main Menu" State="false"/>
+            <Setting Id="text" Label="Show Text Components" State="false">
+                <Setting Id="Quest" Label="Show Current Quest" State="false"/>
+                <Setting Id="RoomID" Label="Show Current RoomID" State="false"/>
+                <Setting Id="HP" Label="Show Current HP" State="false"/>
+                <Setting Id="Remove" Label="Remove All Text Components on Exit" State="false"/>
+            </Setting>
+        </Setting>
+        <Setting Id="Quest Splits" Label="Quest Splits" State="true">
+            <Setting Id="1_enterlibrary" Label="Entered Library for the first time" State="false"/>
+            <Setting Id="2_explorelibrary" Label="Quest 2 - Explore Library" State="false"/>
+            <Setting Id="3_enterlittlecreek" Label="Quest 3 - Enter Little Creek" State="false"/>
+            <Setting Id="4_collectitems" Label="Quest 4 - Collect Items" State="false"/>
+            <Setting Id="5_returntoschneel" Label="Quest 5 - Return to Schneel" State="false"/>
+            <Setting Id="6_findanotherway" Label="Quest 6 - Find Another Way" State="false"/>
+            <Setting Id="7_collectthebook" Label="Quest 7 - Collect the Book" State="false"/>
+            <Setting Id="8_leavelibrary" Label="Quest 8 - Leave Library" State="false"/>
+            <Setting Id="9_helpyourfriends" Label="Quest 9 - Help Your Friends" State="false"/>
+            <Setting Id="10_friendsmeet_lcnorth" Label="Quest 10 - Friends Meet LC North" State="false"/>
+            <Setting Id="11_computerlabthumbdrive" Label="Quest 11 - Computer Lab Thumb Drive" State="false"/>
+            <Setting Id="12_discoveredschneelid" Label="Quest 12 - Discovered Schneel ID" State="false"/>
+            <Setting Id="13_libraryjail" Label="Quest 13 - Library Jail" State="false"/>
+            <Setting Id="14_meetingwithfriends" Label="Quest 14 - Meeting With Friends" State="false"/>
+            <Setting Id="15_obtainsquarerune_harvey" Label="Quest 15 - Obtain Square Rune Harvey" State="false"/>
+            <Setting Id="16_discoveredsquarerune" Label="Quest 16 - Discovered Square Rune" State="false"/>
+            <Setting Id="17_findmonsterinfo" Label="Quest 17 - Find Monster Info" State="false"/>
+            <Setting Id="18_meetfriends" Label="Quest 18 - Meet Friends" State="false"/>
+            <Setting Id="19_findinformation" Label="Quest 19 - Find Information" State="false"/>
+            <Setting Id="20_findmonstertrap" Label="Quest 20 - Find Monster Trap" State="false"/>
+            <Setting Id="21_activatethetrap" Label="Started the Final Boss" State="false"/>
+        </Setting>
+        <Setting Id="Item Splits" Label="Item Splits" State="true">
+            <Setting Id="Graveyard Key" Label="Graveyard Key" State="false"/>
+            <Setting Id="Slingshot Pellet" Label="Slingshot Pellet" State="false"/>
+            <Setting Id="Half of a symbol" Label="Half of a symbol" State="false"/>
+            <Setting Id="Screwdriver" Label="Screwdriver" State="false"/>
+            <Setting Id="Library Archives Key" Label="Library Archives Key" State="false"/>
+            <Setting Id="Circle Rune" Label="Haunted Book" State="false"/>
+            <Setting Id="Mask" Label="Mask" State="false"/>
+            <Setting Id="Crank" Label="Crank" State="false"/>
+            <Setting Id="Ancient Egyptian Scarab" Label="Ancient Egyptian Scarab" State="false"/>
+            <Setting Id="Radio dial" Label="Radio dial" State="false"/>
+            <Setting Id="Man Jar" Label="Man Jar" State="false"/>
+            <Setting Id="Ankh Jar" Label="Ankh Jar" State="false"/>
+            <Setting Id="Instrument Jar" Label="Instrument Jar" State="false"/>
+            <Setting Id="Bird Jar" Label="Bird Jar" State="false"/>
+            <Setting Id="Eye Jar" Label="Eye Jar" State="false"/>
+            <Setting Id="Officer Pickett's Flash Drive" Label="Officer Pickett's Flash Drive" State="false"/>
+            <Setting Id="Haunted Book" Label="Haunted Book (Library 2)" State="false"/>
+            <Setting Id="Library Key" Label="Library Key" State="false"/>
+            <Setting Id="Bolt Cutters" Label="Bolt Cutters" State="false"/>
+            <Setting Id="Graveyard Idol" Label="Graveyard Idol" State="false"/>
+            <Setting Id="Shovel" Label="Shovel" State="false"/>
+            <Setting Id="Talon Medallion" Label="Talon Medallion" State="false"/>
+            <Setting Id="Lungs Medallion" Label="Lungs Medallion" State="false"/>
+            <Setting Id="Eye Medallion" Label="Eye Medallion" State="false"/>
+            <Setting Id="Church Key" Label="Church Key" State="false"/>
+            <Setting Id="Flat Eye Statue" Label="Flat Eye Statue" State="false"/>
+            <Setting Id="Round Eye Statue" Label="Round Eye Statue" State="false"/>
+            <Setting Id="Sad Eye Statue" Label="Sad Eye Statue" State="false"/>
+            <Setting Id="Cave Idol" Label="Cave Idol" State="false"/>
+            <Setting Id="Prop Lantern" Label="Prop Lantern" State="false"/>
+            <Setting Id="Prop sword" Label="Prop sword" State="false"/>
+            <Setting Id="Prop head" Label="Prop head" State="false"/>
+            <Setting Id="Crook and Flair of Osiris" Label="Crook and Flair of Osiris" State="false"/>
+            <Setting Id="Stagg of Ptah" Label="Stagg of Ptah" State="false"/>
+            <Setting Id="Canopic Jar: Duamutef" Label="Canopic Jar: Duamutef" State="false"/>
+            <Setting Id="Canopic Jar: Qebehsenuef" Label="Canopic Jar: Qebehsenuef" State="false"/>
+            <Setting Id="Canopic Jar: Hapi" Label="Canopic Jar: Hapi" State="false"/>
+        </Setting>
+    </Setting>
+</Settings>
