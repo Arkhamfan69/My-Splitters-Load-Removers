@@ -66,10 +66,11 @@
             <Setting Id="Prop sword" Label="Prop sword" State="false"/>
             <Setting Id="Prop head" Label="Prop head" State="false"/>
             <Setting Id="Crook and Flair of Osiris" Label="Crook and Flair of Osiris" State="false"/>
-            <Setting Id="Stagg of Ptah" Label="Stagg of Ptah" State="false"/>
+            <Setting Id="Staff of Ptah" Label="Staff of Ptah" State="false"/>
             <Setting Id="Canopic Jar: Duamutef" Label="Canopic Jar: Duamutef" State="false"/>
             <Setting Id="Canopic Jar: Qebehsenuef" Label="Canopic Jar: Qebehsenuef" State="false"/>
             <Setting Id="Canopic Jar: Hapi" Label="Canopic Jar: Hapi" State="false"/>
         </Setting>
     </Setting>
+
 </Settings>
