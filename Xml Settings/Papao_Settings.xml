@@ -32,7 +32,7 @@
             </Setting>
             <Setting Id="C3Items" Label="Chapter 3 Items" State="true">
                 <Setting Id="Blue Lever" Label="Blue Lever (During Boss Fight)" State="false"/>
-                <Setting Id="Yellow Lever" Label="Blue Lever (During Boss Fight)" State="false"/>
+                <Setting Id="Yellow Lever" Label="Yellow Lever (During Boss Fight)" State="false"/>
                 <Setting Id="Green Lever" Label="Green Lever (During Boss Fight)" State="false"/>
                 <Setting Id="Red Level" Label="Red Lever (During Boss Fight)" State="false"/>
                 <Setting Id="Safety Lock" Label="Safety Lock" State="false"/>
