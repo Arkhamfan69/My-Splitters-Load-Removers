@@ -72,6 +72,4 @@
             <Setting Id="Canopic Jar: Hapi" Label="Canopic Jar: Hapi" State="false"/>
         </Setting>
     </Setting>
-
 </Settings>
-
