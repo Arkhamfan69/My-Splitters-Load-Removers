@@ -1,4 +1,8 @@
-state("FNAF_SOTM-Win64-Shipping") { }
+state("FNAF_SOTM-Win64-Shipping")
+{
+    int prePatchCode: "FNAF_SOTM-Win64-Shipping.exe", 0x057523F0, 0x210, 0x1E8, 0x14;
+    int currPatchCode: "FNAF_SOTM-Win64-Shipping.exe", 0x05770C10, 0xE0, 0x1D8, 0x14;
+}
 
 startup
 {
@@ -14,6 +18,7 @@ startup
         { "text", false, "Display Game Info On A Text Component", null },
             { "Remove", false, "Remove Text Component On Exit", "text" },
             {"Seen", false, "Show If The Player Is Seen By Ai", "text"},
+            { "Code", true, "Show Manor Code", "text" },
         { "loads", true, "Load Removal", null },
             { "pause", true, "Pause when on the Loads", "loads" },
     };
@@ -80,6 +85,24 @@ startup
     {
         return pos.X >= minX && pos.X <= maxX
             && pos.Y >= minY && pos.Y <= maxY;
+    });
+
+    vars.SetTextComponent = (Action<string, string>)((id, text) =>
+    {
+        var textSettings = timer.Layout.Components.Where(x => x.GetType().Name == "TextComponent").Select(x => x.GetType().GetProperty("Settings").GetValue(x, null));
+        var textSetting = textSettings.FirstOrDefault(x => (x.GetType().GetProperty("Text1").GetValue(x, null) as string) == id);
+        if (textSetting == null)
+        {
+        var textComponentAssembly = Assembly.LoadFrom("Components\\LiveSplit.Text.dll");
+        var textComponent = Activator.CreateInstance(textComponentAssembly.GetType("LiveSplit.UI.Components.TextComponent"), timer);
+        timer.Layout.LayoutComponents.Add(new LiveSplit.UI.Components.LayoutComponent("LiveSplit.Text.dll", textComponent as LiveSplit.UI.Components.IComponent));
+
+        textSetting = textComponent.GetType().GetProperty("Settings", BindingFlags.Instance | BindingFlags.Public).GetValue(textComponent, null);
+        textSetting.GetType().GetProperty("Text1").SetValue(textSetting, id);
+        }
+
+        if (textSetting != null)
+        textSetting.GetType().GetProperty("Text2").SetValue(textSetting, text);
     });
 }
 
@@ -183,6 +206,7 @@ init
 
     vars.GameManager = IntPtr.Zero;
     vars.Jumpscare = "";
+    vars.manorCode = 0;
 }
 
 update
@@ -230,6 +254,15 @@ update
     vars.Watch(old, current, "IsSeen");
 
     vars.SetTextIfEnabled("Seen", current.IsSeen);
+
+    vars.manorCode = current.prePatchCode + current.currPatchCode;
+
+    if ((current.prePatchCode != 0) && (current.currPatchCode != 0))
+        vars.manorCode = current.currPatchCode;
+
+    if (settings["Code"])
+        vars.SetTextComponent("Manor Code:", (vars.manorCode.ToString())); // Done only cause Broomz told me to do so
+// If you got a problem with it bitch about it to Broomz
 }
 
 exit
