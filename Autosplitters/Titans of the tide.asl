@@ -16,6 +16,7 @@ startup
             {"BBR_HRA", true, "Bikini Bottom", "Area"},
             {"WP_GoldFishIsland", true, "Goldfish Island", "Area"},
             {"KKHubTest_Map", true, "Krabby Patty Float", "Area"},
+            {"P_DemoEndSplashScreen", true, "End Of Demo Screen", "Area"},
     };
 
     vars.Helper.Settings.Create(_settings);
@@ -57,6 +58,10 @@ init
 
     vars.Helper["Loading"] = vars.Helper.Make<bool>(gSyncLoad);
 
+    vars.Helper["Character"] = vars.Helper.Make<int>(gEngine, 0x1248, 0x38, 0x0, 0x30, 0x3C8, 0x7B0);
+
+    // vars.Helper
+
 	vars.FNameToString = (Func<ulong, string>)(fName =>
 	{
 		var nameIdx = (fName & 0x000000000000FFFF) >> 0x00;
@@ -90,6 +95,11 @@ update
     if (old.Loading != current.Loading)
     {
         vars.Log("Loading..." + current.Loading);
+    }
+
+    if (old.Character != old.Character)
+    {
+        vars.Log("Current Character Is: " + current.Character);
     }
 }
 
