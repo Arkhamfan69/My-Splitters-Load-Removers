@@ -7,6 +7,8 @@ startup
     Assembly.Load(File.ReadAllBytes("Components/uhara9")).CreateInstance("Main");
     vars.Uhara.Settings.CreateFromXml("Components/Bio_Ashton_Settings.xml");
     vars.Uhara.EnableDebug();
+
+
     vars.lcCache = new Dictionary<string, LiveSplit.UI.Components.ILayoutComponent>();
 
     vars.Watch = (Action<IDictionary<string, object>, IDictionary<string, object>, string>)((oldLookup, currentLookup, key) =>
@@ -15,11 +17,11 @@ startup
         var oldValue = oldLookup.ContainsKey(key) ? (oldLookup[key] ?? "(null)") : null;
 
         if (oldValue != null && currentValue != null && !oldValue.Equals(currentValue)) {
-            vars.Log(key + ": " + oldValue + " -> " + currentValue);
+            print(key + ": " + oldValue + " -> " + currentValue);
         }
 
         if (oldValue == null && currentValue != null) {
-            vars.Log(key + ": " + currentValue);
+            print(key + ": " + currentValue);
         }
     });
 
@@ -145,5 +147,4 @@ exit
 {
     timer.IsGameTimePaused = true;
     if (settings["Remove"]) vars.RemoveAllTexts();
-
 }
