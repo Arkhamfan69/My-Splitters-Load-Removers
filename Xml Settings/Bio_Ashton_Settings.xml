@@ -3,7 +3,6 @@
         <Setting Id="General Settings" Label="General Settings" State="true">
             <Setting Id="text" Label="Show Text Components" State="false">
                 <Setting Id="RoomID" Label="Show Current RoomID" State="false"/>
-                <Setting Id="ItemID" Label="Show Current ItemID" State="false"/>
                 <Setting Id="Paused" Label="Show If Paused" State="false"/>
                 <Setting Id="InventoryOpen" Label="Show If Inventory Open" State="false"/>
                 <Setting Id="Remove" Label="Remove All Text Components on Exit" State="false"/>
@@ -39,4 +38,5 @@
             </Setting>
         </Setting>
     </Setting>
+
 </Settings>
