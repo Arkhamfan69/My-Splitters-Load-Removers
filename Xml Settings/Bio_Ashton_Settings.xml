@@ -1,0 +1,42 @@
+<Settings>
+    <Setting Id="BAAS" Label="Biodacity Ashton Autosplitter Settings" State="true">
+        <Setting Id="General Settings" Label="General Settings" State="true">
+            <Setting Id="text" Label="Show Text Components" State="false">
+                <Setting Id="RoomID" Label="Show Current RoomID" State="false"/>
+                <Setting Id="ItemID" Label="Show Current ItemID" State="false"/>
+                <Setting Id="Paused" Label="Show If Paused" State="false"/>
+                <Setting Id="InventoryOpen" Label="Show If Inventory Open" State="false"/>
+                <Setting Id="Remove" Label="Remove All Text Components on Exit" State="false"/>
+            </Setting>
+        </Setting>
+        <Setting Id="Area Splits" Label="Area Splits" State="true">
+            <Setting Id="C1" Label="Chapter 1 Areas" State="true">
+                <Setting Id="3" Label="Left Intro Apartment" State="false"/>
+                <Setting Id="4" Label="Entered Sewers" State="false"/>
+                <Setting Id="5" Label="Peter Conversation" State="false"/>
+                <Setting Id="6" Label="Creature Encounter" State="false"/>
+                <Setting Id="7" Label="Parking Garage" State="false"/>
+                <Setting Id="8" Label="Power Skip" State="false"/>
+                <Setting Id="9" Label="Boomerang Area" State="false"/>
+                <Setting Id="10" Label="Safe Haven" State="false"/>
+                <Setting Id="11" Label="Safe Haven Apartment" State="false"/>
+                <Setting Id="12" Label="School" State="false"/>
+            </Setting>
+            <Setting Id="C2" Label="Chapter 2 Areas" State="true">
+                <Setting Id="13" Label="Start Of Chapter 2" State="false"/>
+                <Setting Id="14" Label="Double Door Clip" State="false"/>
+                <Setting Id="15" Label="Underground Subway" State="false"/>
+                <Setting Id="16" Label="Gate Skip Area" State="false"/>
+                <Setting Id="17" Label="Getting Punched Cutscene" State="false"/>
+                <Setting Id="18" Label="Grabbing Dynamite" State="false"/>
+            </Setting>
+            <Setting Id="C3" Label="Chapter 3 Areas" State="true">
+                <Setting Id="24" Label="Start of Chapter 3" State="false"/>
+                <Setting Id="19" Label="Garrison Tower" State="false"/>
+                <Setting Id="22" Label="Ulrich Boss Fight" State="false"/>
+                <Setting Id="DeadUlrich" Label="Ulrich Defeated" State="false"/>
+                <Setting Id="23" Label="Final Area - Escape from Biodacity" State="false"/>
+            </Setting>
+        </Setting>
+    </Setting>
+</Settings>
