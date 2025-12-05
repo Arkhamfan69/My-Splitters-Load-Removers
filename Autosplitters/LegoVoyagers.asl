@@ -7,14 +7,18 @@ startup
 {
     Assembly.Load(File.ReadAllBytes("Components/uhara9")).CreateInstance("Main");
     Assembly.Load(File.ReadAllBytes("Components/asl-help")).CreateInstance("Unity");
+    vars.Uhara.Settings.CreateFromXml("Components/LVoyagers_Settings.xml");
     vars.Helper.LoadSceneManager = true;
     vars.Uhara.EnableDebug();
-
-    settings.Add("Start", true, "Start On Chapter 1");
 }
 
 init
 {
+    var Instance =  vars.Uhara.CreateTool("Unity", "IL2CPP", "Instance");
+
+    Instance.Watch<int>("Chapter", "TumbleDefinition::LoadGameElement", "_active", "index");
+
+    vars.CompletedChapters = new HashSet<int>();
 }
 
 update
@@ -26,6 +30,7 @@ update
     current.Scene = vars.Helper.Scenes.Active.Name ?? current.Scene;
 
     if (old.Scene != current.Scene) vars.Log("Scene Changed: " + current.Scene);
+    print("Current Chapter: " + current.Chapter.ToString());
 }
 
 isLoading
@@ -35,9 +40,31 @@ isLoading
 
 start
 {
-    if (settings["Start"] && current.Scene == "nature_root" && old.Scene == "Foundation")
+    if (settings["IL"])
     {
         return true;
+    }
+    
+    if (settings["Start"] && current.Scene == "nature_root" && old.Scene == "Foundation" && current.Chapter == 0)
+    {
+        return true;
+    }
+}
+
+onStart
+{
+    vars.CompletedChapters.Clear();
+}
+
+split
+{
+    if (current.Chapter > old.Chapter && current.Chapter > 0)
+    {
+        string chapterSettingId = current.Chapter.ToString();
+        if (settings.ContainsKey(chapterSettingId) && settings[chapterSettingId])
+        {
+            return true;
+        }
     }
 }
 
