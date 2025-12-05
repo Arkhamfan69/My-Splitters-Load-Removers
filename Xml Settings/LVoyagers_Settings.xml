@@ -1,0 +1,46 @@
+<Settings>
+    <Setting Id="LVAPS" Label="Lego Voyagers Autosplitter Settings" State="true">
+        <Setting Id="Gen" Label="General Settings" State="true">
+            <Setting Id="Start" Label="Start The Timer In Chapter 1" State="true"/>
+            <Setting Id="IL" Label="Start The Timer Anywhere For ILS" State="false"/>
+        </Setting>
+        <Setting Id="Chapter Splits" Label="Chapter Splits" State="true">
+            <Setting Id="1" Label="Chapter 2" State="true"/>
+            <Setting Id="2" Label="Chapter 3" State="true"/>
+            <Setting Id="3" Label="Chapter 4" State="true"/>
+            <Setting Id="4" Label="Chapter 5" State="true"/>
+            <Setting Id="5" Label="Chapter 6" State="true"/>
+            <Setting Id="6" Label="Chapter 7" State="true"/>
+            <Setting Id="7" Label="Chapter 8" State="true"/>
+            <Setting Id="8" Label="Chapter 9" State="true"/>
+            <Setting Id="9" Label="Chapter 10" State="true"/>
+            <Setting Id="10" Label="Chapter 11" State="true"/>
+            <Setting Id="11" Label="Chapter 12" State="true"/>
+            <Setting Id="12" Label="Chapter 13" State="true"/>
+            <Setting Id="13" Label="Chapter 14" State="true"/>
+            <Setting Id="14" Label="Chapter 15" State="true"/>
+            <Setting Id="15" Label="Chapter 16" State="true"/>
+            <Setting Id="16" Label="Chapter 17" State="true"/>
+            <Setting Id="17" Label="Chapter 18" State="true"/>
+            <Setting Id="18" Label="Chapter 19" State="true"/>
+            <Setting Id="19" Label="Chapter 20" State="true"/>
+            <Setting Id="20" Label="Chapter 21" State="true"/>
+            <Setting Id="21" Label="Chapter 22" State="true"/>
+            <Setting Id="22" Label="Chapter 23" State="true"/>
+            <Setting Id="23" Label="Chapter 24" State="true"/>
+            <Setting Id="24" Label="Chapter 25" State="true"/>
+            <Setting Id="25" Label="Chapter 26" State="true"/>
+            <Setting Id="26" Label="Chapter 27" State="true"/>
+            <Setting Id="27" Label="Chapter 28" State="true"/>
+            <Setting Id="28" Label="Chapter 29" State="true"/>
+            <Setting Id="29" Label="Chapter 30" State="true"/>
+            <Setting Id="30" Label="Chapter 31" State="true"/>
+            <Setting Id="31" Label="Chapter 32" State="true"/>
+            <Setting Id="32" Label="Chapter 33" State="true"/>
+            <Setting Id="33" Label="Chapter 34" State="true"/>
+            <Setting Id="34" Label="Chapter 35" State="true"/>
+            <Setting Id="35" Label="Chapter 36" State="true"/>
+            <Setting Id="36" Label="Chapter 37" State="true"/>
+        </Setting>
+    </Setting>
+</Settings>
