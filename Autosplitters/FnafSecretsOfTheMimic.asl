@@ -1,18 +1,19 @@
-state("FNAF_SOTM-Win64-Shipping")
-{
-}
+state("FNAF_SOTM-Win64-Shipping") { }
 
 startup
 {
     Assembly.Load(File.ReadAllBytes("Components/asl-help")).CreateInstance("Basic");
-    vars.Helper.GameName = "Five Nights At Freddy's: Secret of The Mimic";
-    vars.Helper.AlertLoadless();
+    Assembly.Load(File.ReadAllBytes("Components/uhara9")).CreateInstance("Main");
+    vars.Uhara.AlertLoadless();
     vars.ZoneCooldown = new Stopwatch();
+    vars.ElevatorStopwatch = new Stopwatch();
 
     dynamic[,] _settings =
     {
         { "split", true, "Splitting", null },
             { "MAP_Outro_InteractiveCredits_Infinite", true, "Final Split - Works on all 3 Endings", "split" },
+            { "Petting", true, "Petting Robot Split", "split" },
+            { "UpgradeStation", true, "Upgrade Station Split", "split" },
         { "text", false, "Display Game Info On A Text Component", null },
             { "Remove", false, "Remove Text Component On Exit", "text" },
             {"Seen", false, "Show If The Player Is Seen By Ai", "text"},
@@ -20,7 +21,7 @@ startup
             { "pause", true, "Pause when on the Loads", "loads" },
     };
 
-    vars.Helper.Settings.Create(_settings);
+    vars.Uhara.Settings.Create(_settings);
     vars.CompletedSplits = new HashSet<string>();
     vars.lcCache = new Dictionary<string, LiveSplit.UI.Components.ILayoutComponent>();
 
@@ -87,84 +88,45 @@ startup
 
 init
 {
-    IntPtr namePoolData = vars.Helper.ScanRel(13, "89 5C 24 ?? 89 44 24 ?? 74 ?? 48 8D 15");
-    IntPtr gWorld = vars.Helper.ScanRel(3, "48 8B 1D ???????? 48 85 DB 74 ?? 41 B0 01");
-    IntPtr gEngine = vars.Helper.ScanRel(3, "48 8B 0D ???????? 66 0F 5A C9 E8");
+    vars.Utils = vars.Uhara.CreateTool("UnrealEngine", "Utils");
+	vars.Events = vars.Uhara.CreateTool("UnrealEngine", "Events");
 
-    if (namePoolData == IntPtr.Zero || gWorld == IntPtr.Zero || gEngine == IntPtr.Zero)
-    {
-        throw new InvalidOperationException("Not all signatures resolved.");
-    }
+    // Upgrade Station Splitting Function
+    // vars.Events.FunctionFlag("BP_VNT_DD_UpgradePermStation_C", "BP_VNT_DD_UpgradePermStation", "OnPawnFinishedBlendingOut");
 
-    vars.Helper["GWorldName"] = vars.Helper.Make<ulong>(gWorld, 0x18);
+    // Elevator Loads Maybe
+    vars.Events.FunctionFlag("ElevatorStarted", "BP_ElevatorDoor_C", "", "DoorCloseStart");
+    vars.Events.FunctionFlag("ElevatorEnded", "BP_ElevatorDoor_C", "", "DoorOpenStart");
+
+    
+
+    vars.Resolver.Watch<ulong>("GWorldName", vars.Utils.GWorld, 0x18);
 
     // GEngine->GameInstance->LocalPlayers[0]->PlayerController->Character->CapsuleComponent->RelativeLocation
-    vars.Helper["PlayerPosition"] = vars.Helper.Make<Vector3f>(gEngine, 0xD28, 0x38, 0x0, 0x30, 0x260, 0x290, 0x11C);
-
+    vars.Resolver.Watch<Vector3f>("PlayerPosition", vars.Utils.GEngine, 0xD28, 0x38, 0x0, 0x30, 0x260, 0x290, 0x11C);
+    
     // GEngine->TransitionType
-    vars.Helper["TransitionType"] = vars.Helper.Make<byte>(gEngine, 0x8A8);
+    vars.Resolver.Watch<byte>("TransitionType", vars.Utils.GEngine, 0x8A8);
 
     // GEngine->GameInstance->LocalPlayers[0]->PlayerController->AcknowledgedPawn->ShowingReticle
-    vars.Helper["ShowingReticle"] = vars.Helper.Make<bool>(gEngine, 0xD28, 0x38, 0x0, 0x30, 0x2A0, 0x69A);
+    vars.Resolver.Watch<bool>("ShowingReticle", vars.Utils.GEngine, 0xD28, 0x38, 0x0, 0x30, 0x2A0, 0x69A);
 
     // GEngine->GameInstance->LocalPlayers[0]->PlayerController->AcknowledgedPawn->HasInteractionStarted
-    vars.Helper["HasInterctionStarted"] = vars.Helper.Make<bool>(gEngine, 0xD28, 0x38, 0x0, 0x30, 0x2A0, 0x6C8);
+    vars.Resolver.Watch<bool>("HasInterctionStarted", vars.Utils.GEngine, 0xD28, 0x38, 0x0, 0x30, 0x2A0, 0x6C8);
 
     // GEngine->GameInstance->LocalPlayers[0]->PlayerController->AcknowledgedPawn->IsSeenByAi
-    vars.Helper["IsSeen"] = vars.Helper.Make<bool>(gEngine, 0xD28, 0x38, 0x0, 0x30, 0x2A0, 0x60C);
+    vars.Resolver.Watch<bool>("IsSeen", vars.Utils.GEngine, 0xD28, 0x38, 0x0, 0x30, 0x2A0, 0x60C);
 
     // GEngine->GameInstance->LocalPlayers[0]->PlayerController->AcknowledgedPawn.Fname
-    vars.Helper["Pawn"] = vars.Helper.Make<ulong>(gEngine, 0xD28, 0x38, 0x0, 0x30, 0x2A0, 0x18);
-
-    // NamePool stuff
-    const int FNameBlockOffsetBits = 16;
-    const uint FNameBlockOffsetMask = ushort.MaxValue; // (1 << FNameBlockOffsetBits) - 1
-
-    const int FNameIndexBits = 32;
-    const uint FNameIndexMask = uint.MaxValue; // (1 << FNameIndexBits) - 1
-
-    var nameCache = new Dictionary<int, string> { { 0, "None" } };
-
-    vars.FNameToString = (Func<ulong, string>)(fName =>
-    {
-        var number          = (int)(fName >> FNameIndexBits);
-        var comparisonIndex = (int)(fName &  FNameIndexMask);
-
-        string name;
-        if (!nameCache.TryGetValue(comparisonIndex, out name))
-        {
-            var blockIndex = (ushort)(comparisonIndex >> FNameBlockOffsetBits);
-            var offset     = (ushort)(comparisonIndex &  FNameBlockOffsetMask);
-
-            var block = vars.Helper.Read<IntPtr>(namePoolData + 0x10 + blockIndex * 0x8);
-            var entry = block + 2 * offset;
-
-            var length = vars.Helper.Read<short>(entry) >> 6;
-            name = vars.Helper.ReadString(length, ReadStringType.UTF8, entry + 2);
-
-            nameCache.Add(comparisonIndex, name);
-        }
-
-        return number == 0 ? name : name + "_" + (number - 1);
-    });
-
-    vars.FNameToShortString = (Func<ulong, string>)(fName =>
-	{
-		string name = vars.FNameToString(fName);
-
-		int dot = name.LastIndexOf('.');
-		int slash = name.LastIndexOf('/');
-
-		return name.Substring(Math.Max(dot, slash) + 1);
-	});
+    vars.Resolver.Watch<uint>("Pawn", vars.Utils.GEngine, 0xD28, 0x38, 0x0, 0x30, 0x2A0, 0x18);
 
     vars.FindSubsystem = (Func<string, IntPtr>)(name =>
     {
-        var subsystems = vars.Helper.Read<int>(gEngine, 0xD28, 0xF8);
+        var subsystems = vars.Helper.Read<int>(vars.Utils.GEngine, 0xD28, 0xF8);
         for (int i = 0; i < subsystems; i++)
         {
-            var subsystem = vars.Helper.Deref(gEngine, 0xD28, 0xF0, 0x18 * i + 0x8);
-            var sysName = vars.FNameToString(vars.Helper.Read<ulong>(subsystem, 0x18));
+            var subsystem = vars.Resolver.Deref(vars.Utils.GEngine, 0xD28, 0xF0, 0x18 * i + 0x8);
+            var sysName = vars.Utils.FNameToString(vars.Resolver.Read<uint>(subsystem, 0x18));
 
             if (sysName.StartsWith(name))
             {
@@ -185,49 +147,53 @@ init
 
     vars.GameManager = IntPtr.Zero;
     vars.Jumpscare = "";
+    current.World = "";
+    vars.ElevatorLoad = false;
 }
 
 update
 {
+    vars.Uhara.Update();
+    vars.Helper.Update();
+
     IntPtr gm;
-    if (!vars.Helper.TryRead<IntPtr>(out gm, vars.GameManager))
+    if (!vars.Resolver.TryRead<IntPtr>(out gm, vars.GameManager))
     {
         vars.GameManager = vars.FindSubsystem("CarnivalGameManager");
-
         // UCarnivalGameManager->LoadingScreenManager->0x48
-        vars.Helper["LoadingState"] = vars.Helper.Make<int>(vars.GameManager, 0x168, 0x48);
+        vars.Resolver.Watch<int>("LoadingState", vars.GameManager, 0x168, 0x48);
     }
 
-    vars.Helper.Update();
-    vars.Helper.MapPointers();
+    string world = vars.Utils.FNameToString(current.GWorldName);
+	if (!string.IsNullOrEmpty(world) && world != "None") current.World = world;
+	if (old.World != current.World) vars.Uhara.Log("World Change: " + current.World);
 
-    var world = vars.FNameToString(current.GWorldName);
-    if (!string.IsNullOrEmpty(world) && world != "None")
-        current.World = world;
-
-    var Jumpscare = vars.FNameToString(current.Pawn);
+    string Jumpscare = vars.Utils.FNameToString(current.Pawn);
     if (!string.IsNullOrEmpty(Jumpscare) && Jumpscare != "None")
         current.Jumpscare = Jumpscare;
-    
-    if (old.Jumpscare != current.Jumpscare)
+
+    if (vars.Resolver.CheckFlag("ElevatorStarted"))
     {
-        vars.Log("Current Jumpscare Is " + current.Jumpscare);
-    }
-    
-    if (old.LoadingState != current.LoadingState)
-    {
-        vars.Log("LoadingState: " + old.LoadingState + " -> " + current.LoadingState);
+        if (!vars.ElevatorLoad)
+        {
+            vars.ElevatorLoad = true;
+            vars.ElevatorStopwatch.Restart();
+        }
     }
 
-    if (old.ShowingReticle != current.ShowingReticle)
+    if (vars.Resolver.CheckFlag("ElevatorEnded"))
     {
-        vars.Log("ShowingReticle: " + old.ShowingReticle + " -> " + current.ShowingReticle);
+        if (vars.ElevatorLoad)
+        {
+            vars.ElevatorLoad = false;
+            vars.ElevatorStopwatch.Reset();
+        }
+        else
+        {
+            vars.Uhara.Log("Elevator Ended Happened but vars.ElevatorLoad is already false");
+        }
     }
 
-    if (old.HasInterctionStarted != current.HasInterctionStarted)
-    {
-        vars.Log("Interaction: " + current.HasInterctionStarted);
-    }
 
     vars.Watch(old, current, "IsSeen");
 
@@ -285,6 +251,11 @@ isLoading
     if (!inZone && vars.ZoneCooldown.IsRunning)
     {
         vars.ZoneCooldown.Reset();
+    }
+
+    if (vars.ElevatorLoad)
+    {
+        return true;
     }
 
     if (current.Jumpscare.Contains("JumpscarePawn"))
@@ -382,4 +353,3 @@ isLoading
 // PlayerPositionX: 6594.047 playerPositionY: -3834.238
 // PlayerPositionX: 6672.446 PlayerPositionY: -3585.102
 // PlayerPositionX: 6596.219 PlayerPositionY: -3597.073
-
