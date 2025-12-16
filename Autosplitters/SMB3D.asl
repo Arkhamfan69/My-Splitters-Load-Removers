@@ -20,7 +20,7 @@ startup
             {"L_W1_L09", true, "Level 6", "Area"},
             {"L_W1_L14", true, "Level 7", "Area"},
             {"L_W2_L01", true, "Level 8", "Area"},
-            {"L_W2_LO3", true, "Level 9", "Area"},
+            {"L_W2_L03", true, "Level 9", "Area"},
             {"L_W2_L05", true, "Level 10", "Area"}
     };
     vars.Uhara.Settings.Create(_settings);
@@ -34,9 +34,7 @@ init
     vars.Resolver.Watch<uint>("GWorldName", vars.Utils.GWorld, 0x18);
     vars.Resolver.Watch<bool>("IsLoading", vars.Utils.GSync);
 
-    vars.Events.FunctionFlag("Start", "PC_MainMenu_C", "PC_MainMenu_C", "BIESwitchToGame");
-    vars.Events.FunctionFlag("FinalLevel", "BP_LevelGoal_C","[BP_LevelGoal_C", "CE_StartReplay");
-
+    vars.Events.FunctionFlag("FinalLevel", "BP_LevelGoal_C", "BP_LevelGoal_C", "AfterOneFrame_5034C4DF43B0FF9AC4A9B39A2E9FE973");
 
     current.World = "";
 }
@@ -45,15 +43,14 @@ update
 {
 	vars.Uhara.Update();
 
-
     var world = vars.Utils.FNameToString(current.GWorldName);
     if (!string.IsNullOrEmpty(world) && world != "None") current.World = world;
     if (old.World != current.World) vars.Uhara.Log("World Change: " + current.World);
-}
+} 
 
 start
 {
-    return vars.Resolver.CheckFlag("Start");
+    return current.World == "L_W1_L01" && current.IsLoading;
 }
 
 split
@@ -64,9 +61,9 @@ split
         return true;
     }
 
-    if (old.World != current.World && !vars.CompletedSplits.Contains(old.World) && settings.ContainsKey(old.World) && settings[old.World])
+    if (old.World != current.World && !vars.CompletedSplits.Contains(current.World) && settings.ContainsKey(current.World) && settings[current.World])
     {
-        vars.CompletedSplits.Add(old.World);
+        vars.CompletedSplits.Add(current.World);
         return true;
     }
 }
