@@ -1,19 +1,43 @@
-state("Unmourned")
+state("Unmourned") 
 {
 }
 
 startup
 {
     Assembly.Load(File.ReadAllBytes("Components/asl-help")).CreateInstance("Unity");
-    vars.Helper.GameName = "Unmourned";  
     vars.Helper.LoadSceneManager = true;
 
     dynamic[,] _settings =
 	{
 		{ "Area", true, "Splitting Areas", null },
-			{ "1.2 RoadToLibrary_Library_Demo", true, "Split When You Go To The Library", "Area" },
-			{ "4. EchoesOfParanoia", true, "Split When Entering The Area After Library", "Area" },
+			{ "1. Maze", true, "Maze", "Area" },
+			{ "2. MeltedHall", true, "Melted Hall ", "Area" },
+            { "3. CameraHouses", true, "Camera Houses", "Area" },
+            { "0. WakeFromDreamNew", true, "Back In Starting House", "Area" },
+            { "1.1 RoadToLibrary_House", true, "Outside Of The House", "Area" },
+            { "1.2 RoadToLibrary_Library", true, "Entered Sewer", "Area" },
+            { "2. HouseAfterLibrary", true, "At The House Again", "Area" },
+            { "3. Opera", true, "Opera Theater", "Area" },
+            { "4. EchoesOfParanoia", true, "Echoes Of Paranoia", "Area" },
+            { "5. WomanDragFinale", true, "Nathan Jumpscare", "Area" },
+            { "0. GettingPhotographicCamera", true, "Getting The Camera", "Area" },
+            { "1. HideAndSeek", true, "Hide And Seek", "Area" },
+            { "2. schoolFirstTime", true, "First Time In School", "Area" },
+            { "3. KnockKnock", true, "Back In Attic", "Area" },
+            { "4. schoolSecondTime", true, "Second Time In School", "Area" },
+            { "5. Betrayal", true, "Betrayal", "Area" },
+            { "6. EmmasDeathNearby", true, "Emma Drowning Nightmare", "Area" },
+            { "0. ThePrayer", true, "The Prayer Scene", "Area" },
+            { "1. RoadToVillage", true, "Road To Village", "Area" },
+            { "2. PrisonBreak", true, "Prison Break", "Area" },
+            { "3. TheExorcism", true, "The Exorcism", "Area" },
+            { "4. TheSacrifice", true, "The Sacrifice", "Area" },
+            { "5.1 RoadToChurchRuins", true, "Road To Church Ruins", "Area" },
+            { "5.2 RoadToChurchChurch", true, "Fell Off Plank", "Area" },
+            { "6. TheEnd", true, "The Ending", "Area" },
+            { "Credits", true, "Credits", "Area" },
     };
+
 	vars.Helper.Settings.Create(_settings);
 }
 
@@ -22,40 +46,29 @@ init
     vars.CompletedSplits = new HashSet<string>();
 }
 
-start
-{
-    return current.Scene == "0. WakeFromDreamNew";
-}
-
 split
 {
-    if (current.Scene != old.Scene && settings[current.Scene] && !vars.CompletedSplits.Contains(current.Scene))
-    {
-        vars.CompletedSplits.Add(current.Scene);
-        return true;
-    }
+    if (old.World != current.World && !vars.CompletedSplits.Contains(current.World) && settings.ContainsKey(current.World) && settings[current.World])
+	{
+		vars.CompletedSplits.Add(current.World);
+		return true;
+	}
 }
 
-reset
+start
 {
-    return current.Scene == "MainMenu L";
+    return current.Scene == "0. Beginning";
 }
 
-onReset
+update
 {
-    vars.CompletedSplits.Clear();
+    vars.Helper.Update();
+
+    current.Scene = vars.Helper.Scenes.Active.Name ?? current.Scene;
+    if (old.Scene != current.Scene) vars.Log("Scene Changed: " + current.Scene);
 }
 
 isLoading
 {
     return current.Scene == "SceneLoader L";
-}
-
-update
-{
-    current.Scene = vars.Helper.Scenes.Active.Name ?? current.Scene;
-
-    // Log the scene change
-    if (old.Scene != current.Scene)
-        vars.Log("Scene Changed: " + current.Scene);
 }
