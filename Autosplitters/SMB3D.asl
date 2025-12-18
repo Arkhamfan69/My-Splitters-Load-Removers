@@ -7,6 +7,7 @@ startup
 {
     Assembly.Load(File.ReadAllBytes("Components/uhara9")).CreateInstance("Main");
     vars.Uhara.AlertLoadless(); 
+    vars.Uhara.EnableDebug();
     vars.CompletedSplits = new List<string>();  
 
     dynamic[,] _settings =
