@@ -5,7 +5,9 @@ state("Unmourned")
 startup
 {
     Assembly.Load(File.ReadAllBytes("Components/asl-help")).CreateInstance("Unity");
+    Assembly.Load(File.ReadAllBytes("Components/uhara9")).CreateInstance("Main");
     vars.Helper.LoadSceneManager = true;
+    vars.Uhara.EnableDebug();
 
     dynamic[,] _settings =
 	{
@@ -35,34 +37,34 @@ startup
             { "5.1 RoadToChurchRuins", true, "Road To Church Ruins", "Area" },
             { "5.2 RoadToChurchChurch", true, "Fell Off Plank", "Area" },
             { "6. TheEnd", true, "The Ending", "Area" },
-            { "Credits", true, "Credits", "Area" },
     };
 
-	vars.Helper.Settings.Create(_settings);
+	vars.Uhara.Settings.Create(_settings);
 }
 
 init
 {
     vars.CompletedSplits = new HashSet<string>();
+
+    var Instance =  vars.Uhara.CreateTool("Unity", "IL2CPP", "Instance");
+
+    Instance.Watch<bool>("Paused", "Assembly-CSharp:HFPS.Systems:HFPS_GameManager", "isPaused");
 }
 
 split
 {
-    if (old.World != current.World && !vars.CompletedSplits.Contains(current.World) && settings.ContainsKey(current.World) && settings[current.World])
+    if (old.Scene != current.Scene && !vars.CompletedSplits.Contains(current.Scene) && settings.ContainsKey(current.Scene) && settings[current.Scene])
 	{
-		vars.CompletedSplits.Add(current.World);
+		vars.CompletedSplits.Add(current.Scene);
 		return true;
 	}
-}
-
-start
-{
-    return current.Scene == "0. Beginning";
 }
 
 update
 {
     vars.Helper.Update();
+    vars.Helper.MapPointers();
+    vars.Uhara.Update();
 
     current.Scene = vars.Helper.Scenes.Active.Name ?? current.Scene;
     if (old.Scene != current.Scene) vars.Log("Scene Changed: " + current.Scene);
@@ -70,5 +72,5 @@ update
 
 isLoading
 {
-    return current.Scene == "SceneLoader L";
+    return current.Scene == "SceneLoader L" || current.Paused;
 }
