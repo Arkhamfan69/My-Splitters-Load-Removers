@@ -7,13 +7,18 @@ startup
     vars.Uhara.AlertLoadless();
     vars.ZoneCooldown = new Stopwatch();
     vars.ElevatorStopwatch = new Stopwatch();
+    vars.CurrentElevatorName = "";
+    vars.ElevatorStartedThisTick = false;
+    vars.MailboxThisTick = false;
+    vars.UpgradeStationPending = 0;  // queued UpgradeStation splits
+    vars.UpgradeStationMax = 5;      // allow up to 5 splits per run
 
     dynamic[,] _settings =
     {
         { "split", true, "Splitting", null },
             { "MAP_Outro_InteractiveCredits_Infinite", true, "Final Split - Works on all 3 Endings", "split" },
-            { "Petting", true, "Petting Robot Split", "split" },
-            { "UpgradeStation", true, "Upgrade Station Split", "split" },
+            { "UpgradeStation", false, "Upgrade Station Split", "split" },
+            { "Mailbox",  false, "Split On Getting A Mailbox", "split" },
         { "text", false, "Display Game Info On A Text Component", null },
             { "Remove", false, "Remove Text Component On Exit", "text" },
             {"Seen", false, "Show If The Player Is Seen By Ai", "text"},
@@ -84,6 +89,16 @@ startup
         return pos.X >= minX && pos.X <= maxX
             && pos.Y >= minY && pos.Y <= maxY;
     });
+
+    vars.GetElevatorName = (Func<Vector3f, string>)(pos =>
+    {
+        if (vars.InZone(pos, 5112.163f, 5358.639f, -7084.621f, -6895.581f)) return "Elevator_BigTop";
+        if (vars.InZone(pos, 2151.378f, 2402.004f, -12852.01f, -12638.08f)) return "Elevator_EnteringTigerRock";
+        if (vars.InZone(pos, 22372.08f, 22586.03f, -12275.96f, -12025.33f)) return "Elevator_LeavingTigerRock";
+        if (vars.InZone(pos, 18866.88f, 19117.49f, -6120.364f, -5906.428f)) return "Elevator_GoingToMoon";
+        if (vars.InZone(pos, -6560.449f, -6219.757f, 7219.589f, 7514.636f)) return "Elevator_GoingToManor";
+        return "Elevator_Unknown";
+    });
 }
 
 init
@@ -94,11 +109,23 @@ init
     // Upgrade Station Splitting Function
     // vars.Events.FunctionFlag("BP_VNT_DD_UpgradePermStation_C", "BP_VNT_DD_UpgradePermStation", "OnPawnFinishedBlendingOut");
 
+    // Mailbox Splitting Function
+    vars.Events.FunctionFlag("Mailbox", "BP_TerminalLogCollector_C", "BP_TerminalLogCollector3", "OnLogAcquired");
+    // Upgrade Station Splitting Function
+    vars.Events.FunctionFlag("UpgradeStation", "BP_VNT_DD_UpgradePermStation_C", "BP_VNT_DD_UpgradePermStation", "OnPawnFinishedBlendingOut");
+
     // Elevator Loads Maybe
     vars.Events.FunctionFlag("ElevatorStarted", "BP_ElevatorDoor_C", "", "DoorCloseStart");
     vars.Events.FunctionFlag("ElevatorEnded", "BP_ElevatorDoor_C", "", "DoorOpenStart");
 
-    
+    // Lift Load Removal
+    vars.Events.FunctionFlag("LiftLoadStart", "BP_Springlock_Lift_C", "BP_Springlock_Lift", "Start Enter A");
+    vars.Events.FunctionFlag("LiftLoadEnd", "BP_Springlock_Lift_C", "BP_Springlock_Lift", "On FFinished Enter A");
+    vars.Events.FunctionFlag("SpringSuitLoad", "BP_Springlock_Lift_C", "BP_Springlock_Lift", "Start Enter B");
+    vars.Events.FunctionFlag("SpringSuitLoadEnd", "BP_Springlock_LiftPad_C", "BP_Springlock_LiftPad", "On Finished Exit Sequence");
+    // vars.Events.FunctionFlag("PuppetShowLoadStart", )
+    // vars.Events.FunctionFlag("PuppetShowLoadEnd", "BP_Springlock_LiftPad_C", "BP_Springlock_LiftPad4", "On Finished Exit Sequence");
+
 
     vars.Resolver.Watch<ulong>("GWorldName", vars.Utils.GWorld, 0x18);
 
@@ -176,8 +203,19 @@ update
     {
         if (!vars.ElevatorLoad)
         {
-            vars.ElevatorLoad = true;
-            vars.ElevatorStopwatch.Restart();
+            var elevatorName = vars.GetElevatorName(current.PlayerPosition);
+            if (elevatorName != "Elevator_Unknown")
+            {
+                vars.ElevatorLoad = true;
+                vars.ElevatorStopwatch.Restart();
+                vars.CurrentElevatorName = elevatorName;
+                vars.ElevatorStartedThisTick = true;
+                vars.Uhara.Log("Elevator Started: " + vars.CurrentElevatorName);
+            }
+            else
+            {
+                vars.Uhara.Log("Elevator Started ignored (player not in elevator zone)");
+            }
         }
     }
 
@@ -187,13 +225,29 @@ update
         {
             vars.ElevatorLoad = false;
             vars.ElevatorStopwatch.Reset();
+            vars.Uhara.Log("Elevator Ended: " + vars.CurrentElevatorName);
+            vars.CurrentElevatorName = "";
         }
         else
         {
             vars.Uhara.Log("Elevator Ended Happened but vars.ElevatorLoad is already false");
         }
     }
+    if (vars.Resolver.CheckFlag("Mailbox"))
+    {
+        vars.MailboxThisTick = true;
+    }
 
+    if (vars.Resolver.CheckFlag("UpgradeStation"))
+    {
+        if (vars.UpgradeStationPending < vars.UpgradeStationMax)
+        {
+            vars.UpgradeStationPending++;
+        }
+    }
+
+    if (old.PlayerPosition.X != current.PlayerPosition.X) vars.Uhara.Log("PlayerPositionX: " + current.PlayerPosition.X);
+    if (old.PlayerPosition.Y != current.PlayerPosition.Y) vars.Uhara.Log("PlayerPositionY: " + current.PlayerPosition.Y);
 
     vars.Watch(old, current, "IsSeen");
 
@@ -203,8 +257,7 @@ update
 exit
 {
     timer.IsGameTimePaused = true;
-    if (settings["Remove"])
-    vars.RemoveAllTexts();
+    if (settings["Remove"]) vars.RemoveAllTexts();
 }
 
 start
@@ -215,11 +268,27 @@ start
 onStart
 {
     vars.CompletedSplits.Clear();
+    vars.UpgradeStationPending = 0;
 }
 
 split
 {
-    return old.World != current.World && settings[current.World] && vars.CompletedSplits.Add(current.World);
+    if (old.World != current.World && settings[current.World] && vars.CompletedSplits.Add(current.World))
+        return true;
+
+    if (vars.ElevatorStartedThisTick)
+    {
+        vars.ElevatorStartedThisTick = false;
+        if (!string.IsNullOrEmpty(vars.CurrentElevatorName) && settings[vars.CurrentElevatorName] && vars.CompletedSplits.Add(vars.CurrentElevatorName))
+            return true;
+    }
+
+    if (vars.MailboxThisTick)
+    {
+        vars.MailboxThisTick = false;
+        if (settings["Mailbox"])
+            return true;
+    }
 }
 
 isLoading
@@ -353,3 +422,35 @@ isLoading
 // PlayerPositionX: 6594.047 playerPositionY: -3834.238
 // PlayerPositionX: 6672.446 PlayerPositionY: -3585.102
 // PlayerPositionX: 6596.219 PlayerPositionY: -3597.073
+
+// Elevators
+
+// Big Top Elevator
+// PlayerPositionX: 5112.163 PlayerPositiony: -7081.495
+// PlayerPositionX: 5112.164 PlayerPositionY: -6916.096
+// PlayerPositionX: 5358.639 PlayerPositionY: -6895.581
+// PlayerPositionX: 5358.638 PlayerPositionY: -7084.621
+
+// Entering Tiger Rock
+// PlayerPositionX: 2152.682 PlayerPositionY: -12666.67
+// PlayerPositionX: 2151.378 PlayerPositionY: -12852.01
+// PlayerPositionX: 2402.004 PlayerPositionY: -12852.01
+// PlayerPositionX: 2402.001 PlayerPositionY: -12638.08
+
+// Leaving Tiger Rock
+// PlayerPositionX: 22398.18 PlayerPositionY: -12275.96
+// PlayerPositionX: 22586.03 PlayerPositionY: -12275.83
+// PlayerPositionX: 22586.02 PlayerPositionY: -12025.33
+// PlayerPositionX: 22372.08 PlayerPositionY: -12025.39
+
+// Going To Moon
+// PlayerPositionX: 18866.88 PlayerPositionY: -5933.735
+// PlayerPositionX: 18866.88 PlayerPositionY: -6120.364
+// PlayerPositionX: 19117.49 PlayerPositionY: -6120.363
+// PlayerPositionX: 19117.49 PlayerPositionY: -5906.428
+
+// Going To Manor
+// PlayerPositionX: -6235.226 PlayerPositionY: 7514.62
+// PlayerPositionX: -6560.448 PlayerPositionY: 7514.636
+// PlayerPositionX: -6560.449 PlayerPositionY: 7219.589
+// PlayerPositionX: -6219.757 PlayerPositionY: 7219.594
