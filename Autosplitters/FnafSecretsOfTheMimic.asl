@@ -246,9 +246,6 @@ update
         }
     }
 
-    if (old.PlayerPosition.X != current.PlayerPosition.X) vars.Uhara.Log("PlayerPositionX: " + current.PlayerPosition.X);
-    if (old.PlayerPosition.Y != current.PlayerPosition.Y) vars.Uhara.Log("PlayerPositionY: " + current.PlayerPosition.Y);
-
     vars.Watch(old, current, "IsSeen");
 
     vars.SetTextIfEnabled("Seen", current.IsSeen);
@@ -454,3 +451,4 @@ isLoading
 // PlayerPositionX: -6560.448 PlayerPositionY: 7514.636
 // PlayerPositionX: -6560.449 PlayerPositionY: 7219.589
 // PlayerPositionX: -6219.757 PlayerPositionY: 7219.594
+
