@@ -92,6 +92,7 @@ startup
 
     vars.GetElevatorName = (Func<Vector3f, string>)(pos =>
     {
+        // if (vars.InZone(pos, 5112.163f, 5358.639f, -7081.495f, -6916.096f)) return "Elevator_Jackie";
         if (vars.InZone(pos, 5112.163f, 5358.639f, -7084.621f, -6895.581f)) return "Elevator_BigTop";
         if (vars.InZone(pos, 2151.378f, 2402.004f, -12852.01f, -12638.08f)) return "Elevator_EnteringTigerRock";
         if (vars.InZone(pos, 22372.08f, 22586.03f, -12275.96f, -12025.33f)) return "Elevator_LeavingTigerRock";
@@ -105,9 +106,6 @@ init
 {
     vars.Utils = vars.Uhara.CreateTool("UnrealEngine", "Utils");
 	vars.Events = vars.Uhara.CreateTool("UnrealEngine", "Events");
-
-    // Upgrade Station Splitting Function
-    // vars.Events.FunctionFlag("BP_VNT_DD_UpgradePermStation_C", "BP_VNT_DD_UpgradePermStation", "OnPawnFinishedBlendingOut");
 
     // Mailbox Splitting Function
     vars.Events.FunctionFlag("Mailbox", "BP_TerminalLogCollector_C", "BP_TerminalLogCollector3", "OnLogAcquired");
@@ -149,7 +147,7 @@ init
 
     vars.FindSubsystem = (Func<string, IntPtr>)(name =>
     {
-        var subsystems = vars.Helper.Read<int>(vars.Utils.GEngine, 0xD28, 0xF8);
+        var subsystems = vars.Resolver.Read<int>(vars.Utils.GEngine, 0xD28, 0xF8);
         for (int i = 0; i < subsystems; i++)
         {
             var subsystem = vars.Resolver.Deref(vars.Utils.GEngine, 0xD28, 0xF0, 0x18 * i + 0x8);
@@ -211,10 +209,6 @@ update
                 vars.CurrentElevatorName = elevatorName;
                 vars.ElevatorStartedThisTick = true;
                 vars.Uhara.Log("Elevator Started: " + vars.CurrentElevatorName);
-            }
-            else
-            {
-                vars.Uhara.Log("Elevator Started ignored (player not in elevator zone)");
             }
         }
     }
@@ -285,6 +279,12 @@ split
         vars.MailboxThisTick = false;
         if (settings["Mailbox"])
             return true;
+    }
+
+    if (vars.UpgradeStationPending > 0 && settings["UpgradeStation"])
+    {
+        vars.UpgradeStationPending--;
+        return true;
     }
 }
 
@@ -451,4 +451,3 @@ isLoading
 // PlayerPositionX: -6560.448 PlayerPositionY: 7514.636
 // PlayerPositionX: -6560.449 PlayerPositionY: 7219.589
 // PlayerPositionX: -6219.757 PlayerPositionY: 7219.594
-
