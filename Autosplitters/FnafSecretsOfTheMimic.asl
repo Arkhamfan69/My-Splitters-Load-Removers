@@ -10,8 +10,8 @@ startup
     vars.CurrentElevatorName = "";
     vars.ElevatorStartedThisTick = false;
     vars.MailboxThisTick = false;
-    vars.UpgradeStationPending = 0;  // queued UpgradeStation splits
-    vars.UpgradeStationMax = 5;      // allow up to 5 splits per run
+    vars.UpgradeStationPending = 0;
+    vars.UpgradeStationMax = 5;
 
     dynamic[,] _settings =
     {
@@ -110,20 +110,19 @@ init
     // Mailbox Splitting Function
     vars.Events.FunctionFlag("Mailbox", "BP_TerminalLogCollector_C", "BP_TerminalLogCollector3", "OnLogAcquired");
     // Upgrade Station Splitting Function
-    vars.Events.FunctionFlag("UpgradeStation", "BP_VNT_DD_UpgradePermStation_C", "BP_VNT_DD_UpgradePermStation", "OnPawnFinishedBlendingOut");
+    vars.Events.FunctionFlag("UpgradeStation", "[BP_VNT_DD_UpgradePermStation_C] [BP_VNT_DD_UpgradePermStation", "OnPawnFinishedBlendingOut");
 
     // Elevator Loads Maybe
     vars.Events.FunctionFlag("ElevatorStarted", "BP_ElevatorDoor_C", "", "DoorCloseStart");
     vars.Events.FunctionFlag("ElevatorEnded", "BP_ElevatorDoor_C", "", "DoorOpenStart");
 
     // Lift Load Removal
-    vars.Events.FunctionFlag("LiftLoadStart", "BP_Springlock_Lift_C", "BP_Springlock_Lift", "Start Enter A");
-    vars.Events.FunctionFlag("LiftLoadEnd", "BP_Springlock_Lift_C", "BP_Springlock_Lift", "On FFinished Enter A");
+    vars.Events.FunctionFlag("LiftLoadStart", "BP_Springlock_Lift_C", "BP_Springlock_Lift3", "Start Enter A");
+    vars.Events.FunctionFlag("LiftLoadEnd", "BP_Springlock_LiftPad_C", "BP_Springlock_LiftPad5", "On Finished Exit Sequence");
     vars.Events.FunctionFlag("SpringSuitLoad", "BP_Springlock_Lift_C", "BP_Springlock_Lift", "Start Enter B");
     vars.Events.FunctionFlag("SpringSuitLoadEnd", "BP_Springlock_LiftPad_C", "BP_Springlock_LiftPad", "On Finished Exit Sequence");
-    // vars.Events.FunctionFlag("PuppetShowLoadStart", )
+    // vars.Events.FunctionFlag("PuppetShowLoadStart", );
     // vars.Events.FunctionFlag("PuppetShowLoadEnd", "BP_Springlock_LiftPad_C", "BP_Springlock_LiftPad4", "On Finished Exit Sequence");
-
 
     vars.Resolver.Watch<ulong>("GWorldName", vars.Utils.GWorld, 0x18);
 
@@ -266,13 +265,6 @@ split
 {
     if (old.World != current.World && settings[current.World] && vars.CompletedSplits.Add(current.World))
         return true;
-
-    if (vars.ElevatorStartedThisTick)
-    {
-        vars.ElevatorStartedThisTick = false;
-        if (!string.IsNullOrEmpty(vars.CurrentElevatorName) && settings[vars.CurrentElevatorName] && vars.CompletedSplits.Add(vars.CurrentElevatorName))
-            return true;
-    }
 
     if (vars.MailboxThisTick)
     {
