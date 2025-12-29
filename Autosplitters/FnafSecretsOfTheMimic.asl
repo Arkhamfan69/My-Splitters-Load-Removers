@@ -92,7 +92,7 @@ startup
 
     vars.GetElevatorName = (Func<Vector3f, string>)(pos =>
     {
-        // if (vars.InZone(pos, 5112.163f, 5358.639f, -7081.495f, -6916.096f)) return "Elevator_Jackie";
+        if (vars.InZone(pos, -415f, -185f, -10170f, -9890f)) return "Elevator_Jackie";
         if (vars.InZone(pos, 5112.163f, 5358.639f, -7084.621f, -6895.581f)) return "Elevator_BigTop";
         if (vars.InZone(pos, 2151.378f, 2402.004f, -12852.01f, -12638.08f)) return "Elevator_EnteringTigerRock";
         if (vars.InZone(pos, 22372.08f, 22586.03f, -12275.96f, -12025.33f)) return "Elevator_LeavingTigerRock";
@@ -421,6 +421,12 @@ isLoading
 // PlayerPositionX: 6596.219 PlayerPositionY: -3597.073
 
 // Elevators
+
+// Jackie Elevator
+// PlayerPositionX: -215.5157 PlayerPositionY: -9904.332
+// PlayerPositionX: -407.7143 PlayerPositionY: -9904.332
+// PlayerPositionX: -407.7509 PlayerPositionY: -10154.96
+// PlayerPositionX: -193.813 PlayerPositionY: -10154.95
 
 // Big Top Elevator
 // PlayerPositionX: 5112.163 PlayerPositiony: -7081.495
