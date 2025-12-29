@@ -110,7 +110,7 @@ init
     // Mailbox Splitting Function
     vars.Events.FunctionFlag("Mailbox", "BP_TerminalLogCollector_C", "BP_TerminalLogCollector3", "OnLogAcquired");
     // Upgrade Station Splitting Function
-    vars.Events.FunctionFlag("UpgradeStation", "[BP_VNT_DD_UpgradePermStation_C] [BP_VNT_DD_UpgradePermStation", "OnPawnFinishedBlendingOut");
+    vars.Events.FunctionFlag("UpgradeStation", "BP_VNT_DD_UpgradePermStation_C", "BP_VNT_DD_UpgradePermStation", "OnPawnFinishedBlendingOut");
 
     // Elevator Loads Maybe
     vars.Events.FunctionFlag("ElevatorStarted", "BP_ElevatorDoor_C", "", "DoorCloseStart");
@@ -449,3 +449,4 @@ isLoading
 // PlayerPositionX: -6560.448 PlayerPositionY: 7514.636
 // PlayerPositionX: -6560.449 PlayerPositionY: 7219.589
 // PlayerPositionX: -6219.757 PlayerPositionY: 7219.594
+
