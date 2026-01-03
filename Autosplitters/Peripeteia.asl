@@ -13,6 +13,7 @@ init
     var Instance =  vars.Uhara.CreateTool("Unity", "IL2CPP", "Instance");
 
     Instance.Watch<bool>("Loading", "Assembly-CSharp::LoadingScreen", "currentlyLoading");
+    Instance.Watch<bool>("Paused", "Assembly-CSharp:VIDE_Data:VD", "pausedAction");
 }
 
 update
@@ -24,17 +25,19 @@ update
     current.Scene = vars.Helper.Scenes.Active.Name ?? current.Scene;
 
     if (old.Scene != current.Scene) vars.Log("Scene Changed: " + current.Scene);
-
-    if (old.Loading != current.Loading) vars.Uhara.Log("Loading changed: " + current.Loading);
 }
 
 isLoading
 {
-    return current.Loading;
+    return current.Loading || current.Paused || current.Scene == "main menu";
 }
 
 start
 {
-    return current.Scene == "tutorial" && old.Scene != "tutorial" && current.Loading == false;
+    return current.Scene == "tutorial" && old.Scene == "tutorial" && current.Loading == false;
+}
 
+exit
+{
+    timer.IsGameTimePaused = true;
 }
