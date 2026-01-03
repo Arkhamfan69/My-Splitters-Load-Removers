@@ -35,5 +35,6 @@ isLoading
 
 start
 {
-    return current.Scene == "tutorial" && old.Scene == "tutorial" && current.Loading == false;
+    return current.Scene == "tutorial" && old.Scene != "tutorial" && current.Loading == false;
+
 }
