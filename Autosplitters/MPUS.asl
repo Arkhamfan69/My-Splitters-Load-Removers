@@ -15,7 +15,7 @@ startup
         { "MPUS", true, "Miraclous: Paris Under Siege Auto-Splitter Settings", null},
             {"IL", false, "Start Timer On Any Level", "MPUS"},
                 {"Split", true, "Where To Split?", "MPUS"},
-                        {"New", true, "Split On Level Stats Popup", "LC"},
+                        {"New", true, "Split On Level Stats Popup", "Split"},
                             {"Plaza", false, "Plaza", "New"},
                                 {"MAP_INTRO_2", false, "Plaza 2", "Plaza"},
                                 {"MAP_INTRO_3", false, "Plaza 3", "Plaza"},
