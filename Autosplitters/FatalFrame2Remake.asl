@@ -1,0 +1,131 @@
+state("FatalFrameII")
+{
+}
+
+startup
+{
+    Assembly.Load(File.ReadAllBytes("Components/uhara10")).CreateInstance("Main");
+    vars.Uhara.AlertLoadless();
+    vars.Log = (Action<object>)((output) => print("[Fatal Frame 2 Remake] " + output));
+
+    vars.GetCutsceneName = (Func<int, string>)(cut =>
+    {
+        if (cut == 1) return "Intro_Cutscene";
+        if (cut == 2) return "Mayu_Cutscene";
+        if (cut == 3) return "House_Cutscene";
+        if (cut == 4) return "Entered_House";
+        if (cut == 5) return "Picked_Up_Camera";
+        if (cut == 6) return "Started_Lady_BossFight";
+        if (cut == 7) return "Finished_BossFight";
+        if (cut == 8) return "Mayu_Betrayal";
+        if (cut == 9) return "Followed_Butterfly";
+        if (cut == 10) return "Grabbed_By_Hand_InChest";
+        if (cut == 11) return "EndOf_ChapterTwo";
+        if (cut == 12) return "Shinobi_Cutscene";
+        if (cut == 13) return "Grabbed_Bookshelf_Item";
+        if (cut == 14) return "Reunited_With_Mayu";
+        if (cut == 15) return "Entered_Shinobi_Room";
+        return "Cutscene_Unknown";
+    });
+}
+
+init
+{
+    vars.Watchers = new MemoryWatcherList
+    {
+        new MemoryWatcher<byte>(new DeepPointer(0x6FCD6F3)) { Name = "Cutscene" },
+        new MemoryWatcher<int>(new DeepPointer(0x6FCD58C)) { Name = "FPS" },
+        new MemoryWatcher<byte>(new DeepPointer(0x6FEB5AC)) { Name = "OnMainMenu" }
+    };
+
+    vars.CutsceneCount = 0;
+    vars.StartFlag = false;
+    current.OnMainMenu = 0;
+    vars.FrameRate = 60;
+    vars.MainMenuHasIncremented = false;
+}
+
+update
+{
+    vars.Uhara.Update();
+    vars.Watchers.UpdateAll(game);
+
+    // vars.Log("Cutscene: " + vars.Watchers["Cutscene"].Current);
+    // vars.Log("FPS: " + vars.Watchers["FPS"].Current);
+    // vars.Log("On Main Menu: " + vars.Watchers["OnMainMenu"].Current);
+
+    if (vars.Watchers["OnMainMenu"].Current != 0 && vars.Watchers["OnMainMenu"].Old == 0)
+        vars.MainMenuHasIncremented = true;
+
+    if (vars.Watchers["FPS"].Current > 0)
+        vars.FrameRate = vars.Watchers["FPS"].Current;
+
+    bool isCutsceneLoad = vars.Watchers["Cutscene"].Current == 62;
+    bool wasCutsceneLoad = vars.Watchers["Cutscene"].Old == 62;
+
+    if (isCutsceneLoad && !wasCutsceneLoad && vars.Watchers["Cutscene"].Current != 0)
+    {
+        vars.CutsceneCount++;
+
+        vars.Uhara.Log("Cutscene Count: " + vars.CutsceneCount);
+        vars.Uhara.Log(vars.GetCutsceneName("Current Cutscene:" + vars.GetCutsceneName(vars.CutsceneCount)));
+    }
+
+    if (timer.CurrentPhase == TimerPhase.NotRunning)
+    {
+        vars.CutsceneCount = 0;
+    }
+
+    if (vars.CutsceneCount == 1 && vars.GetCutsceneName(vars.CutsceneCount) == "Intro_Cutscene")
+    {
+        vars.StartFlag = true;
+    }
+}
+
+start
+{
+    return vars.StartFlag && current.OnMainMenu != 0;
+}
+
+isLoading
+{
+    if (vars.MainMenuHasIncremented && vars.Watchers["OnMainMenu"].Current == 0 && vars.Watchers["Cutscene"].Current == 62)
+        return true;
+
+    if (vars.Watchers["Cutscene"].Current == 62)
+        return true;
+
+    return false;
+}
+
+exit
+{
+    timer.IsGameTimePaused = true;
+}
+
+// NOTES
+// MemoryWatcher<byte> Cutscene also works for loading detection
+// Cutscene load value is 62 (this is the characteristic loading state in cutscene transitions)
+// Main menu loading (OnMainMenu == 0) only counts as load if cutscene == 62 and main menu has incremented once
+// Start condition: StartFlag true and OnMainMenu != 0
+// Cutscene count increments only when entering 62 from a non-load state
+
+// COMMENTED OUT CODE
+// vars.Uhara.Settings.CreateFromXml("Components/FatalFrameII_Settings.xml");
+// vars.Log("Cutscene: " + vars.Watchers["Cutscene"].Current);
+// vars.Log("FPS: " + vars.Watchers["FPS"].Current);
+
+// SPLIT FUNCTION (disabled)
+// split
+// {
+//     string cut = vars.GetCutsceneName(vars.CutsceneCount);
+//     if (settings[cut])
+//         return true;
+// }
+
+// CHAPTER MAPPINGS
+// Chapter 1: cuts 1-7
+// Chapter 2: cuts 8-11
+// Chapter 3: cuts 12-14
+// Chapter 4: cut 15
+// Chapters 5-9: Not yet mapped
