@@ -102,30 +102,3 @@ exit
 {
     timer.IsGameTimePaused = true;
 }
-
-// NOTES
-// MemoryWatcher<byte> Cutscene also works for loading detection
-// Cutscene load value is 62 (this is the characteristic loading state in cutscene transitions)
-// Main menu loading (OnMainMenu == 0) only counts as load if cutscene == 62 and main menu has incremented once
-// Start condition: StartFlag true and OnMainMenu != 0
-// Cutscene count increments only when entering 62 from a non-load state
-
-// COMMENTED OUT CODE
-// vars.Uhara.Settings.CreateFromXml("Components/FatalFrameII_Settings.xml");
-// vars.Log("Cutscene: " + vars.Watchers["Cutscene"].Current);
-// vars.Log("FPS: " + vars.Watchers["FPS"].Current);
-
-// SPLIT FUNCTION (disabled)
-// split
-// {
-//     string cut = vars.GetCutsceneName(vars.CutsceneCount);
-//     if (settings[cut])
-//         return true;
-// }
-
-// CHAPTER MAPPINGS
-// Chapter 1: cuts 1-7
-// Chapter 2: cuts 8-11
-// Chapter 3: cuts 12-14
-// Chapter 4: cut 15
-// Chapters 5-9: Not yet mapped
