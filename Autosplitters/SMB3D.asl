@@ -12,7 +12,7 @@ startup
 
     dynamic[,] _settings =
     {
-        { "SMB3D", true, "Super Mario Bros 3D Auto-Splitter Settings", null},
+        { "SMB3D", true, "Super Meat Boy 3D Auto-Splitter Settings", null},
         {"Area", true, "Level Splits", "SMB3D"},
             {"L_W1_L02", true, "Level 2", "Area"},
             {"L_W1_L03", true, "Level 3", "Area"},
