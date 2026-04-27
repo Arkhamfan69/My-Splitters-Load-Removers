@@ -497,7 +497,7 @@ onReset
 
 isLoading
 {
-    return false;
+    return true;
 }
 
 gameTime
