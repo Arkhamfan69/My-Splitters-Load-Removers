@@ -68,7 +68,7 @@ update
         vars.CutsceneCount++;
 
         vars.Uhara.Log("Cutscene Count: " + vars.CutsceneCount);
-        vars.Uhara.Log(vars.GetCutsceneName("Current Cutscene:" + vars.GetCutsceneName(vars.CutsceneCount)));
+        vars.Uhara.Log("Current Cutscene: " + vars.GetCutsceneName(vars.CutsceneCount));
     }
 
     if (timer.CurrentPhase == TimerPhase.NotRunning)
