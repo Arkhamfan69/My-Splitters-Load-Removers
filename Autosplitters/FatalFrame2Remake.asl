@@ -159,18 +159,18 @@ update
     }
 }
 
-start
-{
-    if(version == "1.0.2.1")
-    {
-        return vars.CutsceneCount == 1 && vars.GetCutsceneName(vars.CutsceneCount) == "Intro_Cutscene";
-    }
+// start
+// {
+//     if(version == "1.0.2.1")
+//     {
+//         return vars.CutsceneCount == 1 && vars.GetCutsceneName(vars.CutsceneCount) == "Intro_Cutscene";
+//     }
 
-    if(version == "1.3.4.0")
-    {
-        return vars.CutsceneCount == 1 && vars.GetCutsceneName(vars.CutsceneCount) == "Intro_Cutscene" && vars.Watchers["Cutscene"].Old == 1;
-    }
-}
+//     if(version == "1.3.4.0")
+//     {
+//         return vars.CutsceneCount == 1 && vars.GetCutsceneName(vars.CutsceneCount) == "Intro_Cutscene" && vars.Watchers["Cutscene"].Old == 1;
+//     }
+// }
 
 isLoading
 {
