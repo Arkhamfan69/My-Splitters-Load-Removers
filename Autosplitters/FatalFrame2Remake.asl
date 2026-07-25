@@ -1,5 +1,5 @@
 // Patch 1.0.2.1 by Arkahamfan69
-// Patch 1.3.4.0 by Streetbackguy
+// Patch 1.3.4.0 & 1.4.0.0 by Streetbackguy
 state("FatalFrameII")
 {
 }
@@ -24,6 +24,10 @@ init
         
         case "1.3.4.0":
             version = "1.3.4.0";
+            break;
+
+        case "1.4.0.0":
+            version = "1.4.0.0";
             break;
 
         default:
@@ -73,6 +77,26 @@ init
             return "Cutscene_Unknown";
         }
 
+        if(version == "1.4.0.0")
+        {
+            if (cut == 1) return "Intro_Cutscene";
+            if (cut == 3) return "Mayu_Cutscene";
+            if (cut == 5) return "House_Cutscene";
+            if (cut == 7) return "Entered_House";
+            if (cut == 9) return "Picked_Up_Camera";
+            if (cut == 11) return "Started_Lady_BossFight";
+            if (cut == 13) return "Finished_BossFight";
+            if (cut == 15) return "Mayu_Betrayal";
+            if (cut == 17) return "Followed_Butterfly";
+            if (cut == 19) return "Grabbed_By_Hand_InChest";
+            if (cut == 21) return "EndOf_ChapterTwo";
+            if (cut == 23) return "Shinobi_Cutscene";
+            if (cut == 25) return "Grabbed_Bookshelf_Item";
+            if (cut == 27) return "Reunited_With_Mayu";
+            if (cut == 29) return "Entered_Shinobi_Room";
+            return "Cutscene_Unknown";
+        }
+
         return "Cutscene_Unknown";
     });
 
@@ -93,6 +117,16 @@ init
             new MemoryWatcher<byte>(new DeepPointer(0x6FCDBE1)) { Name = "Cutscene" },
             new MemoryWatcher<int>(new DeepPointer(0x6FD07D0)) { Name = "FPS" },
             new MemoryWatcher<byte>(new DeepPointer(0x6FCC6DD)) { Name = "OnMainMenu" }
+        };
+    }
+
+    if(version == "1.4.0.0")
+    {
+        vars.Watchers = new MemoryWatcherList
+        {
+            new MemoryWatcher<byte>(new DeepPointer(0x6FD9961)) { Name = "Cutscene" },
+            new MemoryWatcher<int>(new DeepPointer(0x6FDC6A0)) { Name = "FPS" },
+            new MemoryWatcher<byte>(new DeepPointer(0x6FD8374)) { Name = "OnMainMenu" }
         };
     }
 
@@ -157,6 +191,28 @@ update
             vars.Uhara.Log("Current Cutscene:" + vars.GetCutsceneName(vars.CutsceneCount));
         }
     }
+
+    if(version == "1.4.0.0")
+    {
+        // vars.Log("Cutscene: " + vars.Watchers["Cutscene"].Current);
+        // vars.Log("Cutscene Count: " + vars.CutsceneCount);
+        // vars.Log("FPS: " + vars.Watchers["FPS"].Current);
+        // vars.Log("On Main Menu: " + vars.Watchers["OnMainMenu"].Current);
+
+        if (vars.Watchers["OnMainMenu"].Current != 0 && vars.Watchers["OnMainMenu"].Old == 0)
+        vars.MainMenuHasIncremented = true;
+
+        if (vars.Watchers["FPS"].Current > 0)
+            vars.FrameRate = vars.Watchers["FPS"].Current;
+
+        if (vars.Watchers["Cutscene"].Current == 1 && vars.Watchers["Cutscene"].Old == 0 && vars.Watchers["Cutscene"].Current != 0 && vars.Watchers["OnMainMenu"].Current == 0)
+        {
+            vars.CutsceneCount++;
+
+            vars.Uhara.Log("Cutscene Count: " + vars.CutsceneCount);
+            vars.Uhara.Log("Current Cutscene:" + vars.GetCutsceneName(vars.CutsceneCount));
+        }
+    }
 }
 
 start
@@ -168,7 +224,12 @@ start
 
     if(version == "1.3.4.0")
     {
-        return vars.CutsceneCount == 1 && vars.GetCutsceneName(vars.CutsceneCount) == "Intro_Cutscene" && vars.Watchers["Cutscene"].Old == 1;
+        return vars.CutsceneCount == 1 && vars.GetCutsceneName(vars.CutsceneCount) == "Intro_Cutscene" && vars.Watchers["Cutscene"].Old == 1 && vars.Watchers["Cutscene"].Current == 0;
+    }
+
+    if(version == "1.4.0.0")
+    {
+        return vars.CutsceneCount == 1 && vars.GetCutsceneName(vars.CutsceneCount) == "Intro_Cutscene" && vars.Watchers["Cutscene"].Old == 1 && vars.Watchers["Cutscene"].Current == 0;
     }
 }
 
@@ -186,6 +247,17 @@ isLoading
     }
 
     if(version == "1.3.4.0")
+    {
+        if (vars.MainMenuHasIncremented && vars.Watchers["OnMainMenu"].Current == 1 && vars.Watchers["Cutscene"].Current == 1)
+            return true;
+
+        if (vars.Watchers["Cutscene"].Current == 1)
+            return true;
+
+        return false;
+    }
+
+    if(version == "1.4.0.0")
     {
         if (vars.MainMenuHasIncremented && vars.Watchers["OnMainMenu"].Current == 1 && vars.Watchers["Cutscene"].Current == 1)
             return true;
