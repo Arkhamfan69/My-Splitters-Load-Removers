@@ -10,6 +10,7 @@ state("Resonance")
 
 startup
 {
+    settings.Add("startChapter3", false, "Start on Chapter 3 (No Intro)");
     settings.Add("chapters", true, "Chapter Splits");
     settings.Add("chapter2", true, "Split on Chapter 2", "chapters");
     settings.Add("chapter3", true, "Split on Chapter 3", "chapters");
@@ -163,6 +164,14 @@ update
     vars.PreviousZ = current.Zpos;
     vars.PreviousTime = currentTime;
     vars.HasPreviousPosition = true;
+}
+
+start
+{
+    if (settings["startChapter3"])
+        return current.Chapter >= 3 && old.Chapter < 3;
+
+    return current.Chapter >= 1 && old.Chapter < 1;
 }
 
 isLoading
